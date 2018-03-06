@@ -19,10 +19,17 @@ public class ClienteValidator implements Validator {
 		cliente = (Cliente) target;
 
 		String cpf = cliente.getCpfCnpj();
-		
-		
+		String nome = cliente.getNome();
+		String email = cliente.getEmail();
+
 		if (cpf == null || cpf.isEmpty())
-			erros.rejectValue("cpfCnpj", "o cpf/cnpj não pode ser vazio");
+			erros.rejectValue("cpfCnpj", "O cpf/cnpj não pode ser vazio");
+
+		if (nome == null || nome.isEmpty())
+			erros.rejectValue("nome", "O nome não pode ser vazio");
+
+		if (email == null || email.isEmpty())
+			erros.rejectValue("email", "O email não pode ser vazio");
 
 	}
 

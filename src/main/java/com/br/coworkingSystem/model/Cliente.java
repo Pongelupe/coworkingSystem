@@ -122,6 +122,10 @@ public class Cliente {
 		return id;
 	}
 
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	@Override
 	public String toString() {
 		return "Cliente [id=" + id + ", nome=" + nome + ", endereco=" + endereco + ", tipoCliente=" + tipoCliente

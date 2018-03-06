@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.br.coworkingSystem.model.Cliente;
@@ -59,13 +60,14 @@ public class ClienteController {
 	}
 
 	@PostMapping("/cliente")
-	public @ResponseBody ResponseEntity<Response<Long>> cadastraCliente(@Valid Cliente cliente, BindingResult result) {
+	public @ResponseBody ResponseEntity<Response<Long>> cadastraCliente(@RequestBody @Valid Cliente cliente,
+			BindingResult result) {
 
 		Response<Long> response = new Response<Long>();
 
 		if (result.hasErrors()) {
 			response.setData(null);
-			result.getAllErrors().forEach(error -> response.addError(error.getDefaultMessage()));
+			result.getAllErrors().forEach(error -> response.addError(error.getCode()));
 
 			return ResponseEntity.badRequest().body(response);
 		} else {
@@ -78,12 +80,12 @@ public class ClienteController {
 
 	@PutMapping("/cliente/{idCliente}")
 	public @ResponseBody ResponseEntity<Response<Long>> updateCliente(@PathVariable Long idCliente,
-			@Valid Cliente cliente, BindingResult result) {
+			@RequestBody @Valid Cliente cliente, BindingResult result) {
 		Response<Long> response = new Response<Long>();
 
 		if (result.hasErrors()) {
 			response.setData(null);
-			result.getAllErrors().forEach(error -> response.addError(error.getDefaultMessage()));
+			result.getAllErrors().forEach(error -> response.addError(error.getCode()));
 
 			return ResponseEntity.badRequest().body(response);
 		} else if (!repository.findById(idCliente).isPresent()) {
@@ -92,8 +94,10 @@ public class ClienteController {
 
 			return ResponseEntity.badRequest().body(response);
 		} else {
-			cliente = repository.save(cliente);
-			response.setData(cliente.getId());
+
+			cliente.setId(idCliente);
+			repository.save(cliente);
+			response.setData(idCliente);
 
 			return ResponseEntity.ok(response);
 		}
@@ -101,23 +105,17 @@ public class ClienteController {
 	}
 
 	@DeleteMapping("/cliente/{idCliente}")
-	public @ResponseBody ResponseEntity<Response<Void>> deletarCliente(@PathVariable Long idCliente,
-			@Valid Cliente cliente, BindingResult result) {
-		Response<Void> response = new Response<Void>();
+	public @ResponseBody ResponseEntity<Response<Boolean>> deletarCliente(@PathVariable Long idCliente) {
+		Response<Boolean> response = new Response<Boolean>();
 
-		if (result.hasErrors()) {
-			response.setData(null);
-			result.getAllErrors().forEach(error -> response.addError(error.getDefaultMessage()));
-
-			return ResponseEntity.badRequest().body(response);
-		} else if (!repository.findById(idCliente).isPresent()) {
-			response.setData(null);
+		if (!repository.findById(idCliente).isPresent()) {
+			response.setData(false);
 			response.addError("Não conseguimos encontrar este cliente");
 
 			return ResponseEntity.badRequest().body(response);
 		} else {
-			repository.delete(cliente);
-			response.setData(null);
+			repository.deleteById(idCliente);
+			response.setData(true);
 
 			return ResponseEntity.ok(response);
 		}

@@ -1,0 +1,21 @@
+{
+    "name": "coworkingsystem",
+    "version": "1.0.0",
+    "description": "Software para gestão de coworking",
+    "main": "app.js",
+    "keywords": [
+        "coworking",
+        "gestao coworking"
+    ],
+    "author": "Ana Santos, Aline, Bernardo Baptista, Pedro Pongelupe",
+    "license": "MIT",
+    "dependencies": {
+        "@uirouter/angularjs": "^1.0.15",
+        "angular": "^1.6.9",
+        "angular-animate": "^1.6.9",
+        "angular-loading-bar": "^0.9.0",
+        "bootstrap": "^4.0.0",
+        "components-font-awesome": "^5.0.6",
+        "jquery": "^3.3.1"
+    }
+}

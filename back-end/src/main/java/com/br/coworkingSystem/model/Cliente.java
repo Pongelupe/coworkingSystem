@@ -1,11 +1,14 @@
 package com.br.coworkingSystem.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -17,7 +20,6 @@ public class Cliente {
 	private long id;
 
 	private String nome;
-	private String endereco;
 	private String tipoCliente;
 	private String email;
 	private String cpfCnpj;
@@ -30,6 +32,12 @@ public class Cliente {
 	@Temporal(TemporalType.DATE)
 	private Date dtNascimento;
 
+	@OneToOne
+	private Endereco endereco;
+
+	@OneToMany
+	private List<Consumo> consumos;
+
 	public String getNome() {
 		return nome;
 	}
@@ -38,11 +46,11 @@ public class Cliente {
 		this.nome = nome;
 	}
 
-	public String getEndereco() {
+	public Endereco getEndereco() {
 		return endereco;
 	}
 
-	public void setEndereco(String endereco) {
+	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
 
@@ -124,6 +132,14 @@ public class Cliente {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public List<Consumo> getConsumos() {
+		return consumos;
+	}
+
+	public void setConsumos(List<Consumo> consumos) {
+		this.consumos = consumos;
 	}
 
 	@Override

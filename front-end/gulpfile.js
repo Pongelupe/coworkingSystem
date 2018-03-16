@@ -20,7 +20,7 @@ var paths = {
 //Tarefa para copiar as fonts do font-awesome para pasta src/shared/libs/js
 gulp.task('libs-fonts', function () {
     gulp.src('node_modules/components-font-awesome/webfonts/**/*')
-        .pipe(gulp.dest('src/shared/libs/webfonts'));
+        .pipe(gulp.dest('src/shared/libs/fonts'));
 });
 
 //Tarefa para concatenar as libs js public e salvar arquivo em src/shared/libs/js

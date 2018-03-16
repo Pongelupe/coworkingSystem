@@ -1,0 +1,25 @@
+<!doctype html>
+<html ng-app="coworkingApp">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Software para gestão coworking">
+    
+    <link rel="stylesheet" href="shared/libs/css/public.libs.css">
+
+    <title>Coworking System</title>
+</head>
+
+<body>
+    <div ui-view="app"> </div>
+    <div ui-view="login"></div>
+
+
+    <script src="shared/libs/js/public.libs.js"></script>
+    <script src="app.module.js"></script>
+    <script src="app.route.js"></script>
+    <script src="components/home/home.controller.js"></script>
+</body>
+
+</html>

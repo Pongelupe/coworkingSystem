@@ -1,8 +1,4 @@
-(function () {
-    'use strict';
+'use strict';
 
-    angular
-        .module('coworking-app', ["ui.router"])
-
-
-})
+angular
+    .module('coworkingApp', ["ui.router"]);

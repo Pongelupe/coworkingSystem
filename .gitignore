@@ -2,4 +2,4 @@ front-end/node_modules/*
 front-end/package-lock.json
 front-end/src/shared/libs/css/public.libs.css
 front-end/src/shared/libs/js/public.libs.js
-front-end/src/shared/libs/webfonts/*
+front-end/src/shared/libs/fonts/*

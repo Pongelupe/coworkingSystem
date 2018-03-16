@@ -4,7 +4,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import com.br.coworkingSystem.model.Sala;
-import com.br.coworkingSystem.model.TipoSala;
+import com.br.coworkingSystem.model.enuns.TipoSala;
 
 public class SalaValidator implements Validator {
 

@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.br.coworkingSystem.model.enuns.TipoSala;
+
 @Entity
 public class Sala {
 

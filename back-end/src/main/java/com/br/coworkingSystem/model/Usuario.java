@@ -1,5 +1,7 @@
 package com.br.coworkingSystem.model;
 
+import com.br.coworkingSystem.model.enuns.Role;
+
 public class Usuario {
 
 	private String login;

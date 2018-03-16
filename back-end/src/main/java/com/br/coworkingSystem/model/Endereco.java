@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Endereco {
@@ -11,7 +12,10 @@ public class Endereco {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
+	@OneToOne
+	private Cliente cliente;
+
 	private String rua;
 	private String bairro;
 	private String cidade;
@@ -85,10 +89,19 @@ public class Endereco {
 		this.numero = numero;
 	}
 
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
 	@Override
 	public String toString() {
-		return "Endereco [rua=" + rua + ", bairro=" + bairro + ", cidade=" + cidade + ", complemento=" + complemento
-				+ ", estado=" + estado + ", pais=" + pais + ", cep=" + cep + ", numero=" + numero + "]";
+		return "Endereco [id=" + id + ", cliente=" + cliente + ", rua=" + rua + ", bairro=" + bairro + ", cidade="
+				+ cidade + ", complemento=" + complemento + ", estado=" + estado + ", pais=" + pais + ", cep=" + cep
+				+ ", numero=" + numero + "]";
 	}
 
 }

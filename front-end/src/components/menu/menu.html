@@ -1,22 +1,49 @@
-<nav class="navbar navbar-expand-sm navbar-dark bg-success">
-  <a class="navbar-brand" ui-sref="app">Coworking System</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
+<nav class="sidebar sidebar-offcanvas" id="sidebar">
+  <!--<div class="text-center">
+    <a class="cws-brand" ui-sref="kanleitos" href="#!/kanleitos">
+      <img id="cws-logo" src="../../shared/images/logo_cws.png">
+    </a>
+  </div>-->
+  <ul class="nav">
       <li class="nav-item">
-        <a class="nav-link" ui-sref="cliente">Cliente</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" ui-sref="sala">Sala</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" ui-sref="faturamento">Faturamentos</a>
-      </li>
-      <li class="nav-item ">
-        <a class="nav-link" ui-sref="pagamento">Pagamentos</a>
-      </li>
-    </ul>
-  </div>
+          <a class="nav-link" ui-sref="app">
+              <img id="cws-logo" src="../../shared/images/cws.png">
+          </a>
+        </li>
+    <li class="nav-item">
+      <a class="nav-link" ui-sref="app">
+        <img class="menu-icon" src="shared/images/menu_icons/home.png" alt="home">
+        <span class="menu-title">Home</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" ui-sref="cliente">
+        <img class="menu-icon" src="shared/images/menu_icons/customer.png" alt="cliente">
+        <span class="menu-title">Cliente</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" ui-sref="sala">
+        <img class="menu-icon" src="shared/images/menu_icons/room.png" alt="sala">
+        <span class="menu-title">Sala</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="collapse" data-target="#cobranca-subitens" aria-expanded="false" aria-controls="cobranca-subitens">
+        <img class="menu-icon" src="shared/images/menu_icons/box-money.png" alt="Cobrança">
+        <span class="menu-title">Cobrança</span>
+        <i class="menu-arrow" aria-hidden="true"></i>
+      </a>
+      <div class="collapse" id="cobranca-subitens">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item">
+            <a class="nav-link" ui-sref="faturamento">Faturamento</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" ui-sref="pagamento">Pagamento</a>
+          </li>
+        </ul>
+      </div>
+    </li>
+  </ul>
 </nav>

@@ -20,7 +20,7 @@
                                     <i class="fa fa-search"></i>
                                 </span>
                             </div>
-                            <input type="text" class="form-control" placeholder="Pesquisar cliente" aria-label="Pesquisar cliente" aria-describedby="basic-addon1">
+                            <input type="text" ng-model="search" class="form-control" placeholder="Pesquisar cliente" aria-label="Pesquisar cliente" aria-describedby="basic-addon1">
                         </div>
                     </div>
                 </div>
@@ -29,18 +29,30 @@
                         <thead>
                             <tr>
                                 <th>Nome</th>
-                                <th>CPF/CNPJ.</th>
-                                <th>RG</th>
-                                <th>Endereço Completo</th>
+                                <!--<th>Data Nasc./Fund.</th>-->
+                                <th>CPF/CNPJ</th>
+                                <!--<th>RG</th>
+                                <th>CNH</th>-->
+                                <th>Telefone Principal</th>
+                                <!--<th>Insc. Municipal</th>
+                                <th>Insc. Estadual</th>
+                                <th>Endereço Completo</th>-->
+                                <th>Email</th>
                                 <th>Ações</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="cliente in vm.clientes">
+                            <tr ng-repeat="cliente in vm.clientes | filter : search | orderBy: 'dataAdmissao'">
                                 <td>{{cliente.nome}}</td>
+                                <!--<td>{{cliente.dtNascimento | date: 'dd/MM/yy'}}</td>-->
                                 <td>{{cliente.cpfCnpj}}</td>
-                                <td>{{cliente.rg}}</td>
-                                <td>{{cliente.endereco}}</td>
+                                <!--<td>{{cliente.rg}}</td>
+                                <td>{{cliente.cnh}}</td>-->
+                                <td>{{cliente.telefone}}</td>
+                                <!--<td>{{cliente.inscricaoMunicipal}}</td>
+                                <td>{{cliente.inscricaoEstadual}}</td
+                                <td>{{cliente.endereco}}</td>-->
+                                <td>{{cliente.email}}</td>
                                 <td>
                                     <label class="badge badge-danger">Pending</label>
                                 </td>

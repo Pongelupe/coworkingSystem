@@ -8,7 +8,7 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <button type="button" class="btn btn-sm btn-success form-control">
-                                    <i class="fa fa-plus"></i>Cadastrar Cliente
+                                    <i class="fa fa-plus" aria-hidden="true" title="Cadastrar novo cliente"></i>Cadastrar Cliente
                                 </button>
                             </div>
                         </div>
@@ -42,7 +42,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="cliente in vm.clientes | filter : search | orderBy: 'dataAdmissao'">
+                            <tr ng-repeat="cliente in vm.clientes | filter : search | orderBy: 'nome'">
                                 <td>{{cliente.nome}}</td>
                                 <!--<td>{{cliente.dtNascimento | date: 'dd/MM/yy'}}</td>-->
                                 <td>{{cliente.cpfCnpj}}</td>
@@ -54,7 +54,8 @@
                                 <td>{{cliente.endereco}}</td>-->
                                 <td>{{cliente.email}}</td>
                                 <td>
-                                    <label class="badge badge-danger">Pending</label>
+                                    <i class="fa fa-pencil text-primary m-1" aria-hidden="true" title="Atualizar dados do cliente" ng-click="vm.updateCliente(cliente)"></i>
+                                    <i class="fa fa-trash-o text-danger" aria-hidden="true" title="Excluir cliente" ng-click="vm.deletarCliente(cliente)"></i>
                                 </td>
                             </tr>
                         </tbody>

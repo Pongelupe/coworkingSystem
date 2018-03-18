@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-body">
-        <h4 class="card-title">Cadastrar Novo Cliente</h4>
+        <h4 class="card-title">{{vm.title}}</h4>
         <form class="form-sample">
             <div class="row col-md-12">
                 <div class="form-radio mr-3">
@@ -100,8 +100,9 @@
                 <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                     <div class="form-group">
                         <div class="input-group">
-                            <button type="button" class="btn btn-sm btn-success form-control" ng-click="vm.cadastrarCliente()">
-                                <i class="fa fa-save"></i>Salvar Cliente
+                            <button type="button" class="btn btn-sm btn-success form-control" ng-click="vm.cliente.atualizar ? vm.updateCliente() : vm.cadastrarCliente()">
+                                <i class="fa fa-save"></i>
+                                <span> {{vm.acao}}</span>
                             </button>
                         </div>
                     </div>

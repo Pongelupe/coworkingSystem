@@ -1,5 +1,5 @@
 angular.module('coworkingApp')
-    .controller('CadastroCliente', ["svcCliente", function (svcCliente) {
+    .controller('Cliente', ["$stateParams", "svcCliente", function ($stateParams, svcCliente) {
         var vm = this;
 
         vm.novoCliente = function () {
@@ -18,7 +18,16 @@ angular.module('coworkingApp')
             };
         };
 
-        vm.novoCliente();
+        if ($stateParams.cliente.length == 0) {
+            vm.title = "Cadastrar Novo Cliente";
+            vm.acao = "Salvar Cliente";
+            vm.novoCliente();
+        } else {
+            vm.cliente = $stateParams.cliente;
+            vm.cliente.dtNascimento = new Date(vm.cliente.dtNascimento);
+            vm.title = "Atualizar Dados do Cliente: " + vm.cliente.nome;
+            vm.acao = "Atualizar Cliente";
+        }
 
         vm.validarCliente = function () {
             if (vm.cliente.nome == "") {
@@ -86,24 +95,26 @@ angular.module('coworkingApp')
                         })
                     })
                     .catch(function (err) {
-                        if (err.status == 400) {
-                            swal(
-                                "Erro!",
-                                err.data.messages[0],
-                                "error"
-                            )
-                        } else {
-                            err.data != undefined ? console.log(err.data.message) : "";
-                            swal({
-                                text: 'Desculpe, não conseguimos processar sua solicitação. Verifique os dados e tente novamente.',
-                                type: 'error',
-                                showConfirmButton: false,
-                                timer: 5000
-                            })
-                        }
-
+                        alertaErroRequisicao(err);
                     })
             };
+        };
+
+        vm.updateCliente = function () {
+
+            svcCliente.updateCliente(vm.cliente)
+                .then(function (res) {
+                    vm.carregarClientes();
+                    swal({
+                        text: "Cliente atualizado com sucesso",
+                        type: 'success',
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
+                })
+                .catch(function (err) {
+                    alertaErroRequisicao(err);
+                })
         };
 
 

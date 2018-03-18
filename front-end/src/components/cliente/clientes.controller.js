@@ -1,10 +1,11 @@
 angular.module('coworkingApp')
-    .controller('Clientes', ["svcCliente", function (svcCliente) {
+    .controller('Clientes', ["$state", "$stateParams", "svcCliente", function ($state, $stateParams, svcCliente) {
         var vm = this;
 
         vm.clientes = [
             {
-                tipoCliente: "fisico",
+                idCliente: 1,
+                tipoCliente: "fisica",
                 nome: "Ana Paula dos Santos",
                 dtNascimento: new Date("03/11/1996"),
                 cpfCnpj: "09487213669",
@@ -17,7 +18,8 @@ angular.module('coworkingApp')
                 email: "ana@teste.com.br"
             },
             {
-                tipoCliente: "fisico",
+                idCliente: 2,
+                tipoCliente: "fisica",
                 nome: "Maria do Rosário",
                 dtNascimento: new Date("06/10/1973"),
                 cpfCnpj: "09487213669",
@@ -30,7 +32,8 @@ angular.module('coworkingApp')
                 email: "ana@teste.com.br"
             },
             {
-                tipoCliente: "juridico",
+                idCliente: 3,
+                tipoCliente: "juridica",
                 nome: "Companhia Coworking System",
                 dtNascimento: new Date("01/01/1999"),
                 cpfCnpj: "10125698000147",
@@ -43,7 +46,8 @@ angular.module('coworkingApp')
                 email: "emp@teste.com.br"
             },
             {
-                tipoCliente: "fisico",
+                idCliente: 4,
+                tipoCliente: "fisica",
                 nome: "Gladston Monteiro de Carvalho",
                 dtNascimento: new Date("11/03/1996"),
                 cpfCnpj: "09547458448",
@@ -56,7 +60,8 @@ angular.module('coworkingApp')
                 email: "ga@teste.com.br"
             },
             {
-                tipoCliente: "fisico",
+                idCliente: 5,
+                tipoCliente: "fisica",
                 nome: "Breno Silva",
                 dtNascimento: new Date("11/03/1996"),
                 cpfCnpj: "09487213669",
@@ -73,26 +78,30 @@ angular.module('coworkingApp')
         vm.carregarClientes = function () {
             svcCliente.clientes()
                 .then(function (res) {
-                    vm.clientes = res.data.data;
+                    if (res.data.data != undefined)
+                        vm.clientes = res.data.data;
+                })
+        };
+
+        vm.updateCliente = function (cliente) {
+            cliente.atualizar = true;
+            $state.go('cliente', { cliente: cliente });
+        };
+
+        vm.deletarCliente = function (cliente) {
+            svcCliente.deletarCliente(cliente)
+                .then(function (res) {
+                    vm.carregarClientes();
+                    swal({
+                        text: "Cliente excluso com sucesso",
+                        type: 'success',
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
                 })
                 .catch(function (err) {
-                    if (err.status == 400) {
-                        swal(
-                            "Erro!",
-                            err.data.messages[0],
-                            "error"
-                        )
-                    } else {
-                        err.data != undefined ? console.log(err.data.message) : "";
-                        swal({
-                            text: 'Desculpe, não conseguimos processar sua solicitação. Verifique os dados e tente novamente.',
-                            type: 'error',
-                            showConfirmButton: false,
-                            timer: 5000
-                        })
-                    }
+                    alertaErroRequisicao(err);
                 })
-
         };
 
 

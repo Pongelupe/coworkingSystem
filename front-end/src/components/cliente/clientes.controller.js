@@ -83,6 +83,11 @@ angular.module('coworkingApp')
                 })
         };
 
+        vm.cadastrarCliente = function () {
+            $state.go('cliente');
+        };
+
+
         vm.updateCliente = function (cliente) {
             cliente.atualizar = true;
             $state.go('cliente', { cliente: cliente });

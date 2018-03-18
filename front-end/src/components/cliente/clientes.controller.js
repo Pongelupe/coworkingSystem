@@ -1,5 +1,5 @@
 angular.module('coworkingApp')
-    .controller('Clientes', [function () {
+    .controller('Clientes', ["svcCliente", function (svcCliente) {
         var vm = this;
 
         vm.clientes = [
@@ -69,6 +69,31 @@ angular.module('coworkingApp')
                 email: "ana@teste.com.br"
             },
         ]
+
+        vm.carregarClientes = function () {
+            svcCliente.clientes()
+                .then(function (res) {
+                    vm.clientes = res.data.data;
+                })
+                .catch(function (err) {
+                    if (err.status == 400) {
+                        swal(
+                            "Erro!",
+                            err.data.messages[0],
+                            "error"
+                        )
+                    } else {
+                        err.data != undefined ? console.log(err.data.message) : "";
+                        swal({
+                            text: 'Desculpe, não conseguimos processar sua solicitação. Verifique os dados e tente novamente.',
+                            type: 'error',
+                            showConfirmButton: false,
+                            timer: 5000
+                        })
+                    }
+                })
+
+        };
 
 
     }]);

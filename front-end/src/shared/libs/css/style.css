@@ -35,7 +35,10 @@ button, input, span {
 .swal2-icon{
   font-size: 10px;
 }
-
+/*Loading Bar */
+#loading-bar .bar {
+  height: 5px;
+}
 
 /*------------------------------------------------------------------
  [Master Stylesheet]

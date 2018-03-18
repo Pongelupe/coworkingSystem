@@ -7,7 +7,7 @@ var paths = {
         "node_modules/bootstrap/dist/js/bootstrap.bundle.js",
         "node_modules/angular/angular.js",
         "node_modules/@uirouter/angularjs/release/angular-ui-router.js",
-        "node_modules/angular-loading-bar/src/loading-bar.js",
+        "node_modules/angular-loading-bar/build/loading-bar.min.js",
         "node_modules/angular-animate/angular-animate.js",
         "node_modules/sweetalert2/dist/sweetalert2.min.js",
         "node_modules/moment/moment.js",
@@ -17,7 +17,8 @@ var paths = {
     css: [
         "node_modules/bootstrap/dist/css/bootstrap.css",
         "node_modules/components-font-awesome/css/font-awesome.css",
-        "node_modules/sweetalert2/dist/sweetalert2.min.css"
+        "node_modules/sweetalert2/dist/sweetalert2.min.css",
+        "node_modules/angular-loading-bar/build/loading-bar.min.css"
     ]
 };
 

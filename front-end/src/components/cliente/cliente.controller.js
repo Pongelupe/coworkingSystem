@@ -16,7 +16,7 @@ angular.module('coworkingApp')
                 inscricalMunicipal: "",
                 inscricaoEstadual: "",
                 dtNascimento: null,
-                endereco: ""
+                endereco: {}
             };
         };
 

@@ -24,24 +24,21 @@ angular
         //Editar cliente
         retorno.updateCliente = function (dados) {
             return $http({
-                url: URL_REQ + "cliente",
+                url: URL_REQ + "cliente/" + dados.id,
                 method: 'PUT',
                 data: dados,
-                params: {
-                    idCliente: dados.idCliente
-                },
                 cwsHeaders
             });
         };
 
         //Deletar cliente
         retorno.deletarCliente = function (dados) {
+            var urlRequest = URL_REQ + "cliente/" + dados.id;
+            urlRequest = urlRequest.toString();
             return $http({
-                url: URL_REQ + "cliente",
+                url: urlRequest,
                 method: 'DELETE',
-                params: {
-                    idCliente: dados.idCliente
-                },
+                data: dados,
                 cwsHeaders
             });
         };

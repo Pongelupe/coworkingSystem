@@ -1,6 +1,8 @@
 angular.module('coworkingApp')
-    .controller('Cliente', ["$stateParams", "svcCliente", function ($stateParams, svcCliente) {
+    .controller('Cliente', ["$rootScope", "$stateParams", "svcCliente", function ($rootScope, $stateParams, svcCliente) {
         var vm = this;
+        $rootScope.mainTitle = "CLIENTE";
+        $rootScope.subTitle = "Cliente / Novo Cliente";
 
         vm.novoCliente = function () {
             vm.cliente = {

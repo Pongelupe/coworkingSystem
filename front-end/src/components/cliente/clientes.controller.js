@@ -1,6 +1,8 @@
 angular.module('coworkingApp')
-    .controller('Clientes', ["$state", "$stateParams", "svcCliente", function ($state, $stateParams, svcCliente) {
+    .controller('Clientes', ["$rootScope", "$state", "$stateParams", "svcCliente", function ($rootScope, $state, $stateParams, svcCliente) {
         var vm = this;
+        $rootScope.mainTitle = "CLIENTE";
+        $rootScope.subTitle = "Cliente / Listar Clientes";
 
         vm.carregarClientes = function () {
             svcCliente.clientes()

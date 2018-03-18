@@ -12,10 +12,13 @@ angular
                     'app@': {
                         templateUrl: 'components/home/home.html',
                         controller: 'Main',
+                        controllerAs: 'vm'
 
                     },
                     'menu@app': {
-                        templateUrl: 'components/menu/menu.html'
+                        templateUrl: 'components/menu/menu.html',
+                        controller: 'Main',
+                        controllerAs: 'vm'
                     },
                     'contentApp@app': {
                         template: "<p> Você está na página inicial"

@@ -1,5 +1,6 @@
 //Cliente 
-app.factory('svcCliente', function ($http) {
+angular
+    .module('coworkingApp').factory('svcCliente', function ($http) {
     var retorno = {};
     //Get clientes
     retorno.clientes = function () {
@@ -11,10 +12,11 @@ app.factory('svcCliente', function ($http) {
     };
 
     //Create clientes
-    cliente.cadastrarCliente = function () {
+    retorno.cadastrarCliente = function (dados) {
         return $http({
             url: URL_REQ + "cliente",
             method: 'POST',
+            data: dados,
             cwsHeaders
         });
     };

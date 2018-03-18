@@ -28,6 +28,14 @@ i, a{
 button, input, span {
   max-height: 33px;
 }
+/* Sweet Popup */
+.swal2-popup {
+  width: 20em;
+}
+.swal2-icon{
+  font-size: 10px;
+}
+
 
 /*------------------------------------------------------------------
  [Master Stylesheet]
@@ -302,7 +310,7 @@ html {
 
 .content-wrapper {
   background: #F6F8FA;
-  padding: 1.5rem 1.7rem;
+  padding: 1rem 1.7rem;
   width: 100%;
   -webkit-flex-grow: 1;
   flex-grow: 1; }
@@ -635,8 +643,9 @@ pre {
 .card {
   border: 0;
   border-radius: 2px; }
-  .card .card-body {
-    padding: 1.88rem 1.81rem; }
+  .card-body{
+    padding: 1rem;
+  }
     .card .card-body + .card-body {
       padding-top: 0; }
   .card.card-outline-success {

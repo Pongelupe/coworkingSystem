@@ -1,7 +1,7 @@
 'use strict';
 
 angular
-    .module('coworkingApp', ["ui.router"]);
+    .module('coworkingApp', ["ui.router", "angularMoment"]);
 
 
 var URL_REQ = "http://localhost:9090/coworking";

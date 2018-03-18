@@ -15,4 +15,16 @@ function alertaErroRequisicao(err) {
             timer: 5000
         })
     }
+};
+
+function alertaConfirmarExclusao() {
+    return swal({
+        title: 'Tem certeza que deseja excluir?',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Excluir',
+        cancelButtonText: 'Cancelar',
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+    })
 }

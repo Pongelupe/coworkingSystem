@@ -94,18 +94,23 @@ angular.module('coworkingApp')
         };
 
         vm.deletarCliente = function (cliente) {
-            svcCliente.deletarCliente(cliente)
+            alertaConfirmarExclusao()
                 .then(function (res) {
-                    vm.carregarClientes();
-                    swal({
-                        text: "Cliente excluso com sucesso",
-                        type: 'success',
-                        showConfirmButton: false,
-                        timer: 2000
-                    })
-                })
-                .catch(function (err) {
-                    alertaErroRequisicao(err);
+                    if (res.value) {
+                        svcCliente.deletarCliente(cliente)
+                            .then(function (res) {
+                                vm.carregarClientes();
+                                swal({
+                                    text: "Cliente excluso com sucesso",
+                                    type: 'success',
+                                    showConfirmButton: false,
+                                    timer: 2000
+                                })
+                            })
+                            .catch(function (err) {
+                                alertaErroRequisicao(err);
+                            })
+                    } 
                 })
         };
 

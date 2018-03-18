@@ -12,6 +12,18 @@ i, a{
   white-space: nowrap;
 }
 
+.title-page{
+      /* background: #0B4E43; */
+    /* padding: 20px; */
+    padding: 0.3rem 1.7rem;
+    /* background: linear-gradient(90deg, #1b9023, #0B5B10); */
+    color: white;
+    font-weight: bold;
+    background: linear-gradient(90deg, #0d6b13, #1b9023);
+}
+.title-page p {
+  font-size: 14px;
+}
 
 /*------------------------------------------------------------------
  [Master Stylesheet]

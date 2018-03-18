@@ -21,7 +21,9 @@ angular
                         controllerAs: 'vm'
                     },
                     'contentApp@app': {
-                        template: "<p> Você está na página inicial"
+                        templateUrl: 'components/consumo/consumos.html',
+                        controller: 'Consumo',
+                        controllerAs: 'vm'
                     }
                 }
 

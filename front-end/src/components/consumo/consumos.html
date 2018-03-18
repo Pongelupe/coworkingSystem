@@ -1,0 +1,53 @@
+<div class="row mb-4" ng-repeat="sala in vm.salas">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title text-capitalize">
+                    <div class="row">
+                        <div class="col-md-10"> sala - {{sala.nome}}</div>
+                        <div class="col-md-2">
+                            <button type="button" class="btn btn-sm btn-success form-control" ng-click="vm.cadastrarConsumo()">
+                                <i class="fa fa-sign-in" aria-hidden="true" title="Fazer Check-In"></i>
+                                Fazer Check-In
+                            </button>
+                        </div>
+                    </div>
+                </h4>
+                <div class="table-responsive">
+                    <table class="table table-hover table-sm">
+                        <thead>
+                            <tr>
+                                <th>Status</th>
+                                <th>Tipo</th>
+                                <th>Nome</th>
+                                <th>Ramal/CNPJ</th>
+                                <th>Horário Funcionamento</th>
+                                <th>Valor Hora</th>
+                                <th>Quant. Estações</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="sala in vm.salas | filter : search | orderBy: 'nome'">
+                                <td>
+                                    <span ng-hide="sala.estaLivre">Ocupada</span>
+                                    <span ng-hide="!sala.estaLivre">Livre</span>
+                                </td>
+                                <td>{{sala.tipoSala}}</td>
+                                <td>{{sala.nome}}</td>
+                                <td>{{sala.ramal}}</td>
+                                <td>{{sala.horarioInicial | date: 'HH:mm'}} às {{sala.horarioFinal | date: 'HH:mm'}}</td>
+                                <td>{{sala.valorHora | currency : "R$": 2}}</td>
+                                <td>{{sala.quantidadeEstacoes}}</td>
+                                <td>
+                                    <i class="fa fa-pencil text-primary m-1" aria-hidden="true" title="Atualizar dados da sala" ng-click="vm.updateSala(sala)"></i>
+                                    <i class="fa fa-trash-o text-danger" aria-hidden="true" title="Excluir sala" ng-click="vm.deletarSala(sala)"></i>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -43,7 +43,7 @@ angular
                 url: "/cliente",
                 views: {
                     'contentApp@app': {
-                        templateUrl: 'components/cliente/cadastro-cliente.html',
+                        templateUrl: 'components/cliente/cliente.html',
                         controller: 'Cliente',
                         controllerAs: 'vm'
                     }

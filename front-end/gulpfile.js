@@ -9,17 +9,17 @@ var paths = {
         "node_modules/@uirouter/angularjs/release/angular-ui-router.js",
         "node_modules/angular-loading-bar/src/loading-bar.js",
         "node_modules/angular-animate/angular-animate.js"
-
     ],
     css: [
-        "node_modules/bootstrap/dist/css/bootstrap.css"
+        "node_modules/bootstrap/dist/css/bootstrap.css",
+        "node_modules/components-font-awesome/css/font-awesome.css"
     ]
 };
 
 
 //Tarefa para copiar as fonts do font-awesome para pasta src/shared/libs/js
 gulp.task('libs-fonts', function () {
-    gulp.src('node_modules/components-font-awesome/webfonts/**/*')
+    gulp.src('node_modules/components-font-awesome/fonts/**/*')
         .pipe(gulp.dest('src/shared/libs/fonts'));
 });
 

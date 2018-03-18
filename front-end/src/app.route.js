@@ -28,7 +28,9 @@ angular
             url: "/cliente",
             views: {
                 'contentApp@app': {
-                    template: "<p> Você está na aba cliente <p>"
+                    templateUrl: 'components/cliente/cliente.html',
+                    controller: 'Cliente',
+                    controllerAs: 'vm'
                 }
             }
 

@@ -1,10 +1,10 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
   <ul class="nav">
-      <li class="nav-item">
-          <a class="nav-link" ui-sref="app">
-              <img id="cws-logo" src="../../shared/images/cws.png">
-          </a>
-        </li>
+    <li class="nav-item">
+      <a class="nav-link" ui-sref="app">
+        <img id="cws-logo" src="../../shared/images/cws.png">
+      </a>
+    </li>
     <li class="nav-item">
       <a class="nav-link" ui-sref="app">
         <img class="menu-icon" src="shared/images/menu_icons/home.png" alt="home">
@@ -12,10 +12,21 @@
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" ui-sref="cliente">
-        <img class="menu-icon" src="shared/images/menu_icons/customer.png" alt="cliente">
+      <a class="nav-link" data-toggle="collapse" data-target="#cliente-subitens" aria-expanded="false" aria-controls="cliente-subitens">
+        <img class="menu-icon" src="shared/images/menu_icons/customer.png" alt="Cliente">
         <span class="menu-title">Cliente</span>
+        <i class="menu-arrow" aria-hidden="true"></i>
       </a>
+      <div class="collapse" id="cliente-subitens">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item">
+            <a class="nav-link" ui-sref="cadastroCliente">Cadastrar Cliente</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" ui-sref="clientes">Visualizar Clientes</a>
+          </li>
+        </ul>
+      </div>
     </li>
     <li class="nav-item">
       <a class="nav-link" ui-sref="sala">

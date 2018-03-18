@@ -1,5 +1,5 @@
 angular.module('coworkingApp')
-    .controller('Cliente', [function () {
+    .controller('Clientes', [function () {
         var vm = this;
 
         vm.clientes = [

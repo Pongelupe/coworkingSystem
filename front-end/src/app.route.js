@@ -23,13 +23,25 @@ angular
             }
 
         })
-        .state("cliente", {
+        .state("clientes", {
             parent: "app",
-            url: "/cliente",
+            url: "/clientes",
             views: {
                 'contentApp@app': {
-                    templateUrl: 'components/cliente/cliente.html',
-                    controller: 'Cliente',
+                    templateUrl: 'components/cliente/clientes.html',
+                    controller: 'Clientes',
+                    controllerAs: 'vm'
+                }
+            }
+
+        })
+        .state("cadastroCliente", {
+            parent: "app",
+            url: "/cadastroCliente",
+            views: {
+                'contentApp@app': {
+                    templateUrl: 'components/cliente/cadastro-cliente.html',
+                    controller: 'CadastroCliente',
                     controllerAs: 'vm'
                 }
             }

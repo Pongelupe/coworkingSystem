@@ -20,19 +20,30 @@
       <div class="collapse" id="cliente-subitens">
         <ul class="nav flex-column sub-menu">
           <li class="nav-item">
-            <a class="nav-link" ui-sref="cliente">Cadastrar Cliente</a>
+            <a class="nav-link" ui-sref="cliente">Novo Cliente</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" ui-sref="clientes">Visualizar Clientes</a>
+            <a class="nav-link" ui-sref="clientes">Listar Clientes</a>
           </li>
         </ul>
       </div>
     </li>
     <li class="nav-item">
-      <a class="nav-link" ui-sref="sala">
-        <img class="menu-icon" src="shared/images/menu_icons/room.png" alt="sala">
+      <a class="nav-link" data-toggle="collapse" data-target="#sala-subitens" aria-expanded="false" aria-controls="sala-subitens">
+        <img class="menu-icon" src="shared/images/menu_icons/room.png" alt="Sala">
         <span class="menu-title">Sala</span>
+        <i class="menu-arrow" aria-hidden="true"></i>
       </a>
+      <div class="collapse" id="sala-subitens">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item">
+            <a class="nav-link" ui-sref="sala">Nova Sala</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" ui-sref="salas">Listar Salas</a>
+          </li>
+        </ul>
+      </div>
     </li>
     <li class="nav-item">
       <a class="nav-link" data-toggle="collapse" data-target="#cobranca-subitens" aria-expanded="false" aria-controls="cobranca-subitens">

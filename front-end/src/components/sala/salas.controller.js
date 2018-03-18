@@ -1,34 +1,34 @@
 angular.module('coworkingApp')
-    .controller('Clientes', ["$state", "$stateParams", "svcCliente", function ($state, $stateParams, svcCliente) {
+    .controller('Salas', ["$state", "$stateParams", "svcSala", function ($state, $stateParams, svcSala) {
         var vm = this;
 
-        vm.carregarClientes = function () {
-            svcCliente.clientes()
+        vm.carregarSalas = function () {
+            svcSala.salas()
                 .then(function (res) {
                     if (res.data.data != undefined)
-                        vm.clientes = res.data.data;
+                        vm.salas = res.data.data;
                 })
         };
 
-        vm.cadastrarCliente = function () {
-            $state.go('cliente');
+        vm.cadastrarSala = function () {
+            $state.go('sala');
         };
 
 
-        vm.updateCliente = function (cliente) {
-            cliente.atualizar = true;
-            $state.go('cliente', { cliente: cliente });
+        vm.updateSala = function (sala) {
+            sala.atualizar = true;
+            $state.go('sala', { sala: sala });
         };
 
-        vm.deletarCliente = function (cliente) {
+        vm.deletarSala = function (sala) {
             alertaConfirmarExclusao()
                 .then(function (res) {
                     if (res.value) {
-                        svcCliente.deletarCliente(cliente)
+                        svcSala.deletarSala(sala)
                             .then(function (res) {
-                                vm.carregarClientes();
+                                vm.carregarSalas();
                                 swal({
-                                    text: "Cliente excluso com sucesso",
+                                    text: "Sala excluso com sucesso",
                                     type: 'success',
                                     showConfirmButton: false,
                                     timer: 2000

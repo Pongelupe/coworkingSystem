@@ -25,6 +25,29 @@ i, a{
   font-size: 14px;
 }
 
+/* INPUT */
+input{
+  height: 34px;
+}
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance:textfield;
+}
+
+input[type=time]::-webkit-clear-button,
+input[type=time]::-webkit-outer-spin-button,
+input[type=time]::-webkit-inner-spin-button {
+    display:none;
+}
+input[type=time] {
+  -moz-appearance:textfield;
+}
+
 /* Sweet Popup */
 .swal2-popup {
   width: 20em;
@@ -651,7 +674,6 @@ pre {
     border-color: #f3f3f3; }
 
 .form-control {
-  border: 1px solid #f3f3f3;
   font-family: "Poppins", sans-serif;
   font-size: 0.75rem;
   padding: 0.56rem 0.75rem;

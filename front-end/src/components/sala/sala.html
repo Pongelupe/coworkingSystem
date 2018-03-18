@@ -1,0 +1,114 @@
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">{{vm.title}}</h4>
+        <form class="form-sample">
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="form-radio">
+                        <label class="form-check-label">
+                            <input type="radio" ng-model="vm.sala.tipoSala" class="form-check-input" name="optionsRadios" id="optionsRadios3" value="COWORKING"
+                                checked=""> Coworking
+                            <i class="input-helper"></i>
+                        </label>
+
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-radio">
+                        <label class="form-check-label">
+                            <input type="radio" ng-model="vm.sala.tipoSala" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="PRIVADA"
+                                checked=""> Sala Privada
+                            <i class="input-helper"></i>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-radio">
+                        <label class="form-check-label">
+                            <input type="radio" ng-model="vm.sala.tipoSala" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="PUBLICA"
+                                checked=""> Sala Compartilhada
+                            <i class="input-helper"></i>
+                        </label>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Nome
+                            <b class="text-danger">*</b>
+                        </label>
+                        <input type="text" ng-model="vm.sala.nome" class="form-control" placeholder="Informe o nome">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Ramal
+
+                        </label>
+                        <input type="number" ng-model="vm.sala.ramal" class="form-control" placeholder="Informe o ramal">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group m-0">
+                                <label>Horário de Funcionamento
+                                    <b class="text-danger">*</b>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <input type="text" ng-model="vm.sala.horarioInicial" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-2 p-0 text-center">
+                            <div class="form-group">
+                                <span class="text-center">às</span>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <input type="text" ng-model="vm.sala.horarioFinal" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Valor da Hora
+                            <b class="text-danger">*</b>
+                        </label>
+                        <input type="number" ng-model="vm.sala.valorHora" class="form-control" placeholder="Informe o valor da hora">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Quantidade de Estações
+                            <b class="text-danger">*</b>
+                        </label>
+                        <input type="number" ng-model="vm.sala.quantidadeEstacoes" class="form-control" placeholder="Informe a quantidade de estações">
+                    </div>
+                </div>
+            </div>
+            <div class="row pull-right">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <button type="button" class="btn btn-sm btn-success form-control" ng-click="vm.sala.atualizar ? vm.updateCliente() : vm.cadastrarCliente()">
+                                <i class="fa fa-save"></i>
+                                <span> {{vm.acao}}</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

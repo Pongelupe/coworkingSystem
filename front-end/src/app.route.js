@@ -50,12 +50,29 @@ angular
                 }
 
             })
+            .state("salas", {
+                parent: "app",
+                url: "/salas",
+                views: {
+                    'contentApp@app': {
+                        templateUrl: 'components/sala/salas.html',
+                        controller: 'Salas',
+                        controllerAs: 'vm'
+                    }
+                }
+
+            })
             .state("sala", {
                 parent: "app",
+                params: {
+                    sala: [],
+                },
                 url: "/sala",
                 views: {
                     'contentApp@app': {
-                        template: "<p> Você está na aba sala <p>"
+                        templateUrl: 'components/sala/sala.html',
+                        controller: 'Sala',
+                        controllerAs: 'vm'
                     }
                 }
 

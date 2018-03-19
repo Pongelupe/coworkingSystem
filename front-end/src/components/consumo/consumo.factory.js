@@ -13,10 +13,10 @@ angular
 
         //Criar consumo
         retorno.cadastrarConsumo = function (dados) {
-            var urlRequest = URL_REQ + "consumo/" + dados.cliente.id + "/" + dados.salaCliente.id;
-            urlRequest = urlRequest.toString();
+            /*var urlRequest = URL_REQ + "consumo/" + dados.cliente.id + "/" + dados.salaCliente.id;
+            urlRequest = urlRequest.toString();*/
             return $http({
-                url: urlRequest,
+                url: URL_REQ + "consumo/",
                 method: 'POST',
                 data: dados,
                 cwsHeaders
@@ -32,6 +32,16 @@ angular
                 params: {
                     idConsumo: dados.idConsumo
                 },
+                cwsHeaders
+            });
+        };
+
+        //Finalizar consumo
+        retorno.finalizarConsumo = function (dados) {
+            return $http({
+                url: URL_REQ + "finalizarConsumo",
+                method: 'POST',
+                data: dados,
                 cwsHeaders
             });
         };

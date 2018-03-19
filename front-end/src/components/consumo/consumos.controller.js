@@ -132,20 +132,24 @@ angular.module('coworkingApp')
             };
             vm.carregarSalas();
 
-            vm.cadastrarConsumo = function (consumo) {
-
-                var obj = {};
+            vm.cadastrarConsumo = function () {
+                debugger;
+                /*var obj = {};
                 obj.salaCliente = vm.salas.filter(function (obj) {
-                    return (obj.id == consumo.id)
+                    return (obj.id == vm.consumo.idSala)
                 })[0];
 
                 obj.cliente = vm.clientes.filter(function (obj) {
                     return (obj.id == consumo.idCliente)
-                })[0];
+                })[0];*/
 
-                obj.tipoConsumo = "AVULSO";
-                obj.faturado = false;
-                obj.dataInicial = moment(consumo.dataInicial).format();
+                var obj = {};
+                obj.idSala = vm.consumo.idSala;
+                obj.idCliente = vm.consumo.idCliente;
+                obj.consumo = {};
+                obj.consumo.tipoConsumo = "AVULSO";
+                obj.consumo.faturado = false;
+                obj.consumo.dataInicial = moment(vm.consumo.dataInicial).format();
 
                 svcConsumo.cadastrarConsumo(obj)
                     .then(function (res) {

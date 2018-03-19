@@ -1,27 +1,13 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
 <div class="row" ng-controller="Consumo">
     <div class="col-12">
-        <h4 class="kan-title">Pacientes da Classificação -
-            <b ng-class="{'text-success' : ngDialogData.pacientes[0].classificacao === 'VERDE', 'text-danger' : ngDialogData.pacientes[0].classificacao === 'VERMELHO', 'text-warning' : ngDialogData.pacientes[0].classificacao === 'AMARELO'}">
-                {{ngDialogData.pacientes[0].classificacao}}
-            </b>
+        <h4 class="kan-title">Realizar Check-Out
         </h4>
     </div>
     <div class="col-12">
-        <p>Sala:</p>
-        <h6>{{ngDialogData.nome}}</h6>
+        <p class="d-inline">Sala:</p>
+        <h6 class="d-inline">{{ngDialogData.nome}}</h6>
+        <p class="d-inline">Cliente:</p>
+        <h6 class="d-inline">{{ngDialogData.cliente}}</h6>
         <div class="col-md-6">
             <div class="form-group">
                 <label>Horário

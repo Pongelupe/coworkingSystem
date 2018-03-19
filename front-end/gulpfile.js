@@ -11,14 +11,18 @@ var paths = {
         "node_modules/angular-animate/angular-animate.js",
         "node_modules/sweetalert2/dist/sweetalert2.min.js",
         "node_modules/moment/moment.js",
-        "node_modules/angular-moment/angular-moment.js"
+        "node_modules/angular-moment/angular-moment.js",
+        "node_modules/ng-dialog/js/ngDialog.min.js"
 
     ],
     css: [
         "node_modules/bootstrap/dist/css/bootstrap.css",
         "node_modules/components-font-awesome/css/font-awesome.css",
         "node_modules/sweetalert2/dist/sweetalert2.min.css",
-        "node_modules/angular-loading-bar/build/loading-bar.min.css"
+        "node_modules/angular-loading-bar/build/loading-bar.min.css",
+        "node_modules/ng-dialog/css/ngDialog.min.css",
+        "node_modules/ng-dialog/css/ngDialog-theme-default.min.css",
+        
     ]
 };
 

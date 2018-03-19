@@ -55,3 +55,30 @@ intervaloHoras = [
     "22:00",
     "23:00"
 ];
+
+function calcularDiasDiferenca(dataAtual, dataPassada) {
+    var one_day = 1000 * 60 * 60 * 24;
+
+    // Convert both dates to milliseconds
+    var date1_ms = dataPassada.getTime();
+    var date2_ms = dataAtual.getTime();
+
+    // Calculate the difference in milliseconds
+    var difference_ms = date2_ms - date1_ms;
+    //take out milliseconds
+    difference_ms = difference_ms / 1000;
+    var seconds = Math.floor(difference_ms % 60);
+    difference_ms = difference_ms / 60;
+    var minutes = Math.floor(difference_ms % 60);
+    difference_ms = difference_ms / 60;
+    var hours = Math.floor(difference_ms % 24);
+    var days = Math.floor(difference_ms / 24);
+
+    var tempo = {
+        dias: days,
+        horas: hours,
+        minutos: minutes
+    };
+
+    return tempo;
+};

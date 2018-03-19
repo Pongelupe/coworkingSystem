@@ -18,6 +18,7 @@
         "bootstrap": "^4.0.0",
         "components-font-awesome": "^4.7.0",
         "jquery": "^3.3.1",
+        "ng-dialog": "^1.4.0",
         "sweetalert2": "^7.16.0"
     },
     "devDependencies": {

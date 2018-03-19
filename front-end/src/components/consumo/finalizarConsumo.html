@@ -1,0 +1,34 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="row" ng-controller="Consumo">
+    <div class="col-12">
+        <h4 class="kan-title">Pacientes da Classificação -
+            <b ng-class="{'text-success' : ngDialogData.pacientes[0].classificacao === 'VERDE', 'text-danger' : ngDialogData.pacientes[0].classificacao === 'VERMELHO', 'text-warning' : ngDialogData.pacientes[0].classificacao === 'AMARELO'}">
+                {{ngDialogData.pacientes[0].classificacao}}
+            </b>
+        </h4>
+    </div>
+    <div class="col-12">
+        <p>Sala:</p>
+        <h6>{{ngDialogData.nome}}</h6>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Horário
+                    <b class="text-danger">*</b>
+                </label>
+                <input type="datetime-local" ng-model="ngDialogData.dataInicial" class="form-control">
+            </div>
+        </div>
+    </div>
+</div>

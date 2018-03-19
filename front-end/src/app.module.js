@@ -5,7 +5,8 @@ angular
         "ui.router",
         "angularMoment",
         "angular-loading-bar",
-        "ngAnimate"
+        "ngAnimate",
+        "ngDialog"
     ]);
 
 angular

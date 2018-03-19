@@ -51,7 +51,8 @@ input[type=time] {
 
 /* Sweet Popup */
 .swal2-popup {
-  width: 20em;
+  width: 24em;
+  font-size: 20px;
 }
 
 /*Loading Bar */

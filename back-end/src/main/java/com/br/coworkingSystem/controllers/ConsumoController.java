@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.br.coworkingSystem.model.Cliente;
@@ -43,7 +44,7 @@ public class ConsumoController {
 		binder.setValidator(new ConsumoValidator());
 	}
 
-	@GetMapping("/consumos/{idCliente}")
+	@GetMapping("/consumos")
 	public @ResponseBody ResponseEntity<Response<List<Consumo>>> getConsumo() {
 		Response<List<Consumo>> response = new Response<List<Consumo>>();
 		List<Consumo> consumos = consumoRepository.findAll();
@@ -52,8 +53,8 @@ public class ConsumoController {
 	}
 
 	@PostMapping("/consumo")
-	public @ResponseBody ResponseEntity<Response<Integer>> cadastraConsumo(@RequestBody @Valid Consumo consumo,
-			BindingResult result, @RequestBody Long idCliente, @RequestBody int idSala) {
+	public @ResponseBody ResponseEntity<Response<Integer>> cadastraConsumo(@RequestParam Long idCliente,
+			@RequestParam int idSala, @RequestBody @Valid Consumo consumo, BindingResult result) {
 
 		Response<Integer> response = new Response<Integer>();
 		Optional<Cliente> clienteOptional = clienteRepository.findById(idCliente);

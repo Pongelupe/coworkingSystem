@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.br.coworkingSystem.model.Cliente;
@@ -79,7 +80,7 @@ public class ClienteController {
 	}
 
 	@PutMapping("/cliente")
-	public @ResponseBody ResponseEntity<Response<Long>> updateCliente(@RequestBody Long idCliente,
+	public @ResponseBody ResponseEntity<Response<Long>> updateCliente(@RequestParam Long idCliente,
 			@RequestBody @Valid Cliente cliente, BindingResult result) {
 		Response<Long> response = new Response<Long>();
 
@@ -105,7 +106,7 @@ public class ClienteController {
 	}
 
 	@DeleteMapping("/cliente")
-	public @ResponseBody ResponseEntity<Response<Boolean>> deletarCliente(@RequestBody Long idCliente) {
+	public @ResponseBody ResponseEntity<Response<Boolean>> deletarCliente(@RequestParam Long idCliente) {
 		Response<Boolean> response = new Response<Boolean>();
 
 		if (!repository.findById(idCliente).isPresent()) {

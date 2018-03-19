@@ -50,7 +50,14 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label ng-hide="vm.cliente.tipoCliente == 'juridica' ">Data de Nascimento</label>
+                        <label ng-hide="vm.cliente.tipoCliente == 'fisica' ">Data de Fundação</label>
+                        <input type="date" ng-model="vm.cliente.dtNascimento" class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-3">
                     <div class="form-group">
                         <label>Telefone Principal
                             <b class="text-danger">*</b>
@@ -82,17 +89,52 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="form-group">
-                        <label ng-hide="vm.cliente.tipoCliente == 'juridica' ">Data de Nascimento</label>
-                        <label ng-hide="vm.cliente.tipoCliente == 'fisica' ">Data de Fundação</label>
-                        <input type="date" ng-model="vm.cliente.dtNascimento" class="form-control">
+                        <label>Cep</label>
+                        <input type="number" ng-model="vm.cliente.endereco.cep" class="form-control" placeholder="Informe o cep">
                     </div>
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-4">
                     <div class="form-group">
-                        <label>Endereço Completo</label>
-                        <input type="text" ng-model="vm.cliente.endereco" class="form-control" placeholder="Informe o endereço">
+                        <label>Rua</label>
+                        <input type="text" ng-model="vm.cliente.endereco.rua" class="form-control" placeholder="Informe a rua">
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label>Número</label>
+                        <input type="number" ng-model="vm.cliente.endereco.numero" class="form-control" placeholder="Informe o número">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Complemento</label>
+                        <input type="text" ng-model="vm.cliente.endereco.complemento" class="form-control" placeholder="Informe o complemento">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Bairro</label>
+                        <input type="text" ng-model="vm.cliente.endereco.bairro" class="form-control" placeholder="Informe o bairro">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Cidade</label>
+                        <input type="text" ng-model="vm.cliente.endereco.cidade" class="form-control" placeholder="Informe a cidade">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Estado</label>
+                        <input type="text" ng-model="vm.cliente.endereco.estado" class="form-control" placeholder="Informe o estado">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>País</label>
+                        <input type="text" ng-model="vm.cliente.endereco.pais" class="form-control" placeholder="Informe o pais">
                     </div>
                 </div>
             </div>

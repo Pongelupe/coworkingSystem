@@ -62,7 +62,7 @@
                         </div>
                         <div class="col-md-5">
                             <div class="form-group">
-                                <input type="text" ng-model="vm.sala.horarioInicial" class="form-control">
+                                <input type="time" ng-model="vm.sala.horarioInicial" class="form-control">
                             </div>
                         </div>
                         <div class="col-md-2 p-0 text-center">
@@ -72,7 +72,7 @@
                         </div>
                         <div class="col-md-5">
                             <div class="form-group">
-                                <input type="text" ng-model="vm.sala.horarioFinal" class="form-control">
+                                <input type="time" ng-model="vm.sala.horarioFinal" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -101,7 +101,7 @@
                 <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                     <div class="form-group">
                         <div class="input-group">
-                            <button type="button" class="btn btn-sm btn-success form-control" ng-click="vm.sala.atualizar ? vm.updateCliente() : vm.cadastrarCliente()">
+                            <button type="button" class="btn btn-sm btn-success form-control" ng-click="vm.sala.atualizar ? vm.updateSala() : vm.cadastrarSala()">
                                 <i class="fa fa-save"></i>
                                 <span> {{vm.acao}}</span>
                             </button>

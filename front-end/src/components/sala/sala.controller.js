@@ -80,6 +80,8 @@ angular.module('coworkingApp')
             if (vm.validarSala()) {
                 if (vm.sala.dtNascimento != undefined)
                     vm.dtNascimento = moment(vm.sala.dtNascimento).format();
+                vm.sala.horarioInicial = moment(vm.sala.horarioInicial).format();
+                vm.sala.horarioFinal = moment(vm.sala.horarioFinal).format();
 
                 svcSala.cadastrarSala(vm.sala)
                     .then(function (res) {

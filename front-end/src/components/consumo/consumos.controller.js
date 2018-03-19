@@ -130,7 +130,7 @@ angular.module('coworkingApp')
                 }
 
             };
-            //vm.carregarSalas();
+            vm.carregarSalas();
 
             vm.cadastrarConsumo = function (consumo) {
 

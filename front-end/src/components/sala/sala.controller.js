@@ -14,6 +14,8 @@ angular.module('coworkingApp')
                 horarioInicial: null,
                 horarioFinal: null
             };
+            vm.title = "Cadastrar Nova Sala";
+            vm.acao = "Salvar Sala";
         };
 
         if ($stateParams.sala.length == 0) {
@@ -100,16 +102,15 @@ angular.module('coworkingApp')
         };
 
         vm.updateSala = function () {
-
             svcSala.updateSala(vm.sala)
                 .then(function (res) {
-                    vm.carregarSalas();
                     swal({
                         text: "Sala atualizado com sucesso",
                         type: 'success',
                         showConfirmButton: false,
                         timer: 2000
                     })
+                    vm.novoSala();
                 })
                 .catch(function (err) {
                     alertaErroRequisicao(err);

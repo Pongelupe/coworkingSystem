@@ -86,30 +86,27 @@ angular.module('coworkingApp')
             vm.finalizarConsumo = function (consumo) {
 
                 var obj = {};
-                obj.sala = vm.salas.filter(function (obj) {
-                    return (obj.id == consumo.id)
-                })[0];
+                obj.idConsumo = consumo.id;
+                obj.consumo = {}
+                obj.consumo.dataFinal = moment(new Date()).format();
 
-                obj.solicitante = vm.clientes.filter(function (obj) {
-                    return (obj.id == consumo.idCliente)
-                })[0];
-
-                obj.tipoConsumo = "AVULSO";
-                obj.faturado = false;
-                obj.dataInicial = moment(consumo.dataInicial).format();
-
-                svcConsumo.cadastrarConsumo(obj)
+                alertaConfirmarExclusao("realizar Check-Out")
                     .then(function (res) {
-                        swal({
-                            title: "Check-In realizado com sucesso",
-                            type: "success",
-                            showConfirmButton: false,
-                            timer: 2000
-                        })
-                        vm.carregarSalas();
-                    })
-                    .catch(function (err) {
-                        alertaErroRequisicao(err);
+                        if (res.value) {
+                            svcConsumo.finalizarConsumo(obj)
+                                .then(function (res) {
+                                    swal({
+                                        title: "Check-Out realizado com sucesso",
+                                        type: "success",
+                                        showConfirmButton: false,
+                                        timer: 2000
+                                    })
+                                    vm.carregarSalas();
+                                })
+                                .catch(function (err) {
+                                    alertaErroRequisicao(err);
+                                })
+                        }
                     })
             };
 

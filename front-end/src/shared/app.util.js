@@ -17,6 +17,19 @@ function alertaErroRequisicao(err) {
     }
 };
 
+function alertaConfirmarExclusao(acao) {
+    var title = acao == undefined ? "excluir" : acao;
+    return swal({
+        title: 'Tem certeza que deseja ' + title + '?',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Prosseguir',
+        cancelButtonText: 'Cancelar',
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+    })
+};
+
 function alertaConfirmarExclusao() {
     return swal({
         title: 'Tem certeza que deseja excluir?',

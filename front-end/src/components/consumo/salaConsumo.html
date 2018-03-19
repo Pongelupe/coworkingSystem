@@ -1,4 +1,4 @@
-<div class="row" ng-init="vm.init()">
+<div class="row" ng-init="vm.carregarConsumos()">
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
@@ -7,7 +7,7 @@
                     <div class="col-12 col-sm-12 col-md-4 col-lg-2 col-xl-2">
                         <div class="form-group">
                             <div class="input-group">
-                                <button type="button" class="btn btn-sm btn-success form-control" ng-click="vm.carregarClientes()" data-toggle="modal" data-target="#modalConsumo">
+                                <button type="button" class="btn btn-sm btn-success form-control" ng-click="vm.carregarClientes(); vm.carregarSalas(); vm.novoConsumo();" data-toggle="modal" data-target="#modalConsumo">
                                     <i class="fa fa-sign-in" aria-hidden="true" title="Fazer Check-In"></i>
                                     Fazer Check-In
                                 </button>
@@ -19,8 +19,8 @@
                     <table class="table table-hover table-sm">
                         <thead>
                             <tr>
-                                <th>Cliente</th>
                                 <th>Sala</th>
+                                <th>Cliente</th>
                                 <th>Horário Check-in</th>
                                 <th>Tempo Decorrido</th>
                                 <th>Valor Sala</th>
@@ -29,11 +29,11 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="consumo in vm.salasComConsumo | filter : search | orderBy: 'nome'">
-                                <td>{{consumo.cliente.nome}}</td>
+                            <tr ng-repeat="consumo in vm.consumos | filter : search | orderBy: 'nome'">
                                 <td>{{consumo.sala.nome}}</td>
+                                <td>{{consumo.solicitante.nome}}</td>
                                 <td>{{consumo.dataInicial | date: 'dd/MM/yy HH:mm'}}</td>
-                                <td>{{consumo.tempoConsumo.dias}} d {{consumo.tempoConsumo.horas}} h {{consumo.tempoConsumo.horas}}
+                                <td>{{consumo.tempoConsumo.dias}} d {{consumo.tempoConsumo.horas}} h {{consumo.tempoConsumo.minutos}}
                                     min </td>
                                 <td>{{consumo.sala.valorHora | currency : "R$": 2}}</td>
                                 <td>{{consumo.valorGasto | currency : "R$": 2}}</td>
@@ -104,7 +104,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-success" ng-click="vm.cadastrarConsumo()">Salvar</button>
+                <button type="button" class="btn btn-success" ng-click="vm.cadastrarConsumo()" data-dismiss="modal">Salvar</button>
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
             </div>
         </div>

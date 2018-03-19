@@ -26,7 +26,7 @@ angular.module('coworkingApp')
             alertaConfirmarExclusao()
                 .then(function (res) {
                     if (res.value) {
-                        svcCliente.deletarCliente(cliente)
+                        svcCliente.deletarCliente(cliente.id)
                             .then(function (res) {
                                 vm.carregarClientes();
                                 swal({

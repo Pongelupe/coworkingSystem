@@ -32,13 +32,13 @@ angular
         };
 
         //Deletar cliente
-        retorno.deletarCliente = function (dados) {
-            var urlRequest = URL_REQ + "cliente/" + dados.id;
-            urlRequest = urlRequest.toString();
+        retorno.deletarCliente = function (idCliente) {
             return $http({
-                url: urlRequest,
+                url: URL_REQ + "cliente/",
                 method: 'DELETE',
-                data: dados,
+                params: {
+                    idCliente: idCliente
+                },
                 cwsHeaders
             });
         };

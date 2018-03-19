@@ -82,12 +82,14 @@ angular
                 }
 
             })
-            .state("faturamento", {
+            .state("faturamentos", {
                 parent: "app",
-                url: "/faturamento",
+                url: "/faturamentos",
                 views: {
                     'contentApp@app': {
-                        template: "<p> Você está na aba faturamento <p>"
+                        templateUrl: "components/faturamento/faturamentos.html",
+                        controller: 'Faturamentos',
+                        controllerAs: 'vm'
                     }
                 }
 

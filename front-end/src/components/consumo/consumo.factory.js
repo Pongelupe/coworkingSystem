@@ -41,13 +41,12 @@ angular
         };
 
         //Finalizar consumo
-        retorno.finalizarConsumo = function (dados) {
+        retorno.finalizarConsumo = function (idConsumo) {
             return $http({
                 url: URL_REQ + "finalizarConsumo",
                 method: 'POST',
-                data: dados.consumo,
                 params: {
-                    idConsumo: dados.idConsumo,
+                    idConsumo: idConsumo,
                 },
                 cwsHeaders
             });

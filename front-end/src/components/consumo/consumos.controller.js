@@ -1,6 +1,6 @@
 angular.module('coworkingApp')
-    .controller('Consumo', ["$rootScope", "$state", "$stateParams", "svcConsumo", "svcSala", "svcCliente", "Notify",
-        function ($rootScope, $state, $stateParams, svcConsumo, svcSala, svcCliente, Notify) {
+    .controller('Consumo', ["$rootScope", "$state", "$stateParams", "svcConsumo", "svcSala", "svcCliente","svcFaturamento", "Notify",
+        function ($rootScope, $state, $stateParams, svcConsumo, svcSala, svcCliente,svcFaturamento, Notify) {
 
             var vm = this;
 
@@ -85,23 +85,24 @@ angular.module('coworkingApp')
 
             vm.finalizarConsumo = function (consumo) {
 
-                var obj = {};
+                /*var obj = {};
                 obj.idConsumo = consumo.id;
-                obj.consumo = {}
-                obj.consumo.dataFinal = moment(new Date()).format();
+                obj.dataFinal = moment().format();*/
 
                 alertaConfirmarExclusao("realizar Check-Out")
                     .then(function (res) {
                         if (res.value) {
-                            svcConsumo.finalizarConsumo(obj)
+                            svcConsumo.finalizarConsumo(consumo.id)
                                 .then(function (res) {
                                     swal({
-                                        title: "Check-Out realizado com sucesso",
+                                        title: "Check-Out e faturamento realizado com sucesso",
                                         type: "success",
                                         showConfirmButton: false,
                                         timer: 2000
                                     })
                                     vm.carregarSalas();
+                                    debugger;
+                                    vm.realizarFaturamento(consumo);
                                 })
                                 .catch(function (err) {
                                     alertaErroRequisicao(err);
@@ -135,6 +136,26 @@ angular.module('coworkingApp')
                         }
                     })
             };
+
+            vm.realizarFaturamento = function(consumo){
+                vm.faturamento = {};
+
+                vm.faturamento.tipoFaturamento = "AVULSO" ;
+                vm.faturamento.statusFaturamento = "ABERTO";
+                vm.faturamento.dtEmissao = moment().format() ;
+                vm.faturamento.dtVencimento = moment().add(30, 'days').format()
+                vm.faturamento.valorFaturamento = consumo.valorGasto;
+                vm.faturamento.descontoFaturamento = 0;
+
+                svcFaturamento.cadastrarFaturamento(vm.faturamento)
+                .then(function(res){
+                    vm.carregarConsumos();
+                })
+                .catch(function(err){
+                    console.log(err);
+                })
+                 
+            }
 
 
             vm.openModalFinalizarConsumo = function (consumo) {

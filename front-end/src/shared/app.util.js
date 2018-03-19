@@ -1,5 +1,5 @@
 function alertaErroRequisicao(err) {
-    if (err.status == 400) {
+    if (err.status == 400 && err.data.messages != undefined) {
         swal({
             text: err.data.messages[0],
             type: 'error',

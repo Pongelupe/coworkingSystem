@@ -669,10 +669,7 @@ pre {
   color: #c9c8c8;
   width: auto;
   border: none; }
-  .input-group-append .input-group-text,
-  .input-group-prepend .input-group-text {
-    background: transparent;
-    border-color: #f3f3f3; }
+
 
 .form-control {
   font-family: "Poppins", sans-serif;

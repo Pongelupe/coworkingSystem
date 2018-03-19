@@ -13,8 +13,10 @@ angular
 
         //Criar consumo
         retorno.cadastrarConsumo = function (dados) {
+            var urlRequest = URL_REQ + "consumo/" + dados.cliente.id + "/" + dados.salaCliente.id;
+            urlRequest = urlRequest.toString();
             return $http({
-                url: URL_REQ + "consumo",
+                url: urlRequest,
                 method: 'POST',
                 data: dados,
                 cwsHeaders

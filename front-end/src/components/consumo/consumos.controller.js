@@ -33,11 +33,11 @@ angular.module('coworkingApp')
             vm.cadastrarConsumo = function (consumo) {
 
                 var obj = {};
-                obj.sala = vm.salas.filter(function (obj) {
+                obj.salaCliente = vm.salas.filter(function (obj) {
                     return (obj.id == consumo.id)
                 })[0];
 
-                obj.solicitante = vm.clientes.filter(function (obj) {
+                obj.cliente = vm.clientes.filter(function (obj) {
                     return (obj.id == consumo.idCliente)
                 })[0];
 

@@ -35,12 +35,12 @@ angular
         };
 
         //Deletar sala
-        retorno.deletarSala = function (dados) {
+        retorno.deletarSala = function (idSala) {
             return $http({
                 url: URL_REQ + "sala",
                 method: 'DELETE',
                 params: {
-                    idSala: dados.idSala
+                    idSala: idSala
                 },
                 cwsHeaders
             });

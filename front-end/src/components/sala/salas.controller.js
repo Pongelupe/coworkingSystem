@@ -26,7 +26,7 @@ angular.module('coworkingApp')
             alertaConfirmarExclusao()
                 .then(function (res) {
                     if (res.value) {
-                        svcSala.deletarSala(sala)
+                        svcSala.deletarSala(sala.id)
                             .then(function (res) {
                                 vm.carregarSalas();
                                 swal({

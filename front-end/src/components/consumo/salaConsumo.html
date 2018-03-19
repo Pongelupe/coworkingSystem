@@ -33,11 +33,13 @@
                                 <td>{{consumo.cliente.nome}}</td>
                                 <td>{{consumo.sala.nome}}</td>
                                 <td>{{consumo.dataInicial | date: 'dd/MM/yy HH:mm'}}</td>
-                                <td>{{consumo.tempoConsumo.horas}} h {{consumo.tempoConsumo.horas}} min </td>
+                                <td>{{consumo.tempoConsumo.dias}} d {{consumo.tempoConsumo.horas}} h {{consumo.tempoConsumo.horas}}
+                                    min </td>
                                 <td>{{consumo.sala.valorHora | currency : "R$": 2}}</td>
                                 <td>{{consumo.valorGasto | currency : "R$": 2}}</td>
-                                <td>
-                                    <i class="fa fa-pencil text-primary m-1" aria-hidden="true" title="Atualizar dados da sala" ng-click="vm.updateSala(sala)"></i>
+                                <td class="text-center">
+                                    <i class="fa fa-sign-out text-danger" aria-hidden="true" title="Fazer Check-Out" ng-click="vm.openModalFinalizarConsumo(sala)"></i>
+
                                     <i class="fa fa-trash-o text-danger" aria-hidden="true" title="Excluir sala" ng-click="vm.deletarSala(sala)"></i>
                                 </td>
                             </tr>

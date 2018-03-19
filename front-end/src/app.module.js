@@ -15,7 +15,7 @@ angular
         cfpLoadingBarProvider.includeSpinner = false;
     }])
 
-var URL_REQ = "http://localhost:9000/coworking/";
+var URL_REQ = "http://10.224.134.110:9000/coworking/";
 
 var cwsHeaders = {
     headers: {

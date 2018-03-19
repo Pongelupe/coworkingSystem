@@ -18,7 +18,11 @@ angular
             return $http({
                 url: URL_REQ + "consumo/",
                 method: 'POST',
-                data: dados,
+                data: dados.consumo,
+                params: {
+                    idCliente: dados.idCliente,
+                    idSala: dados.idSala
+                },
                 cwsHeaders
             });
         };

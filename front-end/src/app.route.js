@@ -21,7 +21,7 @@ angular
                         controllerAs: 'vm'
                     },
                     'contentApp@app': {
-                        templateUrl: 'components/consumo/consumos.html',
+                        templateUrl: 'components/consumo/salaConsumo.html',
                         controller: 'Consumo',
                         controllerAs: 'vm'
                     }

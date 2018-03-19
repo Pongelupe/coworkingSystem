@@ -1,8 +1,98 @@
 angular.module('coworkingApp')
-    .controller('Consumo', ["$rootScope", "$state", "$stateParams", "svcConsumo", "svcSala", "svcCliente","Notify",
+    .controller('Consumo', ["$rootScope", "$state", "$stateParams", "svcConsumo", "svcSala", "svcCliente", "Notify",
         function ($rootScope, $state, $stateParams, svcConsumo, svcSala, svcCliente, Notify) {
 
             var vm = this;
+
+            var consumos = [
+                {
+                    tipoConsumo: "AVULSO",
+                    dataInicial: "2018-03-18T23:45:00",
+                    faturado: "false",
+                    sala: {
+                        "id": 4,
+                        "nome": "Coworking 20",
+                        "horarioInicial": "08:00:00",
+                        "horarioFinal": "18:00:00",
+                        "ramal": 0,
+                        "valorHora": 20.0,
+                        "quantidadeEstacoes": 20,
+                        "estaLivre": true,
+                        "tipoSala": "COWORKING"
+                    },
+                    cliente: {
+                        "id": 5,
+                        "nome": "Ana Paula dos Santos",
+                        "tipoCliente": "fisica",
+                        "email": "ana@teste.com",
+                        "cpfCnpj": "09514114552",
+                        "rg": "16188745",
+                        "cnh": "1656565",
+                        "telefone": "31998574563",
+                        "inscricaoMunicipal": null,
+                        "inscricaoEstadual": "",
+                        "dtNascimento": 826513200000,
+                        "endereco": {
+                            "cliente": null,
+                            "rua": null,
+                            "bairro": null,
+                            "cidade": null,
+                            "complemento": null,
+                            "estado": null,
+                            "pais": null,
+                            "cep": null,
+                            "numero": 0
+                        },
+                        "consumos": [
+
+                        ]
+                    },
+                },
+                {
+                    tipoConsumo: "AVULSO",
+                    dataInicial: "2018-03-18T20:00:00",
+                    faturado: "false",
+                    sala: {
+                        "id": 1,
+                        "nome": "Reunião",
+                        "horarioInicial": "08:00:00",
+                        "horarioFinal": "18:00:00",
+                        "ramal": 6565,
+                        "valorHora": 50.0,
+                        "quantidadeEstacoes": 0,
+                        "estaLivre": true,
+                        "tipoSala": "PUBLICA"
+                    },
+                    cliente: {
+                        "id": 6,
+                        "nome": "Companhia de Locação Ltda",
+                        "tipoCliente": "juridica",
+                        "email": "comapnhia@teste.com",
+                        "cpfCnpj": "10147988000160",
+                        "rg": "",
+                        "cnh": "",
+                        "telefone": "3134354747",
+                        "inscricaoMunicipal": "3265989",
+                        "inscricaoEstadual": "89896523",
+                        "dtNascimento": 1262311200000,
+                        "endereco": {
+                            "cliente": null,
+                            "rua": null,
+                            "bairro": null,
+                            "cidade": null,
+                            "complemento": null,
+                            "estado": null,
+                            "pais": null,
+                            "cep": null,
+                            "numero": 0
+                        },
+                        "consumos": [
+
+                        ]
+                    },
+                }
+            ];
+
 
             vm.carregarSalas = function () {
                 svcSala.salas()
@@ -23,12 +113,24 @@ angular.module('coworkingApp')
             vm.carregarConsumos = function () {
                 svcConsumo.consumos()
                     .then(function (res) {
-                        if (res.data.data != undefined)
+                        if (res.data.data != undefined) {
                             vm.consumos = res.data.data;
+                            vm.carregarSalasComConsumo();
+                        }
+
                     })
             };
 
-            vm.carregarSalas();
+            vm.init = function () {
+                vm.salasComConsumo = consumos;
+
+                for (var j = 0; j < vm.salasComConsumo.length; j++) {
+                    vm.salasComConsumo[j].tempoConsumo = calcularDiasDiferenca(new Date(), new Date(vm.salasComConsumo[j].dataInicial));
+                    vm.salasComConsumo[j].valorGasto = vm.calcularGasto(vm.salasComConsumo[j]);
+                }
+
+            };
+            //vm.carregarSalas();
 
             vm.cadastrarConsumo = function (consumo) {
 
@@ -135,12 +237,13 @@ angular.module('coworkingApp')
             };
 
             vm.calcularGasto = function (consumo) {
-                var valorDia = consumo.valorHora * 24;
-                var valorHora = consumo.valorHora;
-                var valorMinuto = consumo.valorHora / 60;
+                var valorDia = consumo.sala.valorHora * 24;
+                var valorHora = consumo.sala.valorHora;
+                var valorMinuto = consumo.sala.valorHora / 60;
                 var tempoConsumo = consumo.tempoConsumo;
 
                 var valorGasto = parseFloat(tempoConsumo.dias * valorDia + tempoConsumo.horas * valorHora + tempoConsumo.minutos * valorMinuto);
+                return valorGasto;
             }
 
 

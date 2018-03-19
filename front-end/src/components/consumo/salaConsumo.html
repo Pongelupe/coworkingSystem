@@ -1,0 +1,39 @@
+<div class="row" ng-init="vm.init()">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Check-Ins em Aberto</h4>
+                <div class="table-responsive">
+                    <table class="table table-hover table-sm">
+                        <thead>
+                            <tr>
+                                <th>Cliente</th>
+                                <th>Sala</th>
+                                <th>Horário Check-in</th>
+                                <th>Tempo Decorrido</th>
+                                <th>Valor Sala</th>
+                                <th>Valor Gasto</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="consumo in vm.salasComConsumo | filter : search | orderBy: 'nome'">
+                                <td>{{consumo.cliente.nome}}</td>
+                                <td>{{consumo.sala.nome}}</td>
+                                <td>{{consumo.dataInicial | date: 'dd/MM/yy HH:mm'}}</td>
+                                <td>{{consumo.tempoConsumo.horas}} h {{consumo.tempoConsumo.horas}} min </td>
+                                <td>{{consumo.sala.valorHora | currency : "R$": 2}}</td>
+                                <td>{{consumo.valorGasto | currency : "R$": 2}}</td>
+                                <td>
+                                    <i class="fa fa-pencil text-primary m-1" aria-hidden="true" title="Atualizar dados da sala" ng-click="vm.updateSala(sala)"></i>
+                                    <i class="fa fa-trash-o text-danger" aria-hidden="true" title="Excluir sala" ng-click="vm.deletarSala(sala)"></i>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

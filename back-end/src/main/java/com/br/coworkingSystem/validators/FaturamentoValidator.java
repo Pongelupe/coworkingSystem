@@ -24,7 +24,7 @@ public class FaturamentoValidator implements Validator {
 		Date dtEmissao = faturamento.getDtEmissao();
 		Date dtVencimento = faturamento.getDtVencimento();
 
-		if (valorFaturamento >= 0)
+		if (valorFaturamento <= 0)
 			erros.rejectValue("valorFaturamento", "O valorFaturamento não pode ser menor que 0");
 
 		if (dtEmissao == null)

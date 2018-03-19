@@ -14,6 +14,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Cliente {
 
@@ -38,6 +40,7 @@ public class Cliente {
 	private Endereco endereco;
 
 	@OneToMany
+	@JsonIgnore
 	private List<Consumo> consumos;
 
 	public String getNome() {

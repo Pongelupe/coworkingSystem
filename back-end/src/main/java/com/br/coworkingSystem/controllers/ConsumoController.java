@@ -39,7 +39,7 @@ public class ConsumoController {
 	@Autowired
 	private SalaRepository salaRepository;
 
-	@InitBinder
+	@InitBinder("consumo")
 	public void initBinder(WebDataBinder binder) {
 		binder.setValidator(new ConsumoValidator());
 	}
@@ -47,7 +47,7 @@ public class ConsumoController {
 	@GetMapping("/consumos")
 	public @ResponseBody ResponseEntity<Response<List<Consumo>>> getConsumo() {
 		Response<List<Consumo>> response = new Response<List<Consumo>>();
-		List<Consumo> consumos = consumoRepository.findAll();
+		List<Consumo> consumos = consumoRepository.findAllByFaturado(false);
 		response.setData(consumos);
 		return ResponseEntity.ok(response);
 	}
@@ -73,7 +73,6 @@ public class ConsumoController {
 			consumo.setSala(salaOptional.get());
 			consumo.setSolicitante(solicitante);
 			consumo = consumoRepository.save(consumo);
-			clienteRepository.save(solicitante);
 
 			response.setData(consumo.getId());
 
@@ -82,15 +81,14 @@ public class ConsumoController {
 	}
 
 	@PostMapping("/finalizarConsumo")
-	public @ResponseBody ResponseEntity<Response<Integer>> finalizarConsumo(@RequestBody Long idConsumo,
-			@RequestBody Date dataFinal) {
+	public @ResponseBody ResponseEntity<Response<Integer>> finalizarConsumo(@RequestParam int idConsumo) {
 
 		Response<Integer> response = new Response<Integer>();
 		Optional<Consumo> optionalConsumo = consumoRepository.findById(idConsumo);
 
-		if (optionalConsumo.isPresent() && dataFinal != null) {
+		if (optionalConsumo.isPresent()) {
 			Consumo consumo = optionalConsumo.get();
-			consumo.setDataFinal(dataFinal);
+			consumo.setDataFinal(new Date());
 			consumo.setFaturado(true);
 			consumoRepository.save(consumo);
 

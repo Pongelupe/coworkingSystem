@@ -1,5 +1,6 @@
 package com.br.coworkingSystem.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -139,8 +140,12 @@ public class Cliente {
 		return consumos;
 	}
 
-	public void setConsumos(List<Consumo> consumos) {
-		this.consumos = consumos;
+	public void addConsumo(Consumo consumo) {
+		if (consumos == null)
+			this.consumos = new ArrayList<Consumo>();
+
+		this.consumos.add(consumo);
+
 	}
 
 	@Override

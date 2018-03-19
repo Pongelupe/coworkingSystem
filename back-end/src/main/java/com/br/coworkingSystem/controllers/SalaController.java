@@ -78,8 +78,8 @@ public class SalaController {
 		}
 	}
 
-	@PutMapping("/sala/{idSala}")
-	public @ResponseBody ResponseEntity<Response<Integer>> updateSala(@PathVariable Integer idSala,
+	@PutMapping("/sala")
+	public @ResponseBody ResponseEntity<Response<Integer>> updateSala(@RequestBody Integer idSala,
 			@RequestBody @Valid Sala cliente, BindingResult result) {
 		Response<Integer> response = new Response<Integer>();
 
@@ -104,8 +104,8 @@ public class SalaController {
 
 	}
 
-	@DeleteMapping("/sala/{idSala}")
-	public @ResponseBody ResponseEntity<Response<Boolean>> deletarSala(@PathVariable Integer idSala) {
+	@DeleteMapping("/sala")
+	public @ResponseBody ResponseEntity<Response<Boolean>> deletarSala(@RequestBody Integer idSala) {
 		Response<Boolean> response = new Response<Boolean>();
 
 		if (!repository.findById(idSala).isPresent()) {

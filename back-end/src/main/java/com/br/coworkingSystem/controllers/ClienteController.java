@@ -78,8 +78,8 @@ public class ClienteController {
 		}
 	}
 
-	@PutMapping("/cliente/{idCliente}")
-	public @ResponseBody ResponseEntity<Response<Long>> updateCliente(@PathVariable Long idCliente,
+	@PutMapping("/cliente")
+	public @ResponseBody ResponseEntity<Response<Long>> updateCliente(@RequestBody Long idCliente,
 			@RequestBody @Valid Cliente cliente, BindingResult result) {
 		Response<Long> response = new Response<Long>();
 
@@ -104,8 +104,8 @@ public class ClienteController {
 
 	}
 
-	@DeleteMapping("/cliente/{idCliente}")
-	public @ResponseBody ResponseEntity<Response<Boolean>> deletarCliente(@PathVariable Long idCliente) {
+	@DeleteMapping("/cliente")
+	public @ResponseBody ResponseEntity<Response<Boolean>> deletarCliente(@RequestBody Long idCliente) {
 		Response<Boolean> response = new Response<Boolean>();
 
 		if (!repository.findById(idCliente).isPresent()) {

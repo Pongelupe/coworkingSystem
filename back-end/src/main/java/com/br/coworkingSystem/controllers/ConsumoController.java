@@ -13,7 +13,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.br.coworkingSystem.model.Cliente;
 import com.br.coworkingSystem.model.Consumo;
 import com.br.coworkingSystem.model.Response;
+import com.br.coworkingSystem.model.Sala;
 import com.br.coworkingSystem.repositories.ClienteRepository;
 import com.br.coworkingSystem.repositories.ConsumoRepository;
 import com.br.coworkingSystem.repositories.SalaRepository;
@@ -44,44 +44,44 @@ public class ConsumoController {
 	}
 
 	@GetMapping("/consumos/{idCliente}")
-	public @ResponseBody ResponseEntity<Response<List<Consumo>>> getConsumo(@PathVariable Long idCliente) {
+	public @ResponseBody ResponseEntity<Response<List<Consumo>>> getConsumo() {
 		Response<List<Consumo>> response = new Response<List<Consumo>>();
-		Optional<Cliente> cliente = clienteRepository.findById(idCliente);
-		if (cliente.isPresent()) {
-			List<Consumo> consumos = consumoRepository.findAllBySolicitante(cliente.get());
-			response.setData(consumos);
-			return ResponseEntity.ok(response);
-		} else {
-			response.setData(null);
-			response.addError("Cliente não encontrado não encontrado");
-			return ResponseEntity.badRequest().body(response);
-		}
+		List<Consumo> consumos = consumoRepository.findAll();
+		response.setData(consumos);
+		return ResponseEntity.ok(response);
 	}
 
-	@PostMapping("/consumo/{idCliente}/{idSala}")
+	@PostMapping("/consumo")
 	public @ResponseBody ResponseEntity<Response<Integer>> cadastraConsumo(@RequestBody @Valid Consumo consumo,
-			BindingResult result, @PathVariable Long idCliente, @PathVariable int idSala) {
+			BindingResult result, @RequestBody Long idCliente, @RequestBody int idSala) {
 
 		Response<Integer> response = new Response<Integer>();
+		Optional<Cliente> clienteOptional = clienteRepository.findById(idCliente);
+		Optional<Sala> salaOptional = salaRepository.findById(idSala);
 
-		if (result.hasErrors() || salaRepository.existsById(idSala) || clienteRepository.existsById(idCliente)) {
+		if (result.hasErrors()) {
 			response.setData(null);
 			result.getAllErrors().forEach(error -> response.addError(error.getCode()));
-			response.addError("Cliente/Sala podem estar errados!");
-
+			if (!clienteOptional.isPresent() && !salaOptional.isPresent())
+				response.addError("Cliente/Sala não encaontrada");
 			return ResponseEntity.badRequest().body(response);
 		} else {
-			consumo.setSala(salaRepository.getOne(idSala));
-			consumo.setSolicitante(clienteRepository.getOne(idCliente));
+			Cliente solicitante = clienteOptional.get();
+			solicitante.addConsumo(consumo);
+
+			consumo.setSala(salaOptional.get());
+			consumo.setSolicitante(solicitante);
 			consumo = consumoRepository.save(consumo);
+			clienteRepository.save(solicitante);
+
 			response.setData(consumo.getId());
 
 			return ResponseEntity.ok(response);
 		}
 	}
 
-	@PostMapping("/finalizarConsumo/{idConsumo}")
-	public @ResponseBody ResponseEntity<Response<Integer>> finalizarConsumo(@PathVariable Long idConsumo,
+	@PostMapping("/finalizarConsumo")
+	public @ResponseBody ResponseEntity<Response<Integer>> finalizarConsumo(@RequestBody Long idConsumo,
 			@RequestBody Date dataFinal) {
 
 		Response<Integer> response = new Response<Integer>();

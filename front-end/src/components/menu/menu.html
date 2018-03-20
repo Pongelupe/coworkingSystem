@@ -1,0 +1,66 @@
+<nav class="sidebar sidebar-offcanvas" id="sidebar">
+  <ul class="nav">
+    <li class="nav-item">
+      <a class="nav-link" ui-sref="app" ng-click="vm.atualizarTitle()">
+        <img id="cws-logo" src="../../shared/images/cws.png">
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" ui-sref="app" ng-click="vm.atualizarTitle()">
+        <img class="menu-icon" src="shared/images/menu_icons/home.png" alt="home">
+        <span class="menu-title">Home</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="collapse" data-target="#cliente-subitens" aria-expanded="false" aria-controls="cliente-subitens">
+        <img class="menu-icon" src="shared/images/menu_icons/customer.png" alt="Cliente">
+        <span class="menu-title">Cliente</span>
+        <i class="menu-arrow" aria-hidden="true"></i>
+      </a>
+      <div class="collapse" id="cliente-subitens">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item">
+            <a class="nav-link" ui-sref="cliente">Novo Cliente</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" ui-sref="clientes">Listar Clientes</a>
+          </li>
+        </ul>
+      </div>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="collapse" data-target="#sala-subitens" aria-expanded="false" aria-controls="sala-subitens">
+        <img class="menu-icon" src="shared/images/menu_icons/room.png" alt="Sala">
+        <span class="menu-title">Sala</span>
+        <i class="menu-arrow" aria-hidden="true"></i>
+      </a>
+      <div class="collapse" id="sala-subitens">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item">
+            <a class="nav-link" ui-sref="sala">Nova Sala</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" ui-sref="salas">Listar Salas</a>
+          </li>
+        </ul>
+      </div>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="collapse" data-target="#cobranca-subitens" aria-expanded="false" aria-controls="cobranca-subitens">
+        <img class="menu-icon" src="shared/images/menu_icons/box-money.png" alt="Cobrança">
+        <span class="menu-title">Cobrança</span>
+        <i class="menu-arrow" aria-hidden="true"></i>
+      </a>
+      <div class="collapse" id="cobranca-subitens">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item">
+            <a class="nav-link" ui-sref="faturamentos">Faturamentos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" ui-sref="pagamento">Pagamentos</a>
+          </li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+</nav>

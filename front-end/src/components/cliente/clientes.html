@@ -1,0 +1,68 @@
+<div class="row" ng-init="vm.carregarClientes()">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Clientes Cadastrados</h4>
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-4 col-lg-2 col-xl-2">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <button type="button" class="btn btn-sm btn-success form-control" ng-click="vm.cadastrarCliente()">
+                                    <i class="fa fa-plus" aria-hidden="true" title="Cadastrar novo cliente"></i>Cadastrar Cliente
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="fa fa-search"></i>
+                                </span>
+                            </div>
+                            <input type="text" ng-model="search" class="form-control" placeholder="Pesquisar cliente" aria-label="Pesquisar cliente" aria-describedby="basic-addon1">
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover table-sm">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <!--<th>Data Nasc./Fund.</th>-->
+                                <th>CPF/CNPJ</th>
+                                <!--<th>RG</th>
+                                <th>CNH</th>-->
+                                <th>Telefone Principal</th>
+                                <!--<th>Insc. Municipal</th>
+                                <th>Insc. Estadual</th>
+                                <th>Endereço Completo</th>-->
+                                <th>Email</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="cliente in vm.clientes | filter : search | orderBy: 'nome'">
+                                <td>{{cliente.nome}}</td>
+                                <!--<td>{{cliente.dtNascimento | date: 'dd/MM/yy'}}</td>-->
+                                <td>{{cliente.cpfCnpj}}</td>
+                                <!--<td>{{cliente.rg}}</td>
+                                <td>{{cliente.cnh}}</td>-->
+                                <td>{{cliente.telefone}}</td>
+                                <!--<td>{{cliente.inscricaoMunicipal}}</td>
+                                <td>{{cliente.inscricaoEstadual}}</td
+                                <td>{{cliente.endereco}}</td>-->
+                                <td>{{cliente.email}}</td>
+                                <td>
+                                    <i class="fa fa-pencil text-primary m-1" aria-hidden="true" title="Atualizar dados do cliente" ng-click="vm.updateCliente(cliente)"></i>
+                                    <i class="fa fa-trash-o text-danger" aria-hidden="true" title="Excluir cliente" ng-click="vm.deletarCliente(cliente)"></i>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

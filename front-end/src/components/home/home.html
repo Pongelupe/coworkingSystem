@@ -1,0 +1,22 @@
+<div class="container-fluid page-body-wrapper">
+    <div ui-view="menu"></div>
+    <div class="main-panel">
+        <div class="title-page">
+            <div class="title">
+                <span>{{mainTitle}}</span>
+            </div>
+            <div class="sub-title">
+                <p class="mb-0">{{subTitle}}</p>
+            </div>
+        </div>
+        <div class="content-wrapper">
+            <div ui-view="contentApp"></div>
+        </div>
+        <!--<footer class="footer">
+            <div class="container-fluid clearfix">
+                <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © 2018
+                    <a ui-sref="app">Coworking System</a>. All rights reserved.</span>
+            </div>
+        </footer>-->
+    </div>
+</div>

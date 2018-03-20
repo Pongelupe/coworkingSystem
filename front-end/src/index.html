@@ -1,0 +1,39 @@
+<!doctype html>
+<html ng-app="coworkingApp">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Software para gestão coworking">
+
+    <link rel="stylesheet" href="shared/libs/css/public.libs.css">
+    <link rel="stylesheet" href="shared/libs/css/style.css">
+    <link rel="shortcut icon" href="shared/images/logo_cws_mini.png" />
+
+    <title>Coworking System</title>
+</head>
+
+<body>
+    <div ui-view="app"> </div>
+    <div ui-view="login"></div>
+
+
+    <script src="shared/libs/js/public.libs.js"></script>
+    <script src="app.module.js"></script>
+    <script src="app.route.js"></script>
+    <script src="shared/app.util.js"></script>
+    <script src="shared/notify.service.js"></script>
+    <script src="components/cliente/cliente.factory.js"></script>
+    <script src="components/sala/sala.factory.js"></script>
+    <script src="components/faturamento/faturamento.factory.js"></script>
+    <script src="components/home/home.controller.js"></script>
+    <script src="components/consumo/consumo.factory.js"></script>
+    <script src="components/consumo/consumos.controller.js"></script>
+    <script src="components/cliente/clientes.controller.js"></script>
+    <script src="components/cliente/cliente.controller.js"></script>
+    <script src="components/sala/salas.controller.js"></script>
+    <script src="components/sala/sala.controller.js"></script>
+    <script src="components/faturamento/faturamentos.controller.js"></script>
+</body>
+
+</html>

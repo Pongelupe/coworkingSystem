@@ -1,0 +1,110 @@
+<div class="row" ng-init="vm.carregarConsumos()">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Check-In em Aberto</h4>
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-4 col-lg-2 col-xl-2">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <button type="button" class="btn btn-sm btn-success form-control" ng-click="vm.carregarClientes(); vm.carregarSalas(); vm.novoConsumo();" data-toggle="modal" data-target="#modalConsumo">
+                                    <i class="fa fa-sign-in" aria-hidden="true" title="Fazer Check-In"></i>
+                                    Fazer Check-In
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover table-sm">
+                        <thead>
+                            <tr>
+                                <th>Sala</th>
+                                <th>Cliente</th>
+                                <th>Horário Check-in</th>
+                                <th>Tempo Decorrido</th>
+                                <th>Valor Sala</th>
+                                <th>Valor Gasto</th>
+                                <th class="text-center">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="consumo in vm.consumos | filter : search | orderBy: 'nome'">
+                                <td>{{consumo.sala.nome}}</td>
+                                <td>{{consumo.solicitante.nome}}</td>
+                                <td>{{consumo.dataInicial | date: 'dd/MM/yy HH:mm'}}</td>
+                                <td>{{consumo.tempoConsumo.dias}} d {{consumo.tempoConsumo.horas}} h {{consumo.tempoConsumo.minutos}}
+                                    min </td>
+                                <td>{{consumo.sala.valorHora | currency : "R$": 2}}</td>
+                                <td>{{consumo.valorGasto | currency : "R$": 2}}</td>
+                                <td class="text-center">
+                                    <i class="fa fa-sign-out text-danger" aria-hidden="true" title="Fazer Check-Out" ng-click="vm.finalizarConsumo(consumo)"></i>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- modalConsumo-->
+<div class="modal fade" id="modalConsumo" tabindex="-1" role="dialog" aria-labelledby="consumo" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalConsumoTitle">Realizar Check-In</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Sala
+                                <b class="text-danger">*</b>
+                            </label>
+                            <select ng-model="vm.consumo.idSala" class="form-control form-control-sm">
+                                <option value="">Selecione a sala</option>
+                                <option ng-repeat="sala in vm.salas" value="{{sala.id}}">{{sala.nome}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label>Cliente
+                                    <b class="text-danger">*</b>
+                                </label>
+                                <select ng-model="vm.consumo.idCliente" class="form-control form-control-sm">
+                                    <option value="">Selecione o cliente</option>
+                                    <option ng-repeat="cliente in vm.clientes" value="{{cliente.id}}">{{cliente.nome}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Horário
+                                <b class="text-danger">*</b>
+                            </label>
+                            <input type="datetime-local" ng-model="vm.consumo.dataInicial" class="form-control">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" ng-click="vm.cadastrarConsumo()" data-dismiss="modal">Salvar</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>

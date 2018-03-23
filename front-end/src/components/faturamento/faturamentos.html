@@ -22,10 +22,14 @@
                             <tr>
                                 <th>Status Faturamento</th>
                                 <th>Tipo Faturamento</th>
+                                
+                                <th>Cliente</th>
                                 <th>Data Emissão</th>
                                 <th>Data Vencimento</th>
                                 <th>Valor Faturamento</th>
                                 <th>Desconto Faturamento</th>
+                                
+                                <th>Valor Atual</th>
                                 <th>Ações</th>
                             </tr>
                         </thead>
@@ -33,13 +37,15 @@
                             <tr ng-repeat="faturamento in vm.faturamentos | filter : search | orderBy: 'valorFaturamento'">
                                 <td>ABERTO</td>
                                 <td>{{faturamento.tipoFaturamento}}</td>
+                                <td>Ana Paula dos Santos</td>
                                 <td>{{faturamento.dtEmissao | date: 'dd/MM/yy'}}</td>
                                 <td>{{faturamento.dtVencimento | date: 'dd/MM/yy'}}</td>
                                 <td>{{faturamento.valorFaturamento | currency : "R$": 2}}</td>
                                 <td>{{faturamento.descontoFaturamento | currency : "R$": 2}}</td>
+                                <td>{{faturamento.valorFaturamento | currency : "R$": 2}}</td>
                                 <td>
                                     <i class="fa fa-check-circle-o text-success m-1" aria-hidden="true" title="Registrar Pagamento" ng-click=""></i>
-                                    <i class="fa fa-arrow-circle-o-down text-primary" aria-hidden="true" title="Aplicar Desconto" ng-click=""></i>
+                                    <i class="fa fa-arrow-circle-o-down text-primary" aria-hidden="true" data-toggle="modal" data-target="#modalConsumo"title="Aplicar Desconto" ng-click=""></i>
                                 </td>
                             </tr>
                         </tbody>
@@ -50,3 +56,37 @@
         </div>
     </div>
 </div>
+
+
+
+
+<!-- modalConsumo-->
+<div class="modal fade" id="modalConsumo" tabindex="-1" role="dialog" aria-labelledby="consumo" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalConsumoTitle">Aplicar Desconto</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Desconto
+                                    <b class="text-danger">*</b>
+                                </label>
+                                <input type="number" ng-model="vm.aplicarDesconto()" class="form-control">
+                            </div>
+                        </div>
+    
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" ng-click="vm.cadastrarConsumo()" data-dismiss="modal">Salvar</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>

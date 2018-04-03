@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.br.coworkingSystem.model.Faturamento;
@@ -102,6 +103,29 @@ public class FaturamentoController {
 			return ResponseEntity.ok(response);
 		}
 
+	}
+
+	@PostMapping("/aplicarDesconto")
+	public @ResponseBody ResponseEntity<Response<Boolean>> aplicarDesconto(@RequestParam Long idFaturamento,
+			@RequestBody Faturamento faturamento) {
+		Response<Boolean> response = new Response<Boolean>();
+		Optional<Faturamento> faturamentoOptional = repository.findById(idFaturamento);
+
+		if (!faturamentoOptional.isPresent()) {
+			response.setData(false);
+			response.addError("Não conseguimos encontrar este faturamento");
+
+			return ResponseEntity.badRequest().body(response);
+		} else {
+			double desconto = faturamento.getDescontoFaturamento();
+			faturamento = faturamentoOptional.get();
+			faturamento.setDescontoFaturamento(desconto);
+			repository.save(faturamento);
+
+			response.setData(true);
+
+			return ResponseEntity.ok(response);
+		}
 	}
 
 	@DeleteMapping("/faturamento/{idFaturamento}")

@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.br.coworkingSystem.model.Faturamento;
 import com.br.coworkingSystem.model.Response;
+import com.br.coworkingSystem.model.enuns.StatusFaturamento;
 import com.br.coworkingSystem.repositories.FaturamentoRepository;
 import com.br.coworkingSystem.validators.FaturamentoValidator;
 
@@ -120,6 +121,27 @@ public class FaturamentoController {
 			double desconto = faturamento.getDescontoFaturamento();
 			faturamento = faturamentoOptional.get();
 			faturamento.setDescontoFaturamento(desconto);
+			repository.save(faturamento);
+
+			response.setData(true);
+
+			return ResponseEntity.ok(response);
+		}
+	}
+
+	@PostMapping("/registrarPagamento")
+	public @ResponseBody ResponseEntity<Response<Boolean>> registrarPagamento(@RequestParam Long idFaturamento) {
+		Response<Boolean> response = new Response<Boolean>();
+		Optional<Faturamento> faturamentoOptional = repository.findById(idFaturamento);
+
+		if (!faturamentoOptional.isPresent()) {
+			response.setData(false);
+			response.addError("Não conseguimos encontrar este faturamento");
+
+			return ResponseEntity.badRequest().body(response);
+		} else {
+			Faturamento faturamento = faturamentoOptional.get();
+			faturamento.setStatusFaturamento(StatusFaturamento.QUITADO);
 			repository.save(faturamento);
 
 			response.setData(true);

@@ -16,6 +16,20 @@ angular.module('coworkingApp')
             $state.go('faturamento');
         };
 
+				vm.registrarPagamento = function (idFaturamento) {
+						svcFaturamento.registrarPagamento(idFaturamento).
+							then(function (res) {
+								swal({
+									text: "Pagamento realizado com sucesso",
+									type: 'success',
+									showConfirmButton: false,
+									timer: 2000
+								});
+								vm.carregarFaturamentos();
+							}).catch(function (err) {
+								alertaErroRequisicao(err);
+							});
+				};
 
         vm.updateFaturamento = function (faturamento) {
             faturamento.atualizar = true;

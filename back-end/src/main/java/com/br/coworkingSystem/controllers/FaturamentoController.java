@@ -41,7 +41,7 @@ public class FaturamentoController {
 	public @ResponseBody ResponseEntity<Response<List<Faturamento>>> getFaturamentos() {
 		Response<List<Faturamento>> response = new Response<List<Faturamento>>();
 
-		List<Faturamento> faturamentos = repository.findAll();
+		List<Faturamento> faturamentos = repository.findAllByStatusFaturamento(StatusFaturamento.ABERTO);
 		response.setData(faturamentos);
 
 		return ResponseEntity.ok(response);

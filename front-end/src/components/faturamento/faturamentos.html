@@ -44,7 +44,7 @@
                                 <td>{{faturamento.descontoFaturamento | currency : "R$": 2}}</td>
                                 <td>{{faturamento.valorFaturamento | currency : "R$": 2}}</td>
                                 <td>
-                                    <i class="fa fa-check-circle-o text-success m-1" aria-hidden="true" title="Registrar Pagamento" ng-click=""></i>
+																	<i class="fa fa-check-circle-o text-success m-1" aria-hidden="true" title="Registrar Pagamento" ng-click="vm.registrarPagamento(faturamento.id)"></i>
                                     <i class="fa fa-arrow-circle-o-down text-primary" aria-hidden="true" data-toggle="modal" data-target="#modalConsumo"title="Aplicar Desconto" ng-click=""></i>
                                 </td>
                             </tr>

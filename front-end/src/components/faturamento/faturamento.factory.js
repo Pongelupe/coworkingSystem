@@ -34,6 +34,18 @@ angular
             });
         };
 
+				retorno.registrarPagamento = function (idFaturamento) {
+					return $http({
+						url: URL_REQ + "registrarPagamento",
+						method: 'POST',
+						data: {},
+						params: {
+							idFaturamento: idFaturamento
+						},
+						cwsHeaders
+					});
+				};
+
         //Deletar faturamento
         retorno.deletarFaturamento = function (dados) {
             return $http({

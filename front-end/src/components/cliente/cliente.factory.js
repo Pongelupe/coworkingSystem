@@ -24,8 +24,11 @@ angular
         //Editar cliente
         retorno.updateCliente = function (dados) {
             return $http({
-                url: URL_REQ + "cliente/" + dados.id,
+                url: URL_REQ + "cliente",
                 method: 'PUT',
+                params: {
+                    idCliente: dados.id
+                },
                 data: dados,
                 cwsHeaders
             });

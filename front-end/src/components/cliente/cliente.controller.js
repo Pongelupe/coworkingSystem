@@ -106,7 +106,7 @@ angular.module('coworkingApp')
 
             svcCliente.updateCliente(vm.cliente)
                 .then(function (res) {
-                    vm.carregarClientes();
+                    vm.novoCliente();
                     swal({
                         text: "Cliente atualizado com sucesso",
                         type: 'success',

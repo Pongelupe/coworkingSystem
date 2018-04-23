@@ -104,5 +104,51 @@ angular
                 }
 
             })
+            .state("produtosServicos", {
+                parent: "app",
+                url: "/produtosServicos",
+                views: {
+                    'contentApp@app': {
+                        templateUrl: "components/produtoServico/produtosServicos.html",
+                        controller: 'ProdutosServicos',
+                        controllerAs: 'vm'
+                    }
+                }
 
+            })
+            .state("cadastroProdutoServico", {
+                parent: "app",
+                params: {
+                    produtoServico: [],
+                },
+                url: "/cadastroProdutoServico",
+                views: {
+                    'contentApp@app': {
+                        templateUrl: 'components/produtoServico/cadastroProdutoServico.html',
+                        controller: 'ProdutoServico',
+                        controllerAs: 'vm'
+                    }
+                }
+
+            })
+            .state("pacoteHoras", {
+                parent: "app",
+                url: "/pacoteHoras",
+                views: {
+                    'contentApp@app': {
+                        template: "<p> Você está na aba pacote horas <p>"
+                    }
+                }
+
+            })
+            .state("planos", {
+                parent: "app",
+                url: "/planos",
+                views: {
+                    'contentApp@app': {
+                        template: "<p> Você está na aba planos <p>"
+                    }
+                }
+
+            })
     });

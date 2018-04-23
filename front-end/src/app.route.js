@@ -131,12 +131,30 @@ angular
                 }
 
             })
-            .state("pacoteHoras", {
+            .state("pacotesHoras", {
                 parent: "app",
-                url: "/pacoteHoras",
+                url: "/pacotesHoras",
                 views: {
                     'contentApp@app': {
-                        template: "<p> Você está na aba pacote horas <p>"
+                        templateUrl: 'components/pacoteHora/pacotesHoras.html',
+                        controller: 'PacotesHoras',
+                        controllerAs: 'vm'
+                    }
+                }
+
+            })
+
+            .state("cadastroPacoteHora", {
+                parent: "app",
+                params: {
+                    pacoteHora: [],
+                },
+                url: "/cadastroPacoteHora",
+                views: {
+                    'contentApp@app': {
+                        templateUrl: 'components/pacoteHora/cadastroPacoteHora.html',
+                        controller: 'PacoteHora',
+                        controllerAs: 'vm'
                     }
                 }
 

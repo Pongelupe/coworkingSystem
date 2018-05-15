@@ -12,8 +12,9 @@ public class Response<T> {
 		return data;
 	}
 
-	public void setData(T data) {
+	public Response<T> setData(T data) {
 		this.data = data;
+		return this;
 	}
 
 	public List<String> getMessages() {

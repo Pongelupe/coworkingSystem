@@ -2,6 +2,7 @@ package com.br.coworkingSystem.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,33 +11,44 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
 
 @Entity
 public class Consumo {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private long id;
 
 	@Temporal(TemporalType.TIMESTAMP)
+	@Column(nullable = false)
 	private Date dataInicial;
 
 	@Temporal(TemporalType.TIMESTAMP)
+	@Column(nullable = false)
 	private Date dataFinal;
 
+	@Column(nullable = false)
 	private int quantidade;
+	
+	@Column(nullable = false, columnDefinition="boolean default false")
 	private boolean faturado;
 
 	@ManyToOne
-	private Cliente solicitante;
+	@NotNull
+	private Colaborador solicitante;
 
+	@ManyToOne
+	@NotNull
+	private Cliente cliente;
+	
 	@OneToOne
+	@Null
 	private Sala sala;
 
 	@OneToOne
-	private ProdutoServico servico;
-
-	private String tipoConsumo;
-	private String statusConsumo;
+	@Null
+	private ProdutoServico produtoServico;
 
 	public Date getDataInicial() {
 		return dataInicial;
@@ -52,14 +64,6 @@ public class Consumo {
 
 	public void setDataFinal(Date dataFinal) {
 		this.dataFinal = dataFinal;
-	}
-
-	public Sala getSala() {
-		return sala;
-	}
-
-	public void setSala(Sala sala) {
-		this.sala = sala;
 	}
 
 	public int getQuantidade() {
@@ -78,51 +82,42 @@ public class Consumo {
 		this.faturado = faturado;
 	}
 
-	public Cliente getSolicitante() {
+	public Colaborador getSolicitante() {
 		return solicitante;
 	}
 
-	public void setSolicitante(Cliente solicitante) {
+	public void setSolicitante(Colaborador solicitante) {
 		this.solicitante = solicitante;
 	}
 
-	public String getTipoConsumo() {
-		return tipoConsumo;
+	public Cliente getCliente() {
+		return cliente;
 	}
 
-	public void setTipoConsumo(String tipoConsumo) {
-		this.tipoConsumo = tipoConsumo;
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 
-	public String getStatusConsumo() {
-		return statusConsumo;
+	public Sala getSala() {
+		return sala;
 	}
 
-	public void setStatusConsumo(String statusConsumo) {
-		this.statusConsumo = statusConsumo;
+	public void setSala(Sala sala) {
+		this.sala = sala;
 	}
 
-	public int getId() {
+	public ProdutoServico getProdutoServico() {
+		return produtoServico;
+	}
+
+	public void setProdutoServico(ProdutoServico produtoServico) {
+		this.produtoServico = produtoServico;
+	}
+
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
 
-	public ProdutoServico getServico() {
-		return servico;
-	}
-
-	public void setServico(ProdutoServico servico) {
-		this.servico = servico;
-	}
-
-	@Override
-	public String toString() {
-		return "Consumo [id=" + id + ", dataInicial=" + dataInicial + ", dataFinal=" + dataFinal + ", quantidade="
-				+ quantidade + ", faturado=" + faturado + ", solicitante=" + solicitante + ", sala=" + sala
-				+ ", tipoConsumo=" + tipoConsumo + ", statusConsumo=" + statusConsumo + "]";
-	}
 
 }

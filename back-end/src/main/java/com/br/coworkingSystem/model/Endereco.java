@@ -1,10 +1,10 @@
 package com.br.coworkingSystem.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 
 @Entity
 public class Endereco {
@@ -13,16 +13,28 @@ public class Endereco {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@OneToOne
-	private Cliente cliente;
-
+	@Column(nullable = false, length = 50)
 	private String rua;
+	
+	@Column(nullable = false, length = 15)
 	private String bairro;
+	
+	@Column(nullable = false, length = 15)
 	private String cidade;
+	
+	@Column(nullable = false, length = 100)
 	private String complemento;
+	
+	@Column(nullable = false, length = 15)
 	private String estado;
+	
+	@Column(nullable = false, length = 15)
 	private String pais;
+	
+	@Column(nullable = false, length = 8)
 	private String cep;
+	
+	@Column(nullable = false)
 	private int numero;
 
 	public String getRua() {
@@ -87,21 +99,6 @@ public class Endereco {
 
 	public void setNumero(int numero) {
 		this.numero = numero;
-	}
-
-	public Cliente getCliente() {
-		return cliente;
-	}
-
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
-	}
-
-	@Override
-	public String toString() {
-		return "Endereco [id=" + id + ", cliente=" + cliente + ", rua=" + rua + ", bairro=" + bairro + ", cidade="
-				+ cidade + ", complemento=" + complemento + ", estado=" + estado + ", pais=" + pais + ", cep=" + cep
-				+ ", numero=" + numero + "]";
 	}
 
 }

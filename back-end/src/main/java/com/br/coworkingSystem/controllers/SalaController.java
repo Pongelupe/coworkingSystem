@@ -47,7 +47,7 @@ public class SalaController {
 	}
 
 	@GetMapping("/sala/{idSala}")
-	public @ResponseBody ResponseEntity<Response<Sala>> getSala(@PathVariable Integer idSala) {
+	public @ResponseBody ResponseEntity<Response<Sala>> getSala(@PathVariable Long idSala) {
 		Response<Sala> response = new Response<Sala>();
 		Optional<Sala> sala = repository.findById(idSala);
 		if (sala.isPresent()) {
@@ -61,10 +61,10 @@ public class SalaController {
 	}
 
 	@PostMapping("/sala")
-	public @ResponseBody ResponseEntity<Response<Integer>> cadastraSala(@RequestBody @Valid Sala sala,
+	public @ResponseBody ResponseEntity<Response<Long>> cadastraSala(@RequestBody @Valid Sala sala,
 			BindingResult result) {
 
-		Response<Integer> response = new Response<Integer>();
+		Response<Long> response = new Response<Long>();
 
 		if (result.hasErrors()) {
 			response.setData(null);
@@ -80,25 +80,24 @@ public class SalaController {
 	}
 
 	@PutMapping("/sala")
-	public @ResponseBody ResponseEntity<Response<Integer>> updateSala(@RequestParam Integer idSala,
-			@RequestBody @Valid Sala cliente, BindingResult result) {
-		Response<Integer> response = new Response<Integer>();
+	public @ResponseBody ResponseEntity<Response<Long>> updateSala(
+			@RequestBody @Valid Sala sala, BindingResult result) {
+		Response<Long> response = new Response<Long>();
 
 		if (result.hasErrors()) {
 			response.setData(null);
 			result.getAllErrors().forEach(error -> response.addError(error.getCode()));
 
 			return ResponseEntity.badRequest().body(response);
-		} else if (!repository.findById(idSala).isPresent()) {
+		} else if (!repository.findById(sala.getId()).isPresent()) {
 			response.setData(null);
-			response.addError("Não conseguimos encontrar este cliente");
+			response.addError("Não conseguimos encontrar esta sala");
 
 			return ResponseEntity.badRequest().body(response);
 		} else {
 
-			cliente.setId(idSala);
-			repository.save(cliente);
-			response.setData(idSala);
+			repository.save(sala);
+			response.setData(sala.getId());
 
 			return ResponseEntity.ok(response);
 		}
@@ -106,7 +105,7 @@ public class SalaController {
 	}
 
 	@DeleteMapping("/sala")
-	public @ResponseBody ResponseEntity<Response<Boolean>> deletarSala(@RequestParam Integer idSala) {
+	public @ResponseBody ResponseEntity<Response<Boolean>> deletarSala(@RequestParam Long idSala) {
 		Response<Boolean> response = new Response<Boolean>();
 
 		if (!repository.findById(idSala).isPresent()) {

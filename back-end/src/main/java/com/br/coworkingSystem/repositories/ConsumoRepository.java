@@ -9,7 +9,7 @@ import com.br.coworkingSystem.model.Cliente;
 import com.br.coworkingSystem.model.Consumo;
 
 @Repository
-public interface ConsumoRepository extends JpaRepository<Consumo, Integer> {
+public interface ConsumoRepository extends JpaRepository<Consumo, Long> {
 
 	List<Consumo> findAllBySolicitante(Cliente cliente);
 

@@ -47,7 +47,7 @@ public class ProdutoServicoController {
 
 	@GetMapping("/produtoServico")
 	public @ResponseBody ResponseEntity<Response<ProdutoServico>> getProdutoServico(
-			@RequestParam Integer idProdutoServico) {
+			@RequestParam Long idProdutoServico) {
 		Response<ProdutoServico> response = new Response<ProdutoServico>();
 		Optional<ProdutoServico> produtoServico = repository.findById(idProdutoServico);
 		if (produtoServico.isPresent()) {
@@ -61,10 +61,10 @@ public class ProdutoServicoController {
 	}
 
 	@PostMapping("/produtoServico")
-	public @ResponseBody ResponseEntity<Response<Integer>> cadastraProdutoServico(
+	public @ResponseBody ResponseEntity<Response<Long>> cadastraProdutoServico(
 			@RequestBody @Valid ProdutoServico produtoServico, BindingResult result) {
 
-		Response<Integer> response = new Response<Integer>();
+		Response<Long> response = new Response<Long>();
 
 		if (result.hasErrors()) {
 			response.setData(null);
@@ -80,9 +80,9 @@ public class ProdutoServicoController {
 	}
 
 	@PutMapping("/produtoServico")
-	public @ResponseBody ResponseEntity<Response<Integer>> updateProdutoServico(@RequestParam Integer idProdutoServico,
+	public @ResponseBody ResponseEntity<Response<Long>> updateProdutoServico(@RequestParam Long idProdutoServico,
 			@RequestBody @Valid ProdutoServico cliente, BindingResult result) {
-		Response<Integer> response = new Response<Integer>();
+		Response<Long> response = new Response<Long>();
 
 		if (result.hasErrors()) {
 			response.setData(null);
@@ -107,7 +107,7 @@ public class ProdutoServicoController {
 
 	@DeleteMapping("/produtoServico")
 	public @ResponseBody ResponseEntity<Response<Boolean>> deletarProdutoServico(
-			@RequestParam Integer idProdutoServico) {
+			@RequestParam Long idProdutoServico) {
 		Response<Boolean> response = new Response<Boolean>();
 
 		if (!repository.findById(idProdutoServico).isPresent()) {

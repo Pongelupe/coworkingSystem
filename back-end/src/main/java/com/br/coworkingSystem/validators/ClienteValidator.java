@@ -1,5 +1,7 @@
 package com.br.coworkingSystem.validators;
 
+import java.util.Date;
+
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
@@ -18,23 +20,12 @@ public class ClienteValidator implements Validator {
 	public void validate(Object target, Errors erros) {
 		cliente = (Cliente) target;
 
-		String cpf = cliente.getPessoa().getCpfCnpj();
-		String nome = cliente.getPessoa().getNome();
-		String email = cliente.getPessoa().getEmail();
-		String telefonePrincipal = cliente.getPessoa().getTelefonePrincipal();
-
+		Date dataCadastro = cliente.getDataCadastro();
 		
-		if (cpf == null || cpf.isEmpty())
-			erros.rejectValue("cpfCnpj", "O cpf/cnpj não pode ser vazio");
-
-		if (nome == null || nome.isEmpty())
-			erros.rejectValue("nome", "O nome não pode ser vazio");
-
-		if (email == null || email.isEmpty())
-			erros.rejectValue("email", "O e-mail não pode ser vazio");
-		
-		if (telefonePrincipal == null || telefonePrincipal.isEmpty())
-			erros.rejectValue("telefonePrincipal", "O telefone principal não pode ser vazio");
+		if (dataCadastro == null)
+			erros.rejectValue("dataCadastro", "A data de cadastro do cliente não foi informada");
+				
+		new PessoaValidator("pessoa.").validate(cliente.getPessoa(), erros);
 
 	}
 

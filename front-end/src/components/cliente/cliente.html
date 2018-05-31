@@ -5,14 +5,13 @@
             <div class="row col-md-12">
                 <div class="form-radio mr-3">
                     <label class="form-check-label">
-                        <input type="radio" ng-model="vm.cliente.tipoCliente" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="fisica"
-                            checked=""> Pessoa Física
+                        <input type="radio" ng-model="vm.cliente.pessoa.ehPessoaJuridica" class="form-check-input" ng-value="false" checked=""> Pessoa Física
                         <i class="input-helper"></i>
                     </label>
                 </div>
                 <div class="form-radio">
                     <label class="form-check-label">
-                        <input type="radio" ng-model="vm.cliente.tipoCliente" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="juridica"> Pessoa Jurídica
+                        <input type="radio" ng-model="vm.cliente.pessoa.ehPessoaJuridica" class="form-check-input" ng-value="true"> Pessoa Jurídica
                         <i class="input-helper"></i>
                     </label>
                 </div>
@@ -23,7 +22,7 @@
                         <label>Nome Completo
                             <b class="text-danger">*</b>
                         </label>
-                        <input type="text" ng-model="vm.cliente.nome" class="form-control" placeholder="Informe o nome completo">
+                        <input type="text" maxlength="100" ng-model="vm.cliente.pessoa.nome" class="form-control" placeholder="Informe o nome completo">
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -31,30 +30,30 @@
                         <label>CPF/CNPJ
                             <b class="text-danger">*</b>
                         </label>
-                        <input type="text" ng-model="vm.cliente.cpfCnpj" class="form-control" placeholder="Informe o cpf/cnpj">
+                        <input type="text" maxlength="14" ng-model="vm.cliente.pessoa.cpfCnpj" class="form-control" placeholder="Informe o cpf/cnpj">
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row" ng-show="!vm.cliente.pessoa.ehPessoaJuridica">
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>RG</label>
-                        <input type="text" ng-model="vm.cliente.rg" class="form-control" placeholder="Informe o rg">
+                        <input type="text" maxlength="15" ng-model="vm.cliente.pessoa.rg" class="form-control" placeholder="Informe o rg">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>CNH</label>
-                        <input type="text" ng-model="vm.cliente.cnh" class="form-control" placeholder="Informe a cnh">
+                        <input type="text" maxlength="15" ng-model="vm.cliente.pessoa.cnh" class="form-control" placeholder="Informe a cnh">
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-3">
                     <div class="form-group">
-                        <label ng-hide="vm.cliente.tipoCliente == 'juridica' ">Data de Nascimento</label>
-                        <label ng-hide="vm.cliente.tipoCliente == 'fisica' ">Data de Fundação</label>
-                        <input type="date" ng-model="vm.cliente.dtNascimento" class="form-control">
+                        <label ng-hide="vm.cliente.pessoa.ehPessoaJuridica">Data de Nascimento</label>
+                        <label ng-hide="!vm.cliente.pessoa.ehPessoaJuridica">Data de Fundação</label>
+                        <input type="date" ng-model="vm.cliente.pessoa.data" class="form-control">
                     </div>
                 </div>
                 <div class="col-md-3">
@@ -62,7 +61,7 @@
                         <label>Telefone Principal
                             <b class="text-danger">*</b>
                         </label>
-                        <input type="text" ng-model="vm.cliente.telefone" class="form-control" placeholder="Informe o telefone principal">
+                        <input type="text" maxlength="15" ng-model="vm.cliente.pessoa.telefonePrincipal" class="form-control" placeholder="Informe o telefone principal">
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -70,71 +69,85 @@
                         <label>Email
                             <b class="text-danger">*</b>
                         </label>
-                        <input type="email" ng-model="vm.cliente.email" class="form-control" placeholder="Informe o email">
+                        <input type="email" maxlength="100" ng-model="vm.cliente.pessoa.email" class="form-control" placeholder="Informe o email">
                     </div>
                 </div>
             </div>
-            <div class="row" ng-show="vm.cliente.tipoCliente == 'juridica' ">
+            <div class="row" ng-show="vm.cliente.pessoa.ehPessoaJuridica">
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Inscrição Municipal</label>
-                        <input type="text" ng-model="vm.cliente.inscricaoMunicipal" class="form-control" placeholder="Informe a inscrição municipal">
+                        <input type="text" maxlength="15" ng-model="vm.cliente.pessoa.inscricaoMunicipal" class="form-control" placeholder="Informe a inscrição municipal">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Inscrição Estadual</label>
-                        <input type="text" ng-model="vm.cliente.inscricaoEstadual" class="form-control" placeholder="Informe a inscrição estadual">
+                        <input type="text" maxlength="15" ng-model="vm.cliente.pessoa.inscricaoEstadual" class="form-control" placeholder="Informe a inscrição estadual">
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-3">
                     <div class="form-group">
-                        <label>Cep</label>
-                        <input type="number" ng-model="vm.cliente.endereco.cep" class="form-control" placeholder="Informe o cep">
+                        <label>Cep
+                            <b class="text-danger">*</b>
+                        </label>
+                        <input type="number" maxlength="8" ng-model="vm.cliente.pessoa.endereco.cep" class="form-control" placeholder="Informe o cep">
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label>Rua</label>
-                        <input type="text" ng-model="vm.cliente.endereco.rua" class="form-control" placeholder="Informe a rua">
+                        <label>Rua
+                            <b class="text-danger">*</b>
+                        </label>
+                        <input type="text" maxlength="50" ng-model="vm.cliente.pessoa.endereco.rua" class="form-control" placeholder="Informe a rua">
                     </div>
                 </div>
                 <div class="col-md-2">
                     <div class="form-group">
-                        <label>Número</label>
-                        <input type="number" ng-model="vm.cliente.endereco.numero" class="form-control" placeholder="Informe o número">
+                        <label>Número
+                            <b class="text-danger">*</b>
+                        </label>
+                        <input type="number" ng-model="vm.cliente.pessoa.endereco.numero" class="form-control" placeholder="Informe o número">
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
                         <label>Complemento</label>
-                        <input type="text" ng-model="vm.cliente.endereco.complemento" class="form-control" placeholder="Informe o complemento">
+                        <input type="text" maxlength="100" ng-model="vm.cliente.pessoa.endereco.complemento" class="form-control" placeholder="Informe o complemento">
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
-                        <label>Bairro</label>
-                        <input type="text" ng-model="vm.cliente.endereco.bairro" class="form-control" placeholder="Informe o bairro">
+                        <label>Bairro
+                            <b class="text-danger">*</b>
+                        </label>
+                        <input type="text" maxlength="50" ng-model="vm.cliente.pessoa.endereco.bairro" class="form-control" placeholder="Informe o bairro">
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
-                        <label>Cidade</label>
-                        <input type="text" ng-model="vm.cliente.endereco.cidade" class="form-control" placeholder="Informe a cidade">
+                        <label>Cidade
+                            <b class="text-danger">*</b>
+                        </label>
+                        <input type="text" maxlength="50" ng-model="vm.cliente.pessoa.endereco.cidade" class="form-control" placeholder="Informe a cidade">
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
-                        <label>Estado</label>
-                        <input type="text" ng-model="vm.cliente.endereco.estado" class="form-control" placeholder="Informe o estado">
+                        <label>Estado
+                            <b class="text-danger">*</b>
+                        </label>
+                        <input type="text" maxlength="50" ng-model="vm.cliente.pessoa.endereco.estado" class="form-control" placeholder="Informe o estado">
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
-                        <label>País</label>
-                        <input type="text" ng-model="vm.cliente.endereco.pais" class="form-control" placeholder="Informe o pais">
+                        <label>País
+                            <b class="text-danger">*</b>
+                        </label>
+                        <input type="text" maxlength="50" ng-model="vm.cliente.pessoa.endereco.pais" class="form-control" placeholder="Informe o pais">
                     </div>
                 </div>
             </div>
@@ -142,7 +155,7 @@
                 <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                     <div class="form-group">
                         <div class="input-group">
-                            <button type="button" class="btn btn-sm btn-success form-control" ng-click="vm.cliente.atualizar ? vm.updateCliente() : vm.cadastrarCliente()">
+                            <button type="button" class="btn btn-sm btn-success form-control" ng-click="vm.cliente.pessoa.atualizar ? vm.updateCliente() : vm.cadastrarCliente()">
                                 <i class="fa fa-save"></i>
                                 <span> {{vm.acao}}</span>
                             </button>

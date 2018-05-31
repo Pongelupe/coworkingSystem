@@ -2,15 +2,16 @@ package com.br.coworkingSystem.model;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.Null;
 
 @Entity
 public class Pessoa {
@@ -18,36 +19,39 @@ public class Pessoa {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
-	@Column(unique=true, length = 14)
+	@Column(unique = true, length = 14)
 	private String cpfCnpj;
-	
+
 	@Column(nullable = false, length = 100)
 	private String nome;
-	
-	@Column(nullable = false,length = 100)
+
+	@Column(nullable = false, length = 100)
 	private String email;
-	
-	@Column(nullable = false,length = 15)
+
+	@Column(nullable = false, length = 15)
 	private String telefonePrincipal;
-	
+
 	@Temporal(TemporalType.DATE)
 	@Column(nullable = true)
 	private Date data;
-	
+
 	@Column(nullable = true, length = 15)
 	private String rg;
-	
+
 	@Column(nullable = true, length = 15)
 	private String cnh;
-	
+
 	@Column(nullable = true, length = 15)
 	private String inscricaoMunicipal;
-	
+
 	@Column(nullable = true, length = 15)
 	private String inscricaoEstadual;
-	
-	@OneToOne
-	@Null
+
+	@Column(nullable = false, columnDefinition = "boolean default false")
+	private boolean ehPessoaJuridica;
+
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(nullable = false)
 	private Endereco endereco;
 
 	public String getCpfCnpj() {
@@ -133,6 +137,13 @@ public class Pessoa {
 	public long getId() {
 		return id;
 	}
-	
-	
+
+	public boolean isEhPessoaJuridica() {
+		return ehPessoaJuridica;
+	}
+
+	public void setEhPessoaJuridica(boolean ehPessoaJuridica) {
+		this.ehPessoaJuridica = ehPessoaJuridica;
+	}
+
 }

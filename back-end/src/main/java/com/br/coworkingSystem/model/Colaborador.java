@@ -5,10 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
-import javax.validation.constraints.NotNull;
 
 @Entity
 public class Colaborador {
@@ -20,13 +19,12 @@ public class Colaborador {
 	@Column(nullable = false, columnDefinition="boolean default false")
 	private boolean responsavelLegal;
 
-	@MapsId
-	@NotNull
 	@OneToOne
+	@JoinColumn(nullable=false)
 	private Pessoa pessoa;
 	
-	@NotNull
 	@ManyToOne
+	@JoinColumn(nullable=false)
 	private Cliente cliente;
 
 	public boolean isResponsavelLegal() {

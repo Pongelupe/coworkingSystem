@@ -1,6 +1,10 @@
 
 /*COWORKING SYSTEM */
 
+/*Campos inválidos*/
+input.ng-valid-number {
+  border: 1px solid red;
+}
 i, a{
   cursor: pointer;
 }

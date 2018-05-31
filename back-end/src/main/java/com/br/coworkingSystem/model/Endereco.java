@@ -16,19 +16,19 @@ public class Endereco {
 	@Column(nullable = false, length = 50)
 	private String rua;
 	
-	@Column(nullable = false, length = 15)
+	@Column(nullable = false, length = 50)
 	private String bairro;
 	
-	@Column(nullable = false, length = 15)
+	@Column(nullable = false, length = 50)
 	private String cidade;
 	
-	@Column(nullable = false, length = 100)
+	@Column(nullable = true, length = 100)
 	private String complemento;
 	
-	@Column(nullable = false, length = 15)
+	@Column(nullable = false, length = 50)
 	private String estado;
 	
-	@Column(nullable = false, length = 15)
+	@Column(nullable = false, length = 50)
 	private String pais;
 	
 	@Column(nullable = false, length = 8)

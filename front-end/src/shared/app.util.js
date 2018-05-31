@@ -30,6 +30,34 @@ function alertaConfirmarExclusao(acao) {
     })
 };
 
+function isNullOrEmpty(texto){
+    if(texto == null || texto == undefined || texto == "")
+        return true;
+};
+
+function alertaCampoNaoPreenchido(campo) {
+    swal({
+        html: 'O campo <span class="font-weight-bold">' + campo + '</span> não foi informado.',
+        type: 'error',
+        showConfirmButton: false,
+        showCloseButton: true,
+        timer: 5000
+    })
+};
+
+function campoNaoInformado(campo, valor){
+    if(isNullOrEmpty(valor)){
+        alertaCampoNaoPreenchido(campo);
+        return true;
+    }
+
+    return false;
+    
+        
+}
+
+
+
 intervaloHoras = [
     "00:00",
     "01:00",
@@ -83,3 +111,7 @@ function calcularDiasDiferenca(dataAtual, dataPassada) {
 
     return tempo;
 };
+
+function parseDate(data){
+   return new Date(moment(data));
+}

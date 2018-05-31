@@ -43,16 +43,16 @@
                         </thead>
                         <tbody>
                             <tr ng-repeat="cliente in vm.clientes | filter : search | orderBy: 'nome'">
-                                <td>{{cliente.nome}}</td>
-                                <!--<td>{{cliente.dtNascimento | date: 'dd/MM/yy'}}</td>-->
-                                <td>{{cliente.cpfCnpj}}</td>
-                                <!--<td>{{cliente.rg}}</td>
-                                <td>{{cliente.cnh}}</td>-->
-                                <td>{{cliente.telefone}}</td>
-                                <!--<td>{{cliente.inscricaoMunicipal}}</td>
-                                <td>{{cliente.inscricaoEstadual}}</td
-                                <td>{{cliente.endereco}}</td>-->
-                                <td>{{cliente.email}}</td>
+                                <td>{{cliente.pessoa.nome}}</td>
+                                <!--<td>{{cliente.pessoa.data | date: 'dd/MM/yy'}}</td>-->
+                                <td>{{cliente.pessoa.cpfCnpj}}</td>
+                                <!--<td>{{cliente.pessoa.rg}}</td>
+                                <td>{{cliente.pessoa.cnh}}</td>-->
+                                <td>{{cliente.pessoa.telefonePrincipal}}</td>
+                                <!--<td>{{cliente.pessoa.inscricaoMunicipal}}</td>
+                                <td>{{cliente.pessoa.inscricaoEstadual}}</td
+                                <td>{{cliente.pessoa.endereco}}</td>-->
+                                <td>{{cliente.pessoa.email}}</td>
                                 <td>
                                     <i class="fa fa-pencil text-primary m-1" aria-hidden="true" title="Atualizar dados do cliente" ng-click="vm.updateCliente(cliente)"></i>
                                     <i class="fa fa-trash-o text-danger" aria-hidden="true" title="Excluir cliente" ng-click="vm.deletarCliente(cliente)"></i>

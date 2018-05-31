@@ -6,17 +6,21 @@ angular.module('coworkingApp')
 
         vm.novoCliente = function () {
             vm.cliente = {
-                tipoCliente: "fisica",
-                nome: "",
-                cpfCnpj: "",
-                rg: "",
-                cnh: "",
-                telefone: "",
-                email: "",
-                inscricalMunicipal: "",
-                inscricaoEstadual: "",
-                dtNascimento: null,
-                endereco: {}
+                dataCadastro: new Date(),
+                observacoes: null,
+                pessoa: {
+                    ehPessoaJuridica: false,
+                    nome: null,
+                    cpfCnpj: null,
+                    rg: null,
+                    cnh: null,
+                    telefonePrincipal: null,
+                    email: null,
+                    inscricalMunicipal: null,
+                    inscricaoEstadual: null,
+                    data: null,
+                    endereco: {}
+                }
             };
         };
 
@@ -26,65 +30,48 @@ angular.module('coworkingApp')
             vm.novoCliente();
         } else {
             vm.cliente = $stateParams.cliente;
-            vm.cliente.dtNascimento = new Date(vm.cliente.dtNascimento);
-            vm.title = "Atualizar Dados do Cliente: " + vm.cliente.nome;
+            if (!isNullOrEmpty(vm.cliente.pessoa.data))
+                vm.cliente.pessoa.data = parseDate(vm.cliente.pessoa.data);
+
+            vm.cliente.dataCadastro = parseDate(vm.cliente.dataCadastro);
+            vm.cliente.pessoa.endereco.cep = parseInt(vm.cliente.pessoa.endereco.cep);
+            vm.title = "Atualizar Dados do Cliente: " + vm.cliente.pessoa.nome;
             vm.acao = "Atualizar Cliente";
         }
 
         vm.validarCliente = function () {
-            if (vm.cliente.nome == "") {
-                swal({
-                    html: 'O <span class="font-weight-bold"> nome </span> não foi informado.',
-                    type: 'error',
-                    showConfirmButton: false,
-                    timer: 5000
-                })
+
+            if (campoNaoInformado("nome", vm.cliente.pessoa.nome))
                 return;
-            }
-            if (vm.cliente.cpfCnpj == "") {
-                swal({
-                    html: 'O <span class="font-weight-bold"> cpf/cnpj </span> não foi informado.',
-                    type: 'error',
-                    showConfirmButton: false,
-                    timer: 5000
-                })
+            if (campoNaoInformado("CPF/CNPJ", vm.cliente.pessoa.cpfCnpj))
                 return;
-            }
-            if (vm.cliente.telefone == "") {
-                swal({
-                    html: 'O <span class="font-weight-bold"> telefone principal </span> não foi informado.',
-                    type: 'error',
-                    showConfirmButton: false,
-                    timer: 5000
-                })
+            if (campoNaoInformado("telefone principal", vm.cliente.pessoa.telefonePrincipal))
                 return;
-            }
-            if (vm.cliente.email == "") {
-                swal({
-                    html: 'O <span class="font-weight-bold"> email </span> não foi informado.',
-                    type: 'error',
-                    showConfirmButton: false,
-                    timer: 5000
-                })
+            if (campoNaoInformado("e-mail", vm.cliente.pessoa.email))
                 return;
-            }
-            if (vm.cliente.email == undefined) {
-                swal({
-                    html: 'O <span class="font-weight-bold"> email </span> informado é inválido.',
-                    type: 'error',
-                    showConfirmButton: false,
-                    timer: 5000
-                })
+            if (campoNaoInformado("cep", vm.cliente.pessoa.endereco.cep))
                 return;
-            }
+            if (campoNaoInformado("rua", vm.cliente.pessoa.endereco.rua))
+                return;
+            if (campoNaoInformado("numero", vm.cliente.pessoa.endereco.numero))
+                return;
+            if (campoNaoInformado("bairro", vm.cliente.pessoa.endereco.bairro))
+                return;
+            if (campoNaoInformado("cidade", vm.cliente.pessoa.endereco.cidade))
+                return;
+            if (campoNaoInformado("estado", vm.cliente.pessoa.endereco.estado))
+                return;
+            if (campoNaoInformado("pais", vm.cliente.pessoa.endereco.pais))
+                return;
+
             return true;
 
         }
 
         vm.cadastrarCliente = function () {
             if (vm.validarCliente()) {
-                if (vm.cliente.dtNascimento != undefined)
-                    vm.dtNascimento = moment(vm.cliente.dtNascimento).format();
+                if (vm.cliente.pessoa.data != undefined)
+                    vm.data = moment(vm.cliente.pessoa.data).format();
 
                 svcCliente.cadastrarCliente(vm.cliente)
                     .then(function (res) {

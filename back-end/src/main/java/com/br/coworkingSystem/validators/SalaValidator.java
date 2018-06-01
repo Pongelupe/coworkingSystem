@@ -1,5 +1,7 @@
 package com.br.coworkingSystem.validators;
 
+import java.util.Date;
+
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
@@ -20,21 +22,29 @@ public class SalaValidator implements Validator {
 		sala = (Sala) target;
 
 		String nome = sala.getNome();
+		Date horarioInicial = sala.getHorarioInicial();
+		Date horarioFinal = sala.getHorarioFinal();
 		int quantidadeEstacoes = sala.getQuantidadeEstacoes();
 		double valorHora = sala.getValorHora();
-		TipoSala tipoSala = sala.getTipoSala();
+		TipoSala tipo = sala.getTipo();
 
 		if (nome == null || nome.isEmpty())
-			erros.rejectValue("nome", "O nome não pode ser vazio");
+			erros.rejectValue("nome", "O nome não foi informado");
+		
+		if (horarioInicial == null)
+			erros.rejectValue("horarioInicial", "O horário inicial não foi informado");
+		
+		if (horarioFinal == null)
+			erros.rejectValue("horarioFinal", "O horário final não foi informado");
 
-		if (tipoSala == null || tipoSala.name().isEmpty())
-			erros.rejectValue("tipoSala", "O tipoSala não pode ser vazio ou está inválido");
+		if (tipo == null || tipo.name().isEmpty())
+			erros.rejectValue("tipo", "O tipo da sala não foi informado ou é inválido");
 
 		if (quantidadeEstacoes < 0)
 			erros.rejectValue("quantidadeEstacoes", "A quantidade de estações não pode ser menor que 0");
 
 		if (valorHora <= 0)
-			erros.rejectValue("valorHora", "O valorHora não pode ser menor que 0");
+			erros.rejectValue("valorHora", "O valor da hora da sala não pode ser menor que 0");
 
 	}
 

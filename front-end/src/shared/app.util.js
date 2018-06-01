@@ -20,7 +20,7 @@ function alertaErroRequisicao(err) {
 function alertaConfirmarExclusao(acao) {
     var title = acao == undefined ? "excluir" : acao;
     return swal({
-        html: 'Tem certeza que deseja <br /> <span class="font-weight-bold">' +  title +  '</span> ?',
+        html: 'Tem certeza que deseja <br /> <span class="font-weight-bold">' + title + '</span> ?',
         type: 'warning',
         showCancelButton: true,
         confirmButtonText: 'Prosseguir',
@@ -30,8 +30,8 @@ function alertaConfirmarExclusao(acao) {
     })
 };
 
-function isNullOrEmpty(texto){
-    if(texto == null || texto == undefined || texto == "")
+function isNullOrEmpty(texto) {
+    if (texto == null || texto == undefined || texto == "")
         return true;
 };
 
@@ -45,15 +45,15 @@ function alertaCampoNaoPreenchido(campo) {
     })
 };
 
-function campoNaoInformado(campo, valor){
-    if(isNullOrEmpty(valor)){
+function campoNaoInformado(campo, valor) {
+    if (isNullOrEmpty(valor)) {
         alertaCampoNaoPreenchido(campo);
         return true;
     }
 
     return false;
-    
-        
+
+
 }
 
 
@@ -112,6 +112,14 @@ function calcularDiasDiferenca(dataAtual, dataPassada) {
     return tempo;
 };
 
-function parseDate(data){
-   return new Date(moment(data));
+function parseDate(data) {
+    return new Date(moment(data));
+}
+
+function parseTime(time) {
+    return new Date(moment(time, 'HH:mm:ss'))
+}
+
+function parseDateString(data){
+    return moment(data).format();
 }

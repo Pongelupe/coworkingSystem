@@ -7,8 +7,14 @@ angular.module('coworkingApp')
         vm.carregarPacotesHoras = function () {
             svcPacoteHora.pacotesHoras()
                 .then(function (res) {
-                    if (res.data.data != undefined)
+                    if (res.data.data != undefined){
                         vm.pacotesHoras = res.data.data;
+                        vm.pacotesHoras.forEach(function(pacote){
+                            pacote.sala.horarioInicial = parseTime(pacote.sala.horarioInicial);                            
+                            pacote.sala.horarioFinal = parseTime(pacote.sala.horarioFinal);
+                        });
+                    }
+                       
                 })
         };
 

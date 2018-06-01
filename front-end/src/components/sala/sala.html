@@ -6,8 +6,7 @@
                 <div class="col-md-2">
                     <div class="form-radio">
                         <label class="form-check-label">
-                            <input type="radio" ng-model="vm.sala.tipoSala" class="form-check-input" name="optionsRadios" id="optionsRadios3" value="COWORKING"
-                                checked=""> Coworking
+                            <input type="radio" ng-model="vm.sala.tipo" class="form-check-input" value="COWORKING"> Coworking
                             <i class="input-helper"></i>
                         </label>
 
@@ -16,8 +15,7 @@
                 <div class="col-md-2">
                     <div class="form-radio">
                         <label class="form-check-label">
-                            <input type="radio" ng-model="vm.sala.tipoSala" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="PRIVADA"
-                                checked=""> Sala Privada
+                            <input type="radio" ng-model="vm.sala.tipo" class="form-check-input" value="PRIVADA"> Sala Privada
                             <i class="input-helper"></i>
                         </label>
                     </div>
@@ -25,8 +23,7 @@
                 <div class="col-md-3">
                     <div class="form-radio">
                         <label class="form-check-label">
-                            <input type="radio" ng-model="vm.sala.tipoSala" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="PUBLICA"
-                                checked=""> Sala Compartilhada
+                            <input type="radio" ng-model="vm.sala.tipo" class="form-check-input" value="PUBLICA"> Sala Compartilhada
                             <i class="input-helper"></i>
                         </label>
 
@@ -40,7 +37,7 @@
                         <label>Nome
                             <b class="text-danger">*</b>
                         </label>
-                        <input type="text" ng-model="vm.sala.nome" class="form-control" placeholder="Informe o nome">
+                        <input type="text" maxlength="50" ng-model="vm.sala.nome" class="form-control" placeholder="Informe o nome">
                     </div>
                 </div>
                 <div class="col-md-3">

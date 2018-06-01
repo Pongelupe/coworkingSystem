@@ -16,9 +16,8 @@
                         <label>Sala
                             <b class="text-danger">*</b>
                         </label>
-                        <select ng-model="vm.pacoteHoras.idSala" class="form-control form-control-sm">
+                        <select ng-model="vm.pacoteHora.sala" class="form-control form-control-sm" ng-options="sala.nome for sala in vm.salas track by sala.id">
                             <option value="">Selecione a sala</option>
-                            <option ng-repeat="sala in vm.salas" value="{{sala.id}}">{{sala.nome}}</option>
                         </select>
                     </div>
                 </div>
@@ -35,7 +34,7 @@
                         <label>Valor
                             <b class="text-danger">*</b>
                         </label>
-                        <input type="number" ng-model="vm.pacoteHora.valorPacote" class="form-control" placeholder="Informe o valor">
+                        <input type="number" ng-model="vm.pacoteHora.valor" class="form-control" placeholder="Informe o valor">
                     </div>
                 </div>
             </div>

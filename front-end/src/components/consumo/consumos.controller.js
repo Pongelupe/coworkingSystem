@@ -101,7 +101,6 @@ angular.module('coworkingApp')
                                         timer: 2000
                                     })
                                     vm.carregarSalas();
-                                    debugger;
                                     vm.realizarFaturamento(consumo);
                                 })
                                 .catch(function (err) {

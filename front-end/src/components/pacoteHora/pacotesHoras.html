@@ -42,7 +42,7 @@
                                     <span ng-hide="!pacoteHora.ehProduto">Produto</span>
                                 </td>
                                 <td>{{pacoteHora.nome}}</td>
-                                <td>{{pacoteHora.valorPacote | currency : "R$": 2}}</td>
+                                <td>{{pacoteHora.valor | currency : "R$": 2}}</td>
                                 <td>
                                     <i class="fa fa-pencil text-primary m-1" aria-hidden="true" title="Atualizar dados do pacote hora" ng-click="vm.updatePacoteHora(pacoteHora)"></i>
                                     <i class="fa fa-trash-o text-danger" aria-hidden="true" title="Excluir pacote hora" ng-click="vm.deletarPacoteHora(pacoteHora)"></i>

@@ -8,7 +8,7 @@ angular.module('coworkingApp')
             vm.pacoteHora = {
                 nome: "",
                 valor: null,
-                ehProduto: "true"
+                sala: null
             };
             vm.title = "Cadastrar Novo Pacote Hora";
             vm.acao = "Salvar Novo Pacote Hora";
@@ -20,41 +20,25 @@ angular.module('coworkingApp')
             vm.novoPacoteHora();
         } else {
             vm.pacoteHora = $stateParams.pacoteHora;
-            vm.pacoteHora.ehProduto = vm.pacoteHora.ehProduto.toString();
             vm.title = "Atualizar Dados do Pacote de Hora: " + vm.pacoteHora.nome;
             vm.acao = "Atualizar Pacote de Hora";
         }
 
         vm.validarPacoteHora = function () {
-            if (vm.pacoteHora.nome == "") {
-                swal({
-                    html: 'O <span class="font-weight-bold"> nome </span> não foi informado.',
-                    type: 'error',
-                    showConfirmButton: false,
-                    timer: 5000
-                })
+            if (campoNaoInformado("nome do pacote", vm.pacoteHora.nome))
                 return;
-            }
-            if (vm.pacoteHora.valorPacote == undefined) {
-                swal({
-                    html: 'O <span class="font-weight-bold"> valor do pacote</span> não foi informado.',
-                    type: 'error',
-                    showConfirmButton: false,
-                    timer: 5000
-                })
+
+            if (campoNaoInformado("valor do pacote", vm.pacoteHora.valor))
                 return;
-            }
+
+            if (campoNaoInformado("sala", vm.pacoteHora.sala))
+                return;
+
             return true;
         }
 
         vm.cadastrarPacoteHora = function () {
             if (vm.validarPacoteHora()) {
-                debugger;
-                
-                vm.pacoteHora.sala = {};
-                vm.pacoteHora.sala.id = vm.salas.filter(function (obj) {
-                    return (obj.id == vm.pacoteHoras.idSala)
-                })[0].id;
                 svcPacoteHora.cadastrarPacoteHora(vm.pacoteHora)
                     .then(function (res) {
                         vm.novoPacoteHora();
@@ -95,8 +79,14 @@ angular.module('coworkingApp')
 
         svcSala.salas()
             .then(function (res) {
-                if (res.data.data != undefined)
+                if (res.data.data != undefined) {
                     vm.salas = res.data.data;
+                    vm.salas.forEach(function (sala) {
+                        sala.horarioInicial = parseTime(sala.horarioInicial);
+                        sala.horarioFinal = parseTime(sala.horarioFinal);
+                    });
+
+                }
             })
 
 

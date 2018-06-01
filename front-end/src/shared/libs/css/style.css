@@ -2,7 +2,7 @@
 /*COWORKING SYSTEM */
 
 /*Campos inválidos*/
-input.ng-valid-number {
+input.ng-invalid{
   border: 1px solid red;
 }
 i, a{

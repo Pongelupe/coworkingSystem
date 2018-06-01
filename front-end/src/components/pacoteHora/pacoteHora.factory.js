@@ -28,7 +28,7 @@ angular
                 method: 'PUT',
                 data: dados,
                 params: {
-                    idPacoteHora: dados.id
+                    idPacote: dados.id
                 },
                 cwsHeaders
             });

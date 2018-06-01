@@ -2,6 +2,7 @@ package com.br.coworkingSystem.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -20,29 +21,31 @@ public class Sala {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
+	@Column(nullable = false, length = 50)
 	private String nome;
 
 	@Temporal(TemporalType.TIME)
+	@Column(nullable = false)
 	private Date horarioInicial;
 
 	@Temporal(TemporalType.TIME)
+	@Column(nullable = false)
 	private Date horarioFinal;
 
+	@Column(nullable = true)
 	private int ramal;
+	
+	@Column(nullable = false)
 	private double valorHora;
+	
+	@Column(nullable = false)
 	private int quantidadeEstacoes;
+	
+	@Column(nullable = false, columnDefinition="boolean default false")
 	private boolean estaLivre;
 
 	@Enumerated(EnumType.STRING)
-	private TipoSala tipoSala;
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
+	private TipoSala tipo;
 
 	public String getNome() {
 		return nome;
@@ -92,14 +95,6 @@ public class Sala {
 		this.quantidadeEstacoes = quantidadeEstacoes;
 	}
 
-	public TipoSala getTipoSala() {
-		return tipoSala;
-	}
-
-	public void setTipoSala(TipoSala tipoSala) {
-		this.tipoSala = tipoSala;
-	}
-
 	public boolean isEstaLivre() {
 		return estaLivre;
 	}
@@ -108,11 +103,18 @@ public class Sala {
 		this.estaLivre = estaLivre;
 	}
 
-	@Override
-	public String toString() {
-		return "Sala [id=" + id + ", nome=" + nome + ", horarioInicial=" + horarioInicial + ", horarioFinal="
-				+ horarioFinal + ", ramal=" + ramal + ", valorHora=" + valorHora + ", quantidadeEstacoes="
-				+ quantidadeEstacoes + ", tipoSala=" + tipoSala + "]";
+	public TipoSala getTipo() {
+		return tipo;
 	}
+
+	public void setTipo(TipoSala tipo) {
+		this.tipo = tipo;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	
 
 }

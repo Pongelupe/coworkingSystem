@@ -6,13 +6,14 @@ angular.module('coworkingApp')
 
         vm.novoSala = function () {
             vm.sala = {
-                tipoSala: "COWORKING",
+                tipo: "COWORKING",
                 nome: "",
                 ramal: null,
                 valorHora: null,
                 quantidadeEstacoes: null,
                 horarioInicial: null,
-                horarioFinal: null
+                horarioFinal: null,
+                estaLivre: true
             };
             vm.title = "Cadastrar Nova Sala";
             vm.acao = "Salvar Sala";
@@ -24,6 +25,8 @@ angular.module('coworkingApp')
             vm.novoSala();
         } else {
             vm.sala = $stateParams.sala;
+            vm.sala.horarioInicial = parseTime(vm.sala.horarioInicial);
+            vm.sala.horarioFinal = parseTime(vm.sala.horarioFinal);
             vm.title = "Atualizar Dados da Sala: " + vm.sala.nome;
             vm.acao = "Atualizar Sala";
         }
@@ -80,11 +83,6 @@ angular.module('coworkingApp')
 
         vm.cadastrarSala = function () {
             if (vm.validarSala()) {
-                if (vm.sala.dtNascimento != undefined)
-                    vm.dtNascimento = moment(vm.sala.dtNascimento).format();
-                vm.sala.horarioInicial = moment(vm.sala.horarioInicial).format();
-                vm.sala.horarioFinal = moment(vm.sala.horarioFinal).format();
-
                 svcSala.cadastrarSala(vm.sala)
                     .then(function (res) {
                         vm.novoSala();

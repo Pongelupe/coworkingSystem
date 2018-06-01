@@ -70,9 +70,6 @@ angular.module('coworkingApp')
 
         vm.cadastrarCliente = function () {
             if (vm.validarCliente()) {
-                if (vm.cliente.pessoa.data != undefined)
-                    vm.data = moment(vm.cliente.pessoa.data).format();
-
                 svcCliente.cadastrarCliente(vm.cliente)
                     .then(function (res) {
                         vm.novoCliente();
@@ -90,7 +87,7 @@ angular.module('coworkingApp')
         };
 
         vm.updateCliente = function () {
-
+            
             svcCliente.updateCliente(vm.cliente)
                 .then(function (res) {
                     vm.novoCliente();

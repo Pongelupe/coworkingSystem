@@ -40,7 +40,7 @@ angular
                 url: URL_REQ + "pacote",
                 method: 'DELETE',
                 params: {
-                    idPacoteHora: idPacoteHora
+                    idPacote: idPacoteHora
                 },
                 cwsHeaders
             });

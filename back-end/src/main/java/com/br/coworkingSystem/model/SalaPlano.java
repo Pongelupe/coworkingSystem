@@ -1,47 +1,34 @@
 package com.br.coworkingSystem.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 
 @Entity
-public class Pacote {
-
+public class SalaPlano {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-
-	@Column(unique = true, nullable = false, length = 50)
-	private String nome;
-
+	
 	@Column(nullable = false)
 	private int quantidadeHoras;
-
-	@Column(nullable = false)
-	private double valor;
-
-	@OneToOne
+	
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(nullable = false)
+	private Plano plano;
+	
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(nullable = false)
 	private Sala sala;
 
 	public long getId() {
 		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
 	}
 
 	public int getQuantidadeHoras() {
@@ -52,12 +39,12 @@ public class Pacote {
 		this.quantidadeHoras = quantidadeHoras;
 	}
 
-	public double getValor() {
-		return valor;
+	public Plano getPlano() {
+		return plano;
 	}
 
-	public void setValor(double valor) {
-		this.valor = valor;
+	public void setPlano(Plano plano) {
+		this.plano = plano;
 	}
 
 	public Sala getSala() {
@@ -67,4 +54,6 @@ public class Pacote {
 	public void setSala(Sala sala) {
 		this.sala = sala;
 	}
+	
+
 }

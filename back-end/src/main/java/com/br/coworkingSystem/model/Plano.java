@@ -1,13 +1,10 @@
 package com.br.coworkingSystem.model;
 
-import java.util.List;
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 @Entity
 public class Plano {
@@ -16,23 +13,14 @@ public class Plano {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
+	@Column(unique = true, length = 50, nullable = false)
 	private String nome;
+	
+	@Column(length = 400, nullable = true)
 	private String descricao;
-	private double valorPlano;
-
-	@OneToOne
-	private Pacote pacote;
-
-	@OneToMany
-	private List<ProdutoServico> produtosServicos;
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
+	
+	@Column(length = 400, nullable = false)
+	private double valor;
 
 	public String getNome() {
 		return nome;
@@ -50,30 +38,21 @@ public class Plano {
 		this.descricao = descricao;
 	}
 
-	public double getValorPlano() {
-		return valorPlano;
+	public double getValor() {
+		return valor;
 	}
 
-	public void setValorPlano(double valorPlano) {
-		this.valorPlano = valorPlano;
+	public void setValor(double valor) {
+		this.valor = valor;
 	}
 
-	public Pacote getPacote() {
-		return pacote;
+	public long getId() {
+		return id;
 	}
 
-	public void setPacote(Pacote pacote) {
-		this.pacote = pacote;
+	public void setId(long id) {
+		this.id = id;
 	}
 
-	public List<ProdutoServico> getProdutosServicos() {
-		return produtosServicos;
-	}
-
-	@Override
-	public String toString() {
-		return "Plano [nome=" + nome + ", descricao=" + descricao + ", valorPlano=" + valorPlano + ", pacote=" + pacote
-				+ ", produtosServicos=" + produtosServicos + "]";
-	}
-
+	
 }

@@ -1,5 +1,6 @@
 package com.br.coworkingSystem.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,8 +13,13 @@ public class ProdutoServico {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
+	@Column(unique = true, length = 50, nullable = false)
 	private String nome;
+
+	@Column(nullable = false)
 	private double valor;
+	
+	@Column(nullable = false, columnDefinition = "boolean default false")
 	private boolean ehProduto;
 
 	public long getId() {
@@ -48,9 +54,5 @@ public class ProdutoServico {
 		this.ehProduto = ehProduto;
 	}
 
-	@Override
-	public String toString() {
-		return "ProdutoServico [id=" + id + ", nome=" + nome + ", valor=" + valor + ", ehProduto=" + ehProduto + "]";
-	}
-
+	
 }

@@ -19,7 +19,7 @@ public class Pessoa {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
-	@Column(unique = true, length = 14)
+	@Column(unique = true, nullable = false, length = 14)
 	private String cpfCnpj;
 
 	@Column(nullable = false, length = 100)

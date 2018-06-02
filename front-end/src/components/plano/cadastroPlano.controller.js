@@ -1,5 +1,5 @@
 angular.module('coworkingApp')
-    .controller('Plano', ["$rootScope", "$state", "$stateParams", "svcPlano", function ($rootScope, $state, $stateParams, svcPlano) {
+    .controller('Plano', function ($rootScope, $state, $stateParams, svcPlano, svcSala, svcProdutoServico) {
         var vm = this;
         $rootScope.mainTitle = "PLANO";
         $rootScope.subTitle = "Config. Gerais / Listar Planos / Cadastros Plano";
@@ -74,7 +74,52 @@ angular.module('coworkingApp')
 
         vm.retornarListaPlanos = function () {
             $state.go('planos');
-        }
+        };
 
+        vm.adicionarSalaPlano = function () {
+            vm.plano.salas.splice(0, 0, {});
+        };
 
-    }]);
+        vm.deletarSalaPlano = function (indice) {
+            alertaConfirmarExclusao("a sala do plano")
+                .then(function (res) {
+                    if (res.value) {
+                        vm.plano.salas.splice(indice, 1)
+                        $(".form-control").trigger("change");
+                    }
+                })
+        };
+
+        vm.adicionarProdutoServicoPlano = function () {
+            vm.plano.produtosServicos.splice(0, 0, {});
+        };
+
+        vm.deletarProdutoServicoPlano = function (indice) {
+            alertaConfirmarExclusao("o produto/serviço do plano")
+                .then(function (res) {
+                    if (res.value) {
+                        vm.plano.produtosServicos.splice(indice, 1)
+                        $(".form-control").trigger("change");
+                    }
+                })
+        };
+
+        svcSala.salas()
+            .then(function (res) {
+                if (res.data.data != undefined) {
+                    vm.salas = res.data.data;
+                    vm.salas.forEach(function (sala) {
+                        sala.horarioInicial = parseTime(sala.horarioInicial);
+                        sala.horarioFinal = parseTime(sala.horarioFinal);
+                    });
+
+                }
+            });
+
+        svcProdutoServico.produtosServicos()
+            .then(function (res) {
+                if (res.data.data != undefined)
+                    vm.produtosServicos = res.data.data;
+            })
+
+    });

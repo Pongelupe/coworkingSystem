@@ -28,11 +28,11 @@ public class Plano {
 	@Column(length = 400, nullable = false)
 	private double valor;
 
-	@OneToMany(mappedBy = "plano", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "plano", cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonManagedReference
 	private List<ProdutoServicoPlano> produtosServicos;
 
-	@OneToMany(mappedBy = "plano", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "plano", cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonManagedReference
 	private List<SalaPlano> salas;
 

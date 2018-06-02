@@ -12,10 +12,10 @@ angular
 
         retorno.getPlano = function (idPlano) {
             return $http({
-                url: URL_REQ + "planos",
+                url: URL_REQ + "plano",
                 method: 'GET',
                 params: {
-                    idPlano: dados.id
+                    idPlano: idPlano
                 },
                 cwsHeaders
             });

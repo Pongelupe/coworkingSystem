@@ -24,12 +24,83 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label>Descrição
-
                         </label>
                         <textarea maxlength="400" rows="4" ng-model="vm.plano.descricao" class="form-control" placeholder="Informe a descrição"></textarea>
                     </div>
                 </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <button type="button" class="btn btn-sm btn-success form-control" ng-click="vm.adicionarSalaPlano()">
+                                <i class="fa fa-plus" aria-hidden="true" title="Adicionar sala"></i>Adicionar Sala
+                            </button>
 
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <button type="button" class="btn btn-sm btn-success form-control" ng-click="vm.adicionarProdutoServicoPlano()">
+                                <i class="fa fa-plus" aria-hidden="true" title="Adicionar produto/serviço"></i>Adicionar Produto/Servico
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover table-sm">
+                    <thead>
+                        <tr>
+                            <th>Sala</th>
+                            <th>Quantidade de horas</th>
+                            <th class="text-center">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="salaPlano in vm.plano.salas | filter : search | orderBy: 'nome'">
+                            <td>
+                                <select ng-model="salaPlano.sala" class="form-control form-control-sm" ng-options="sala.nome for sala in vm.salas track by sala.id">
+                                    <option value="">Selecione a sala</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input ng-model="salaPlano.quantidadeHoras" type="number" class="form-control form-control-sm" placeholder="Selecione a quantidade de horas">
+                            </td>
+                            <td class="text-center">
+                                <i class="fa fa-trash text-danger m-1" aria-hidden="true" title="Deletar sala do plano" ng-click="vm.deletarSalaPlano($index)"></i>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover table-sm">
+                    <thead>
+                        <tr>
+                            <th>Produto/Serviço</th>
+                            <th>Quantidade</th>
+                            <th class="text-center">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="produtoServicoPlano in vm.plano.produtosServicos | filter : search | orderBy: 'nome'">
+                            <td>
+                                <select ng-model="produtoServicoPlano.produtoServico" class="form-control form-control-sm" ng-options="produtoServico.nome for produtoServico in vm.produtosServicos track by produtoServico.id">
+                                    <option value="">Selecione o produto/serviço</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input ng-model="produtoServicoPlano.quantidade" type="number" class="form-control form-control-sm" placeholder="Selecione a quantidade">
+                            </td>
+                            <td class="text-center">
+                                <i class="fa fa-trash text-danger m-1" aria-hidden="true" title="Deletar sala do plano" ng-click="vm.deletarProdutoServicoPlano($index)"></i>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
             <div class="row pull-right">
                 <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">

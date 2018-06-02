@@ -35,10 +35,6 @@ public class Consumo {
 
 	@ManyToOne
 	@JoinColumn(nullable=false)
-	private Colaborador solicitante;
-
-	@ManyToOne
-	@JoinColumn(nullable=false)
 	private Cliente cliente;
 	
 	@OneToOne
@@ -79,14 +75,6 @@ public class Consumo {
 
 	public void setFaturado(boolean faturado) {
 		this.faturado = faturado;
-	}
-
-	public Colaborador getSolicitante() {
-		return solicitante;
-	}
-
-	public void setSolicitante(Colaborador solicitante) {
-		this.solicitante = solicitante;
 	}
 
 	public Cliente getCliente() {

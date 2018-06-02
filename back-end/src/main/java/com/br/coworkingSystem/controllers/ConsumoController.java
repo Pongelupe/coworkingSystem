@@ -19,13 +19,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.br.coworkingSystem.model.Cliente;
-import com.br.coworkingSystem.model.Colaborador;
 import com.br.coworkingSystem.model.Consumo;
 import com.br.coworkingSystem.model.ProdutoServico;
 import com.br.coworkingSystem.model.Response;
 import com.br.coworkingSystem.model.Sala;
 import com.br.coworkingSystem.repositories.ClienteRepository;
-import com.br.coworkingSystem.repositories.ColaboradorRepository;
 import com.br.coworkingSystem.repositories.ConsumoRepository;
 import com.br.coworkingSystem.repositories.ProdutoServicoRepository;
 import com.br.coworkingSystem.repositories.SalaRepository;
@@ -36,9 +34,6 @@ public class ConsumoController {
 
 	@Autowired
 	private ConsumoRepository consumoRepository;
-
-	@Autowired
-	private ColaboradorRepository solicitanteRepository;
 	
 	@Autowired
 	private ProdutoServicoRepository produtoServicoRepository;
@@ -69,7 +64,6 @@ public class ConsumoController {
 
 		Response<Long> response = new Response<Long>();
 		Optional<Cliente> clienteOptional = clienteRepository.findById(idCliente);
-		Optional<Colaborador> solicitanteOptional = solicitanteRepository.findById(idSolicitante);
 		Optional<Sala> salaOptional = salaRepository.findById(idSala);
 		Optional<ProdutoServico> produtoServicoOptional = produtoServicoRepository.findById(idProdutoServico);
 
@@ -78,17 +72,13 @@ public class ConsumoController {
 			result.getAllErrors().forEach(error -> response.addError(error.getCode()));
 			if (!clienteOptional.isPresent())
 				response.addError("Cliente não encontrado");
-			
-			if (!solicitanteOptional.isPresent())
-				response.addError("Solicitante não encontrado");
-			
+					
 			if (!salaOptional.isPresent() && !produtoServicoOptional.isPresent())
 				response.addError("Não foi encontrado a sala nem produto que deseja consumir.");
 			
 			return ResponseEntity.badRequest().body(response);
 		} else {
 			consumo.setCliente(clienteOptional.get());
-			consumo.setSolicitante(solicitanteOptional.get());
 			
 			if(salaOptional.isPresent())
 				consumo.setSala(salaOptional.get());

@@ -19,18 +19,56 @@ public class Cliente {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
+
 	@Temporal(TemporalType.DATE)
 	@Column(nullable = false)
 	private Date dataCadastro;
-	
+
 	@Column(nullable = true, length = 400)
 	private String observacoes;
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(nullable=false)
-	private Pessoa pessoa;
+	@Column(unique = true, nullable = false, length = 14)
+	private String cpfCnpj;
 
+	@Column(nullable = false, length = 100)
+	private String nome;
+
+	@Column(nullable = false, length = 100)
+	private String email;
+
+	@Column(nullable = false, length = 15)
+	private String telefonePrincipal;
+
+	@Temporal(TemporalType.DATE)
+	@Column(nullable = true)
+	private Date data;
+
+	@Column(nullable = true, length = 15)
+	private String rg;
+
+	@Column(nullable = true, length = 15)
+	private String cnh;
+
+	@Column(nullable = true, length = 15)
+	private String inscricaoMunicipal;
+
+	@Column(nullable = true, length = 15)
+	private String inscricaoEstadual;
+
+	@Column(nullable = false, columnDefinition = "boolean default false")
+	private boolean ehPessoaJuridica;
+
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(nullable = false)
+	private Endereco endereco;
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
 
 	public Date getDataCadastro() {
 		return dataCadastro;
@@ -48,22 +86,92 @@ public class Cliente {
 		this.observacoes = observacoes;
 	}
 
-	public Pessoa getPessoa() {
-		return pessoa;
+	public String getCpfCnpj() {
+		return cpfCnpj;
 	}
 
-	public void setPessoa(Pessoa pessoa) {
-		this.pessoa = pessoa;
+	public void setCpfCnpj(String cpfCnpj) {
+		this.cpfCnpj = cpfCnpj;
 	}
 
-	public long getId() {
-		return id;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setId(long id) {
-		this.id = id;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
-	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getTelefonePrincipal() {
+		return telefonePrincipal;
+	}
+
+	public void setTelefonePrincipal(String telefonePrincipal) {
+		this.telefonePrincipal = telefonePrincipal;
+	}
+
+	public Date getData() {
+		return data;
+	}
+
+	public void setData(Date data) {
+		this.data = data;
+	}
+
+	public String getRg() {
+		return rg;
+	}
+
+	public void setRg(String rg) {
+		this.rg = rg;
+	}
+
+	public String getCnh() {
+		return cnh;
+	}
+
+	public void setCnh(String cnh) {
+		this.cnh = cnh;
+	}
+
+	public String getInscricaoMunicipal() {
+		return inscricaoMunicipal;
+	}
+
+	public void setInscricaoMunicipal(String inscricaoMunicipal) {
+		this.inscricaoMunicipal = inscricaoMunicipal;
+	}
+
+	public String getInscricaoEstadual() {
+		return inscricaoEstadual;
+	}
+
+	public void setInscricaoEstadual(String inscricaoEstadual) {
+		this.inscricaoEstadual = inscricaoEstadual;
+	}
+
+	public boolean isEhPessoaJuridica() {
+		return ehPessoaJuridica;
+	}
+
+	public void setEhPessoaJuridica(boolean ehPessoaJuridica) {
+		this.ehPessoaJuridica = ehPessoaJuridica;
+	}
+
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
 
 }

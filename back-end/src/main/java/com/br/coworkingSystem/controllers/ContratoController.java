@@ -1,5 +1,6 @@
 package com.br.coworkingSystem.controllers;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -16,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.br.coworkingSystem.model.Cliente;
 import com.br.coworkingSystem.model.Contrato;
 import com.br.coworkingSystem.model.Response;
+import com.br.coworkingSystem.repositories.ClienteRepository;
 import com.br.coworkingSystem.repositories.ContratoRepository;
 import com.br.coworkingSystem.validators.ContratoValidator;
 
@@ -27,13 +30,16 @@ public class ContratoController {
 	@Autowired
 	private ContratoRepository repo;
 
+	@Autowired
+	private ClienteRepository repoCliente;
+
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		binder.setValidator(new ContratoValidator());
 	}
 
 	@PostMapping("/contrato")
-	public ResponseEntity<Response<Long>> cadastraContrato(@RequestBody @Valid Contrato contrato,
+	public ResponseEntity<Response<Long>> cadastrarContrato(@RequestBody @Valid Contrato contrato,
 			BindingResult result) {
 		Response<Long> response = new Response<Long>();
 
@@ -50,28 +56,35 @@ public class ContratoController {
 	}
 
 	@GetMapping("/contrato")
-	public ResponseEntity<Response<Contrato>> getContrato(@RequestParam long idContrato) {
-		Optional<Contrato> contratoOpitional = repo.findById(idContrato);
-		Response<Contrato> response = new Response<Contrato>();
+	public ResponseEntity<Response<List<Contrato>>> getContratoByCliente(@RequestParam long idCliente) {
 
-		if (contratoOpitional.isPresent())
-			return ResponseEntity.ok(response.setData(contratoOpitional.get()));
+		Optional<Cliente> clienteOptional = repoCliente.findById(idCliente);
+		Response<List<Contrato>> response = new Response<List<Contrato>>();
+
+		if (clienteOptional.isPresent())
+			return ResponseEntity.ok(response.setData(repo.findAllByCliente(clienteOptional)));
 		else
 			return ResponseEntity.badRequest().body(response);
 	}
 
+	@GetMapping("/contratos")
+	public ResponseEntity<Response<List<Contrato>>> getContratos() {
+
+		Response<List<Contrato>> response = new Response<List<Contrato>>();
+		return ResponseEntity.ok(response.setData(repo.findAll()));
+
+	}
+
 	@PutMapping("/contrato")
-	public ResponseEntity<Response<Long>> cadastraContrato(@RequestParam long idContrato,
-			@RequestBody @Valid Contrato contrato, BindingResult result) {
+	public ResponseEntity<Response<Long>> upadteContrato(@RequestBody @Valid Contrato contrato, BindingResult result) {
 		Response<Long> response = new Response<Long>();
 
-		if (result.hasErrors() || !repo.existsById(idContrato)) {
+		if (result.hasErrors() || !repo.existsById(contrato.getId())) {
 			response.setData(null);
 			result.getAllErrors().forEach(error -> response.addError(error.getCode()));
 
 			return ResponseEntity.badRequest().body(response);
 		} else {
-			contrato.setId(idContrato);
 			contrato = repo.save(contrato);
 			response.setData(contrato.getId());
 			return ResponseEntity.ok(response);

@@ -18,8 +18,16 @@ public class ContratoValidator implements Validator {
 	public void validate(Object target, Errors errors) {
 		this.contrato = (Contrato) target;
 
-		if (contrato.getDataFim() != null)
-			errors.rejectValue("dataFim", "A data fim não pode ser nula");
+		if (contrato.getDiaVencimento() <= 0)
+			errors.rejectValue("diaVencimento", "O dia do vencimento do contrato não foi informado");
+		
+		if (contrato.getMesesDuracaoContrato() <= 0)
+			errors.rejectValue("mesesDuracaoContrato", "A duração do contrato não foi informada");
+		
+		if (contrato.getDataInicio() == null)
+			errors.rejectValue("dataInicio", "A data de início do contrato não foi informada");
+		
+		
 	}
 
 }

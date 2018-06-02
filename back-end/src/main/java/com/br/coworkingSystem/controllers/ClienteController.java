@@ -89,14 +89,13 @@ public class ClienteController {
 			result.getAllErrors().forEach(error -> response.addError(error.getCode()));
 
 			return ResponseEntity.badRequest().body(response);
-		} else if (!repository.findById(idCliente).isPresent()) {
+		} else if (!repository.findById(cliente.getId()).isPresent()) {
 			response.setData(null);
 			response.addError("Não conseguimos encontrar este cliente");
 
 			return ResponseEntity.badRequest().body(response);
 		} else {
 
-			cliente.setId(idCliente);
 			repository.save(cliente);
 			response.setData(idCliente);
 

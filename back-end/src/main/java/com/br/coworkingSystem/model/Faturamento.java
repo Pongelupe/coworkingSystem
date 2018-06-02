@@ -2,16 +2,19 @@ package com.br.coworkingSystem.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.br.coworkingSystem.model.enuns.StatusFaturamento;
+import com.br.coworkingSystem.model.enuns.MeioPagamento;
 import com.br.coworkingSystem.model.enuns.TipoFaturamento;
 
 @Entity
@@ -21,50 +24,82 @@ public class Faturamento {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	private double valorFaturamento;
-	private double descontoFaturamento;
+	@Column(nullable = false)
+	private double valor;
+
+	@Column(nullable = true)
+	private double desconto;
 
 	@Temporal(TemporalType.DATE)
-	private Date dtEmissao;
+	@Column(nullable = false)
+	private Date dataEmissao;
+
 	@Temporal(TemporalType.DATE)
-	private Date dtVencimento;
+	@Column(nullable = false)
+	private Date dataVencimento;
+
+	@Temporal(TemporalType.DATE)
+	@Column(nullable = true)
+	private Date dataPagamento;
 
 	@Enumerated(EnumType.STRING)
+	@Column(nullable = false, length = 15)
 	private TipoFaturamento tipoFaturamento;
 
 	@Enumerated(EnumType.STRING)
-	private StatusFaturamento statusFaturamento;
+	@Column(nullable = true, length = 15)
+	private MeioPagamento meioPagamento;
 
-	public double getValorFaturamento() {
-		return valorFaturamento;
+	@OneToOne
+	@JoinColumn(nullable = false)
+	private Consumo consumo;
+
+	public Long getId() {
+		return id;
 	}
 
-	public void setValorFaturamento(double valorFaturamento) {
-		this.valorFaturamento = valorFaturamento;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
-	public double getDescontoFaturamento() {
-		return descontoFaturamento;
+	public double getValor() {
+		return valor;
 	}
 
-	public void setDescontoFaturamento(double descontoFaturamento) {
-		this.descontoFaturamento = descontoFaturamento;
+	public void setValor(double valor) {
+		this.valor = valor;
 	}
 
-	public Date getDtEmissao() {
-		return dtEmissao;
+	public double getDesconto() {
+		return desconto;
 	}
 
-	public void setDtEmissao(Date dtEmissao) {
-		this.dtEmissao = dtEmissao;
+	public void setDesconto(double desconto) {
+		this.desconto = desconto;
 	}
 
-	public Date getDtVencimento() {
-		return dtVencimento;
+	public Date getDataEmissao() {
+		return dataEmissao;
 	}
 
-	public void setDtVencimento(Date dtVencimento) {
-		this.dtVencimento = dtVencimento;
+	public void setDataEmissao(Date dataEmissao) {
+		this.dataEmissao = dataEmissao;
+	}
+
+	public Date getDataVencimento() {
+		return dataVencimento;
+	}
+
+	public void setDataVencimento(Date dataVencimento) {
+		this.dataVencimento = dataVencimento;
+	}
+
+	public Date getDataPagamento() {
+		return dataPagamento;
+	}
+
+	public void setDataPagamento(Date dataPagamento) {
+		this.dataPagamento = dataPagamento;
 	}
 
 	public TipoFaturamento getTipoFaturamento() {
@@ -75,27 +110,32 @@ public class Faturamento {
 		this.tipoFaturamento = tipoFaturamento;
 	}
 
-	public StatusFaturamento getStatusFaturamento() {
-		return statusFaturamento;
+	public MeioPagamento getMeioPagamento() {
+		return meioPagamento;
 	}
 
-	public void setStatusFaturamento(StatusFaturamento statusFaturamento) {
-		this.statusFaturamento = statusFaturamento;
+	public void setMeioPagamento(MeioPagamento meioPagamento) {
+		this.meioPagamento = meioPagamento;
 	}
 
-	public Long getId() {
-		return id;
+	public Consumo getConsumo() {
+		return consumo;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setConsumo(Consumo consumo) {
+		this.consumo = consumo;
 	}
 
-	@Override
-	public String toString() {
-		return "Faturamento [id=" + id + ", valorFaturamento=" + valorFaturamento + ", descontoFaturamento="
-				+ descontoFaturamento + ", dtEmissao=" + dtEmissao + ", dtVencimento=" + dtVencimento
-				+ ", tipoFaturamento=" + tipoFaturamento + ", statusFaturamento=" + statusFaturamento + "]";
+	public Contrato getContrato() {
+		return contrato;
 	}
+
+	public void setContrato(Contrato contrato) {
+		this.contrato = contrato;
+	}
+
+	@OneToOne
+	@JoinColumn(nullable = false)
+	private Contrato contrato;
 
 }

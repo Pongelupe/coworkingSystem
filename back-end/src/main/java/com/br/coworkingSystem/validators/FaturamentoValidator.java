@@ -20,18 +20,18 @@ public class FaturamentoValidator implements Validator {
 	public void validate(Object target, Errors erros) {
 		faturamento = (Faturamento) target;
 
-		double valorFaturamento = faturamento.getValorFaturamento();
-		Date dtEmissao = faturamento.getDtEmissao();
-		Date dtVencimento = faturamento.getDtVencimento();
+		double valor = faturamento.getValor();
+		Date dtEmissao = faturamento.getDataEmissao();
+		Date dtVencimento = faturamento.getDataVencimento();
 
-		if (valorFaturamento <= 0)
-			erros.rejectValue("valorFaturamento", "O valorFaturamento não pode ser menor que 0");
+		if (valor <= 0)
+			erros.rejectValue("valor", "O valor do faturamento deve ser maior que 0");
 
 		if (dtEmissao == null)
-			erros.rejectValue("dtEmissao", "A data de faturamento não pode ser vazia");
+			erros.rejectValue("dtEmissao", "A data de emissão do faturamento não foi informada");
 
 		if (dtVencimento == null)
-			erros.rejectValue("dtVencimento", "A data de faturamento não pode ser vazia");
+			erros.rejectValue("dtVencimento", "A data de vencimento do faturamento não foi informada");
 
 	}
 

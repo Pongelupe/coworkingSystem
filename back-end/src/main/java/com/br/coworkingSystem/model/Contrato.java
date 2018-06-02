@@ -2,11 +2,15 @@ package com.br.coworkingSystem.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Contrato {
@@ -15,22 +19,27 @@ public class Contrato {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
+	@Column(nullable = false)
 	private int diaVencimento;
-	private int duracaoContrato;
+
+	@Column(nullable = false)
+	private int mesesDuracaoContrato;
+
+	@Temporal(TemporalType.DATE)
+	@Column(nullable = false)
 	private Date dataInicio;
-	private Date dataFim;
-	private int multa;
-	private int juros;
-	@OneToOne
-	private Cliente clinte;
 
-	public long getId() {
-		return id;
-	}
+	@Temporal(TemporalType.DATE)
+	@Column(nullable = true)
+	private Date dataEncerrado;
 
-	public void setId(long id) {
-		this.id = id;
-	}
+	@ManyToOne
+	@JoinColumn(nullable = false)
+	private Cliente cliente;
+
+	@ManyToOne
+	@JoinColumn(nullable = false)
+	private Plano plano;
 
 	public int getDiaVencimento() {
 		return diaVencimento;
@@ -40,12 +49,12 @@ public class Contrato {
 		this.diaVencimento = diaVencimento;
 	}
 
-	public int getDuracaoContrato() {
-		return duracaoContrato;
+	public int getMesesDuracaoContrato() {
+		return mesesDuracaoContrato;
 	}
 
-	public void setDuracaoContrato(int duracaoContrato) {
-		this.duracaoContrato = duracaoContrato;
+	public void setMesesDuracaoContrato(int mesesDuracaoContrato) {
+		this.mesesDuracaoContrato = mesesDuracaoContrato;
 	}
 
 	public Date getDataInicio() {
@@ -56,42 +65,32 @@ public class Contrato {
 		this.dataInicio = dataInicio;
 	}
 
-	public Date getDataFim() {
-		return dataFim;
+	public Date getDataEncerrado() {
+		return dataEncerrado;
 	}
 
-	public void setDataFim(Date dataFim) {
-		this.dataFim = dataFim;
+	public void setDataEncerrado(Date dataEncerrado) {
+		this.dataEncerrado = dataEncerrado;
 	}
 
-	public int getMulta() {
-		return multa;
+	public Cliente getCliente() {
+		return cliente;
 	}
 
-	public void setMulta(int multa) {
-		this.multa = multa;
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 
-	public int getJuros() {
-		return juros;
+	public long getId() {
+		return id;
 	}
 
-	public void setJuros(int juros) {
-		this.juros = juros;
+	public Plano getPlano() {
+		return plano;
 	}
 
-	public Cliente getClinte() {
-		return clinte;
-	}
-
-	public void setClinte(Cliente clinte) {
-		this.clinte = clinte;
-	}
-
-	@Override
-	public String toString() {
-		return "Contrato [id=" + id + ", diaVencimento=" + diaVencimento + ", duracaoContrato=" + duracaoContrato
-				+ ", dataInicio=" + dataInicio + ", dataFim=" + dataFim + ", multa=" + multa + ", juros=" + juros + "]";
+	public void setPlano(Plano plano) {
+		this.plano = plano;
 	}
 
 }

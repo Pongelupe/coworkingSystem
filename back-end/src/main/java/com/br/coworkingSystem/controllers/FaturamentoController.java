@@ -17,12 +17,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.br.coworkingSystem.model.Faturamento;
 import com.br.coworkingSystem.model.Response;
-import com.br.coworkingSystem.model.enuns.StatusFaturamento;
 import com.br.coworkingSystem.repositories.FaturamentoRepository;
 import com.br.coworkingSystem.validators.FaturamentoValidator;
 
@@ -41,7 +39,7 @@ public class FaturamentoController {
 	public @ResponseBody ResponseEntity<Response<List<Faturamento>>> getFaturamentos() {
 		Response<List<Faturamento>> response = new Response<List<Faturamento>>();
 
-		List<Faturamento> faturamentos = repository.findAllByStatusFaturamento(StatusFaturamento.ABERTO);
+		List<Faturamento> faturamentos = repository.findAll();
 		response.setData(faturamentos);
 
 		return ResponseEntity.ok(response);
@@ -81,8 +79,8 @@ public class FaturamentoController {
 	}
 
 	@PutMapping("/faturamento/{idFaturamento}")
-	public @ResponseBody ResponseEntity<Response<Long>> updateFaturamento(@PathVariable Long idFaturamento,
-			@RequestBody @Valid Faturamento faturamento, BindingResult result) {
+	public @ResponseBody ResponseEntity<Response<Long>> updateFaturamento(@RequestBody @Valid Faturamento faturamento,
+			BindingResult result) {
 		Response<Long> response = new Response<Long>();
 
 		if (result.hasErrors()) {
@@ -90,27 +88,23 @@ public class FaturamentoController {
 			result.getAllErrors().forEach(error -> response.addError(error.getCode()));
 
 			return ResponseEntity.badRequest().body(response);
-		} else if (!repository.findById(idFaturamento).isPresent()) {
+		} else if (!repository.findById(faturamento.getId()).isPresent()) {
 			response.setData(null);
 			response.addError("Não conseguimos encontrar este faturamento");
 
 			return ResponseEntity.badRequest().body(response);
 		} else {
-
-			faturamento.setId(idFaturamento);
 			repository.save(faturamento);
-			response.setData(idFaturamento);
-
+			response.setData(faturamento.getId());
 			return ResponseEntity.ok(response);
 		}
 
 	}
 
 	@PostMapping("/aplicarDesconto")
-	public @ResponseBody ResponseEntity<Response<Boolean>> aplicarDesconto(@RequestParam Long idFaturamento,
-			@RequestBody Faturamento faturamento) {
+	public @ResponseBody ResponseEntity<Response<Boolean>> aplicarDesconto(@RequestBody Faturamento faturamento) {
 		Response<Boolean> response = new Response<Boolean>();
-		Optional<Faturamento> faturamentoOptional = repository.findById(idFaturamento);
+		Optional<Faturamento> faturamentoOptional = repository.findById(faturamento.getId());
 
 		if (!faturamentoOptional.isPresent()) {
 			response.setData(false);
@@ -118,9 +112,9 @@ public class FaturamentoController {
 
 			return ResponseEntity.badRequest().body(response);
 		} else {
-			double desconto = faturamento.getDescontoFaturamento();
+			double desconto = faturamento.getDesconto();
 			faturamento = faturamentoOptional.get();
-			faturamento.setDescontoFaturamento(desconto);
+			faturamento.setDesconto(desconto);
 			repository.save(faturamento);
 
 			response.setData(true);
@@ -130,9 +124,9 @@ public class FaturamentoController {
 	}
 
 	@PostMapping("/registrarPagamento")
-	public @ResponseBody ResponseEntity<Response<Boolean>> registrarPagamento(@RequestParam Long idFaturamento) {
+	public @ResponseBody ResponseEntity<Response<Boolean>> registrarPagamento(@RequestBody Faturamento faturamento) {
 		Response<Boolean> response = new Response<Boolean>();
-		Optional<Faturamento> faturamentoOptional = repository.findById(idFaturamento);
+		Optional<Faturamento> faturamentoOptional = repository.findById(faturamento.getId());
 
 		if (!faturamentoOptional.isPresent()) {
 			response.setData(false);
@@ -140,12 +134,8 @@ public class FaturamentoController {
 
 			return ResponseEntity.badRequest().body(response);
 		} else {
-			Faturamento faturamento = faturamentoOptional.get();
-			faturamento.setStatusFaturamento(StatusFaturamento.QUITADO);
 			repository.save(faturamento);
-
 			response.setData(true);
-
 			return ResponseEntity.ok(response);
 		}
 	}

@@ -22,6 +22,10 @@ angular.module('coworkingApp')
             vm.novoPlano();
         } else {
             vm.plano = $stateParams.plano;
+            vm.plano.salas.forEach(function(salaPlano){
+                salaPlano.sala.horarioInicial = parseTime(salaPlano.sala.horarioInicial);
+                salaPlano.sala.horarioFinal = parseTime(salaPlano.sala.horarioFinal);
+            })
             vm.title = "Atualizar Dados do Plano: " + vm.plano.nome;
             vm.acao = "Atualizar Plano";
         }

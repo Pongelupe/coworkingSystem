@@ -1,37 +1,32 @@
 package com.br.coworkingSystem.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+@SuppressWarnings("serial")
 @Entity
-public class SalaPlano {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
-	
+public class SalaPlano implements Serializable {
+
 	@Column(nullable = false)
 	private int quantidadeHoras;
-	
+
+	@Id
 	@ManyToOne
 	@JoinColumn(nullable = false)
 	@JsonBackReference
 	private Plano plano;
-	
+
+	@Id
 	@ManyToOne
 	@JoinColumn(nullable = false)
 	private Sala sala;
-
-	public long getId() {
-		return id;
-	}
 
 	public int getQuantidadeHoras() {
 		return quantidadeHoras;
@@ -56,6 +51,5 @@ public class SalaPlano {
 	public void setSala(Sala sala) {
 		this.sala = sala;
 	}
-	
 
 }

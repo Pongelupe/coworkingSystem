@@ -1,30 +1,29 @@
 package com.br.coworkingSystem.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+@SuppressWarnings("serial")
 @Entity
-public class ProdutoServicoPlano {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
-	
+public class ProdutoServicoPlano implements Serializable {
+
 	@Column(nullable = false)
 	private int quantidade;
-	
+
+	@Id
 	@ManyToOne
 	@JsonBackReference
 	@JoinColumn(nullable = false)
 	private Plano plano;
-	
+
+	@Id
 	@ManyToOne
 	@JoinColumn(nullable = false)
 	private ProdutoServico produtoServico;
@@ -52,11 +51,5 @@ public class ProdutoServicoPlano {
 	public void setProdutoServico(ProdutoServico produtoServico) {
 		this.produtoServico = produtoServico;
 	}
-
-	public long getId() {
-		return id;
-	}
-	
-	
 
 }

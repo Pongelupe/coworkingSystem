@@ -164,7 +164,24 @@ angular
                 url: "/planos",
                 views: {
                     'contentApp@app': {
-                        template: "<p> Você está na aba planos <p>"
+                        templateUrl: 'components/plano/planos.html',
+                        controller: 'Planos',
+                        controllerAs: 'vm'
+                    }
+                }
+
+            })
+            .state("cadastroPlano", {
+                parent: "app",
+                params: {
+                    plano: [],
+                },
+                url: "/cadastroPlano",
+                views: {
+                    'contentApp@app': {
+                        templateUrl: 'components/plano/cadastroPlano.html',
+                        controller: 'Plano',
+                        controllerAs: 'vm'
                     }
                 }
 

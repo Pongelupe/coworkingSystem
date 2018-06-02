@@ -21,7 +21,7 @@ public class Sala {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
-	@Column(nullable = false, length = 50)
+	@Column(unique = true, nullable = false, length = 50)
 	private String nome;
 
 	@Temporal(TemporalType.TIME)
@@ -34,17 +34,18 @@ public class Sala {
 
 	@Column(nullable = true)
 	private int ramal;
-	
+
 	@Column(nullable = false)
 	private double valorHora;
-	
+
 	@Column(nullable = false)
 	private int quantidadeEstacoes;
-	
-	@Column(nullable = false, columnDefinition="boolean default false")
+
+	@Column(nullable = false, columnDefinition = "boolean default false")
 	private boolean estaLivre;
 
 	@Enumerated(EnumType.STRING)
+	@Column(nullable = false)
 	private TipoSala tipo;
 
 	public String getNome() {
@@ -114,7 +115,5 @@ public class Sala {
 	public long getId() {
 		return id;
 	}
-
-	
 
 }

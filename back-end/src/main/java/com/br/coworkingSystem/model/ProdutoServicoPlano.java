@@ -1,6 +1,5 @@
 package com.br.coworkingSystem.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class ProdutoServicoPlano {
@@ -19,11 +20,12 @@ public class ProdutoServicoPlano {
 	@Column(nullable = false)
 	private int quantidade;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
+	@JsonBackReference
 	@JoinColumn(nullable = false)
 	private Plano plano;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(nullable = false)
 	private ProdutoServico produtoServico;
 

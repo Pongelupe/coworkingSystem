@@ -51,8 +51,12 @@ public class Faturamento {
 	private MeioPagamento meioPagamento;
 
 	@OneToOne
-	@JoinColumn(nullable = false)
+	@JoinColumn(nullable = true)
 	private Consumo consumo;
+	
+	@OneToOne
+	@JoinColumn(nullable = true)
+	private Contrato contrato;
 
 	public Long getId() {
 		return id;
@@ -133,9 +137,5 @@ public class Faturamento {
 	public void setContrato(Contrato contrato) {
 		this.contrato = contrato;
 	}
-
-	@OneToOne
-	@JoinColumn(nullable = false)
-	private Contrato contrato;
 
 }

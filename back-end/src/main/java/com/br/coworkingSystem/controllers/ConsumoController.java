@@ -18,15 +18,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.br.coworkingSystem.model.Cliente;
 import com.br.coworkingSystem.model.Consumo;
-import com.br.coworkingSystem.model.ProdutoServico;
 import com.br.coworkingSystem.model.Response;
-import com.br.coworkingSystem.model.Sala;
-import com.br.coworkingSystem.repositories.ClienteRepository;
 import com.br.coworkingSystem.repositories.ConsumoRepository;
-import com.br.coworkingSystem.repositories.ProdutoServicoRepository;
-import com.br.coworkingSystem.repositories.SalaRepository;
 import com.br.coworkingSystem.validators.ConsumoValidator;
 
 @Controller
@@ -34,15 +28,6 @@ public class ConsumoController {
 
 	@Autowired
 	private ConsumoRepository consumoRepository;
-	
-	@Autowired
-	private ProdutoServicoRepository produtoServicoRepository;
-
-	@Autowired
-	private ClienteRepository clienteRepository;
-
-	@Autowired
-	private SalaRepository salaRepository;
 
 	@InitBinder("consumo")
 	public void initBinder(WebDataBinder binder) {
@@ -58,34 +43,18 @@ public class ConsumoController {
 	}
 
 	@PostMapping("/consumo")
-	public @ResponseBody ResponseEntity<Response<Long>> cadastraConsumo(@RequestParam Long idCliente,
-			@RequestParam Long idSala, @RequestParam Long idProdutoServico, @RequestParam Long idSolicitante,
-			@RequestBody @Valid Consumo consumo, BindingResult result) {
+	public @ResponseBody ResponseEntity<Response<Long>> cadastraConsumo(@RequestBody @Valid Consumo consumo,
+			BindingResult result) {
 
 		Response<Long> response = new Response<Long>();
-		Optional<Cliente> clienteOptional = clienteRepository.findById(idCliente);
-		Optional<Sala> salaOptional = salaRepository.findById(idSala);
-		Optional<ProdutoServico> produtoServicoOptional = produtoServicoRepository.findById(idProdutoServico);
 
 		if (result.hasErrors()) {
 			response.setData(null);
 			result.getAllErrors().forEach(error -> response.addError(error.getCode()));
-			if (!clienteOptional.isPresent())
-				response.addError("Cliente não encontrado");
-					
-			if (!salaOptional.isPresent() && !produtoServicoOptional.isPresent())
-				response.addError("Não foi encontrado a sala nem produto que deseja consumir.");
 			
 			return ResponseEntity.badRequest().body(response);
 		} else {
-			consumo.setCliente(clienteOptional.get());
-			
-			if(salaOptional.isPresent())
-				consumo.setSala(salaOptional.get());
-			
-			if(produtoServicoOptional.isPresent())
-				consumo.setProdutoServico(produtoServicoOptional.get());
-			
+		
 			consumo = consumoRepository.save(consumo);
 
 			response.setData(consumo.getId());

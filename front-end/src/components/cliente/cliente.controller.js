@@ -8,19 +8,17 @@ angular.module('coworkingApp')
             vm.cliente = {
                 dataCadastro: new Date(),
                 observacoes: null,
-                pessoa: {
-                    ehPessoaJuridica: false,
-                    nome: null,
-                    cpfCnpj: null,
-                    rg: null,
-                    cnh: null,
-                    telefonePrincipal: null,
-                    email: null,
-                    inscricalMunicipal: null,
-                    inscricaoEstadual: null,
-                    data: null,
-                    endereco: {}
-                }
+                ehPessoaJuridica: false,
+                nome: null,
+                cpfCnpj: null,
+                rg: null,
+                cnh: null,
+                telefonePrincipal: null,
+                email: null,
+                inscricalMunicipal: null,
+                inscricaoEstadual: null,
+                data: null,
+                endereco: {}
             };
         };
 
@@ -30,38 +28,38 @@ angular.module('coworkingApp')
             vm.novoCliente();
         } else {
             vm.cliente = $stateParams.cliente;
-            if (!isNullOrEmpty(vm.cliente.pessoa.data))
-                vm.cliente.pessoa.data = parseDate(vm.cliente.pessoa.data);
+            if (!isNullOrEmpty(vm.cliente.data))
+                vm.cliente.data = parseDate(vm.cliente.data);
 
             vm.cliente.dataCadastro = parseDate(vm.cliente.dataCadastro);
-            vm.cliente.pessoa.endereco.cep = parseInt(vm.cliente.pessoa.endereco.cep);
-            vm.title = "Atualizar Dados do Cliente: " + vm.cliente.pessoa.nome;
+            vm.cliente.endereco.cep = parseInt(vm.cliente.endereco.cep);
+            vm.title = "Atualizar Dados do Cliente: " + vm.cliente.nome;
             vm.acao = "Atualizar Cliente";
         }
 
         vm.validarCliente = function () {
 
-            if (campoNaoInformado("nome", vm.cliente.pessoa.nome))
+            if (campoNaoInformado("nome", vm.cliente.nome))
                 return;
-            if (campoNaoInformado("CPF/CNPJ", vm.cliente.pessoa.cpfCnpj))
+            if (campoNaoInformado("CPF/CNPJ", vm.cliente.cpfCnpj))
                 return;
-            if (campoNaoInformado("telefone principal", vm.cliente.pessoa.telefonePrincipal))
+            if (campoNaoInformado("telefone principal", vm.cliente.telefonePrincipal))
                 return;
-            if (campoNaoInformado("e-mail", vm.cliente.pessoa.email))
+            if (campoNaoInformado("e-mail", vm.cliente.email))
                 return;
-            if (campoNaoInformado("cep", vm.cliente.pessoa.endereco.cep))
+            if (campoNaoInformado("cep", vm.cliente.endereco.cep))
                 return;
-            if (campoNaoInformado("rua", vm.cliente.pessoa.endereco.rua))
+            if (campoNaoInformado("rua", vm.cliente.endereco.rua))
                 return;
-            if (campoNaoInformado("numero", vm.cliente.pessoa.endereco.numero))
+            if (campoNaoInformado("numero", vm.cliente.endereco.numero))
                 return;
-            if (campoNaoInformado("bairro", vm.cliente.pessoa.endereco.bairro))
+            if (campoNaoInformado("bairro", vm.cliente.endereco.bairro))
                 return;
-            if (campoNaoInformado("cidade", vm.cliente.pessoa.endereco.cidade))
+            if (campoNaoInformado("cidade", vm.cliente.endereco.cidade))
                 return;
-            if (campoNaoInformado("estado", vm.cliente.pessoa.endereco.estado))
+            if (campoNaoInformado("estado", vm.cliente.endereco.estado))
                 return;
-            if (campoNaoInformado("pais", vm.cliente.pessoa.endereco.pais))
+            if (campoNaoInformado("pais", vm.cliente.endereco.pais))
                 return;
 
             return true;
@@ -87,7 +85,7 @@ angular.module('coworkingApp')
         };
 
         vm.updateCliente = function () {
-            
+
             svcCliente.updateCliente(vm.cliente)
                 .then(function (res) {
                     vm.novoCliente();

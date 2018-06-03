@@ -6,7 +6,7 @@ angular.module('coworkingApp')
 
             vm.novoConsumo = function () {
                 vm.consumo = {
-                    dataInicial: new Date(moment().format())
+                    dataInicial: new Date()
                 }
             };
 
@@ -15,8 +15,14 @@ angular.module('coworkingApp')
             vm.carregarSalas = function () {
                 svcSala.salas()
                     .then(function (res) {
-                        if (res.data.data != undefined)
+                        if (res.data.data != undefined){
                             vm.salas = res.data.data;
+                            vm.salas.forEach(function(sala) {
+                                sala.horarioInicial = parseTime(sala.horarioInicial);
+                                sala.horarioFinal = parseTime(sala.horarioFinal);
+                            });
+                        }
+                            
                     })
             };
 
@@ -58,15 +64,8 @@ angular.module('coworkingApp')
             }
 
             vm.cadastrarConsumo = function () {
-                var obj = {};
-                obj.idSala = vm.consumo.idSala;
-                obj.idCliente = vm.consumo.idCliente;
-                obj.consumo = {};
-                obj.consumo.tipoConsumo = "AVULSO";
-                obj.consumo.faturado = false;
-                obj.consumo.dataInicial = moment(vm.consumo.dataInicial).format();
 
-                svcConsumo.cadastrarConsumo(obj)
+                svcConsumo.cadastrarConsumo(vm.consumo)
                     .then(function (res) {
                         vm.novoConsumo();
                         vm.carregarConsumos();
@@ -77,6 +76,7 @@ angular.module('coworkingApp')
                             timer: 2000
                         })
                         vm.carregarSalas();
+                        $('#modalConsumo').modal('hide');
                     })
                     .catch(function (err) {
                         alertaErroRequisicao(err);
@@ -127,7 +127,8 @@ angular.module('coworkingApp')
                                         type: 'success',
                                         showConfirmButton: false,
                                         timer: 2000
-                                    })
+                                    });
+                                    $('#modalConsumo').modal('hide');
                                 })
                                 .catch(function (err) {
                                     alertaErroRequisicao(err);
@@ -136,15 +137,16 @@ angular.module('coworkingApp')
                     })
             };
 
-            vm.realizarFaturamento = function(consumo){
+            vm.realizarFaturamento = function(consumo){7
+                consumo.sala.horarioInicial = parseTime(consumo.sala.horarioInicial);
+                consumo.sala.horarioFinal = parseTime(consumo.sala.horarioFinal);
                 vm.faturamento = {};
-
+                vm.faturamento.consumo = consumo;
                 vm.faturamento.tipoFaturamento = "AVULSO" ;
-                vm.faturamento.statusFaturamento = "ABERTO";
-                vm.faturamento.dtEmissao = moment().format() ;
-                vm.faturamento.dtVencimento = moment().add(30, 'days').format()
-                vm.faturamento.valorFaturamento = consumo.valorGasto;
-                vm.faturamento.descontoFaturamento = 0;
+                vm.faturamento.dataEmissao = moment().format();
+                vm.faturamento.dataVencimento = moment().add(30, 'days').format()
+                vm.faturamento.valor = consumo.valorGasto;
+                vm.faturamento.desconto = 0;
 
                 svcFaturamento.cadastrarFaturamento(vm.faturamento)
                 .then(function(res){

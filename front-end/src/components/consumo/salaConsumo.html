@@ -7,7 +7,8 @@
                     <div class="col-12 col-sm-12 col-md-4 col-lg-2 col-xl-2">
                         <div class="form-group">
                             <div class="input-group">
-                                <button type="button" class="btn btn-sm btn-success form-control" ng-click="vm.carregarClientes(); vm.carregarSalas(); vm.novoConsumo();" data-toggle="modal" data-target="#modalConsumo">
+                                <button type="button" class="btn btn-sm btn-success form-control" ng-click="vm.carregarClientes(); vm.carregarSalas(); vm.novoConsumo();"
+                                    data-toggle="modal" data-target="#modalConsumo">
                                     <i class="fa fa-sign-in" aria-hidden="true" title="Fazer Check-In"></i>
                                     Fazer Check-In
                                 </button>
@@ -31,7 +32,7 @@
                         <tbody>
                             <tr ng-repeat="consumo in vm.consumos | filter : search | orderBy: 'nome'">
                                 <td>{{consumo.sala.nome}}</td>
-                                <td>{{consumo.solicitante.nome}}</td>
+                                <td>{{consumo.cliente.nome}}</td>
                                 <td>{{consumo.dataInicial | date: 'dd/MM/yy HH:mm'}}</td>
                                 <td>{{consumo.tempoConsumo.dias}} d {{consumo.tempoConsumo.horas}} h {{consumo.tempoConsumo.minutos}}
                                     min </td>
@@ -67,9 +68,8 @@
                             <label>Sala
                                 <b class="text-danger">*</b>
                             </label>
-                            <select ng-model="vm.consumo.idSala" class="form-control form-control-sm">
+                            <select ng-model="vm.consumo.sala" class="form-control form-control-sm" ng-options="sala.nome for sala in vm.salas track by sala.id">
                                 <option value="">Selecione a sala</option>
-                                <option ng-repeat="sala in vm.salas" value="{{sala.id}}">{{sala.nome}}</option>
                             </select>
                         </div>
                     </div>
@@ -81,9 +81,8 @@
                                 <label>Cliente
                                     <b class="text-danger">*</b>
                                 </label>
-                                <select ng-model="vm.consumo.idCliente" class="form-control form-control-sm">
+                                <select ng-model="vm.consumo.cliente" class="form-control form-control-sm" ng-options="cliente.nome for cliente in vm.clientes track by cliente.id">
                                     <option value="">Selecione o cliente</option>
-                                    <option ng-repeat="cliente in vm.clientes" value="{{cliente.id}}">{{cliente.nome}}</option>
                                 </select>
                             </div>
                         </div>
@@ -102,7 +101,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-success" ng-click="vm.cadastrarConsumo()" data-dismiss="modal">Salvar</button>
+                <button type="button" class="btn btn-success" ng-click="vm.cadastrarConsumo()">Salvar</button>
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
             </div>
         </div>

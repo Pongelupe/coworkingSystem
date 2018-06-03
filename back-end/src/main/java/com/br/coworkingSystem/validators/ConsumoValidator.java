@@ -1,11 +1,9 @@
 package com.br.coworkingSystem.validators;
 
-import java.util.Date;
-
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-import com.br.coworkingSystem.model.Consumo;
+import com.br.coworkingSystem.model.Consumo;;
 
 public class ConsumoValidator implements Validator {
 
@@ -20,11 +18,14 @@ public class ConsumoValidator implements Validator {
 	public void validate(Object target, Errors erros) {
 		consumo = (Consumo) target;
 
-		Date dataInicial = consumo.getDataInicial();
-
-		boolean dtInicialIsNull = dataInicial == null;
-		if (dtInicialIsNull)
-			erros.rejectValue("dataInicial", "A data inicial não pode ser null");
+		if (consumo.getDataInicial() == null)
+			erros.rejectValue("dataInicial", "A data inicial não foi informada");
+		
+		if (consumo.getCliente() == null)
+			erros.rejectValue("dataInicial", "O cliente não foi informado");
+		
+		if (consumo.getSala() == null && consumo.getProdutoServico() == null)
+			erros.rejectValue("sala", "Não foi informado o item que deseja registrar o consumo. Informe a sala ou produto/serviço.");
 
 	}
 

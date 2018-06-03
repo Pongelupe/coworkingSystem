@@ -24,7 +24,7 @@ public class Consumo {
 	private Date dataInicial;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private Date dataFinal;
 
 	@Column(nullable = false)
